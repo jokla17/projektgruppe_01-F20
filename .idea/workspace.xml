@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Production.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Production.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ProductionManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ProductionManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/PrimaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/primary.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/primary.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,12 +117,24 @@
       <workItem from="1585996323598" duration="6434000" />
       <workItem from="1586004323422" duration="5000" />
       <workItem from="1586079243486" duration="4071000" />
-      <workItem from="1586083355252" duration="14693000" />
+      <workItem from="1586083355252" duration="14953000" />
     </task>
+    <task id="LOCAL-00001" summary="Finished CRUD functionality for ProductionManagementSystem. Isn't compatible yet with file writing.">
+      <created>1586123148842</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586123148842</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Finished CRUD functionality for ProductionManagementSystem. Isn't compatible yet with file writing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished CRUD functionality for ProductionManagementSystem. Isn't compatible yet with file writing." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1585656535906">
@@ -159,10 +158,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="268" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586082852967" />
-    <state x="430" y="14" key="CommitChangelistDialog2" timestamp="1586123089270">
+    <state x="430" y="14" key="CommitChangelistDialog2" timestamp="1586123221162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="430" y="14" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123089270" />
+    <state x="430" y="14" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123221162" />
     <state x="538" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585656675278" />
     <state x="717" y="153" key="CommitChangelistDialog2/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585911152171" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1586083635180">
@@ -185,13 +184,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="127" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123109853" />
+    <state x="701" y="130" key="RollbackChangesDialog" timestamp="1586123219668">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="701" y="130" key="RollbackChangesDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123219668" />
     <state x="781" y="343" key="SettingsEditor" timestamp="1585909779504">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585909779504" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1585914398096">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586123178511">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123178511" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585914398096" />
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1585656583390">
       <screen x="0" y="0" width="1920" height="1040" />
