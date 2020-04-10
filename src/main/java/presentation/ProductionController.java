@@ -1,5 +1,6 @@
 package presentation;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,11 +14,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
-public class PrimaryController implements Initializable {
-
+public class ProductionController implements Initializable {
     public TextField tfTitle;
     public TextField tfGenre;
     public TextField tfEpisodeNumber;
@@ -34,6 +34,8 @@ public class PrimaryController implements Initializable {
     public Button btnDelete;
     public TextField tfSearch;
     public Button btnSearch;
+    public Text navCreateCredits;
+    public Text navCreateProduction;
 
     ProductionManagementSystem pms;
 
@@ -43,16 +45,17 @@ public class PrimaryController implements Initializable {
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
-
         pms = new ProductionManagementSystem();
     }
 
+    // Create production handler
     public void createProduction(ActionEvent actionEvent) {
         pms.createProduction(new String[]{tfTitle.getText(), tfGenre.getText(),
                 tfEpisodeNumber.getText(), tfProductionYear.getText(), tfProductionCountry.getText(), tfProducedBy.getText()});
         tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
     }
 
+    // Update production handler
     public void updateProduction(ActionEvent actionEvent) {
         pms.updateProduction(tvProductions.getSelectionModel().getSelectedItem(),
                 new String[]{tfTitle.getText(), tfGenre.getText(),
@@ -60,16 +63,19 @@ public class PrimaryController implements Initializable {
         tvProductions.refresh();
     }
 
+    // Delete production handler
     public void deleteProduction(ActionEvent actionEvent) {
         pms.deleteProduction(tvProductions.getSelectionModel().getSelectedItem());
         tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
     }
 
-    public void searchProduction(ActionEvent actionEvent) {
+    // Search handler
+    public void searchFunctionality(ActionEvent actionEvent) {
         tvProductions.setItems(
                 FXCollections.observableArrayList(pms.readProduction(pms.getProductionList(), tfSearch.getText())));
     }
 
+    // Select production handler
     public void selectProduction(MouseEvent mouseEvent) {
         tfTitle.setText(tvProductions.getSelectionModel().getSelectedItem().getTitle());
         tfGenre.setText(tvProductions.getSelectionModel().getSelectedItem().getGenre());
@@ -77,5 +83,15 @@ public class PrimaryController implements Initializable {
         tfProductionYear.setText(String.valueOf(tvProductions.getSelectionModel().getSelectedItem().getProductionYear()));
         tfProductionCountry.setText(tvProductions.getSelectionModel().getSelectedItem().getProductionCountry());
         tfProducedBy.setText(tvProductions.getSelectionModel().getSelectedItem().getProducedBy());
+    }
+
+    // Navigate to createCredits handler
+    public void navigateToCreateCredits(MouseEvent mouseEvent) throws IOException {
+        App.setRoot("createcredits");
+    }
+
+    // Navigate to createProduction handler
+    public void navigateToCreateProduction(MouseEvent mouseEvent) throws IOException {
+        App.setRoot("createproduction");
     }
 }

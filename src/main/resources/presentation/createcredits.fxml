@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<GridPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.CreditsController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.20001220703125" minWidth="10.0" prefWidth="159.00001831054686" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="830.3999938964844" minWidth="10.0" prefWidth="800.599981689453" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="75.19998779296876" minHeight="10.0" prefHeight="75.19998779296876" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="417.6000122070312" minHeight="10.0" prefHeight="396.0000366210937" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="68.79996337890628" minHeight="10.0" prefHeight="68.79996337890628" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <HBox fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" GridPane.columnIndex="1">
+            <children>
+                <TextField fx:id="tfSearch" focusTraversable="false" />
+                <Button fx:id="btnSearch" focusTraversable="false" mnemonicParsing="false" onAction="#searchFunctionality" text="Søg" />
+            </children>
+        </HBox>
+        <AnchorPane prefHeight="394.0" prefWidth="857.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <VBox layoutX="16.0" layoutY="46.0" prefHeight="114.0" prefWidth="108.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opret kreditering" />
+                  <Label text="Rolle" />
+                  <TextField fx:id="tfCreditRole" focusTraversable="false" />
+                  <Label text="Navn" />
+                  <TextField fx:id="tfCreditName" focusTraversable="false" />
+                  <Button fx:id="btnCreateSingle" focusTraversable="false" mnemonicParsing="false" onAction="#createSingleCredit" text="Opret " />
+               </children>
+            </VBox>
+            <VBox layoutX="151.0" layoutY="46.0" prefHeight="200.0" prefWidth="201.0">
+               <children>
+                  <Label text="Opret krediteringer" />
+                  <TextArea fx:id="taCreditsArea" focusTraversable="false" prefHeight="158.0" prefWidth="202.0" promptText="f.eks. fotograf;hans hansen (enter) " />
+                  <Button fx:id="btnCreateMultiple" focusTraversable="false" mnemonicParsing="false" onAction="#createMultipleCredits" text="Opret" />
+               </children>
+            </VBox>
+            <VBox layoutX="376.0" layoutY="52.0">
+               <children>
+                  <TableView fx:id="tvCreditTable" focusTraversable="false" onMouseClicked="#selectCredit" prefHeight="227.0" prefWidth="387.0">
+                    <columns>
+                      <TableColumn fx:id="tcId" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="tcRole" prefWidth="108.80010986328125" text="Rolle" />
+                        <TableColumn fx:id="tcName" prefWidth="200.79996337890623" text="Navn" />
+                    </columns>
+                  </TableView>
+                  <HBox prefHeight="26.0" prefWidth="387.0">
+                     <children>
+                        <Button fx:id="btnUpdateCredit" mnemonicParsing="false" onAction="#updateCredit" text="Opdater" />
+                        <Button fx:id="btnDeleteCredit" mnemonicParsing="false" onAction="#deleteCredit" text="Slet" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <children>
+                <Text fx:id="navCreateProduction" onMouseClicked="#navigateToCreateProduction" strokeType="OUTSIDE" strokeWidth="0.0" text="Opret produktion" />
+                <Text fx:id="navCreateCredits" onMouseClicked="#navigateToCreateCredits" strokeType="OUTSIDE" strokeWidth="0.0" text="Opret krediteringer" />
+            </children>
+        </VBox>
+    </children>
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </padding>
+</GridPane>
