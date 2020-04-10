@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.CreditsController">
+<GridPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.CreditController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.20001220703125" minWidth="10.0" prefWidth="159.00001831054686" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="830.3999938964844" minWidth="10.0" prefWidth="800.599981689453" />

@@ -87,11 +87,11 @@ public class ProductionController implements Initializable {
 
     // Navigate to createCredits handler
     public void navigateToCreateCredits(MouseEvent mouseEvent) throws IOException {
-        App.setRoot("createcredits");
+        App.setRoot("credit");
     }
 
     // Navigate to createProduction handler
     public void navigateToCreateProduction(MouseEvent mouseEvent) throws IOException {
-        App.setRoot("createproduction");
+        App.setRoot("production");
     }
 }

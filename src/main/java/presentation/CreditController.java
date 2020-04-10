@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CreditsController extends ProductionController implements Initializable {
+public class CreditController extends ProductionController implements Initializable {
     public TextField tfCreditRole;
     public TextField tfCreditName;
     public Button btnCreateSingle;

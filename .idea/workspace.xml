@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/presentation/CreditsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/presentation/createcredits.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/presentation/createproduction.fxml" afterDir="false" />
+    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="Converted Emma's functional CreditManagementSystem code to GUI, with ProductionManagementSystem included. Isn't compatible yet with file writing.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Credit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Credit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/CreditManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/CreditManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/presentation/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/PrimaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/primary.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/CreditsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/CreditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/createcredits.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/credit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/createproduction.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/production.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +137,7 @@
       <workItem from="1586440377451" duration="20049000" />
       <workItem from="1586509856723" duration="2703000" />
       <workItem from="1586513016140" duration="394000" />
-      <workItem from="1586516727414" duration="8764000" />
+      <workItem from="1586516727414" duration="9831000" />
     </task>
     <task id="LOCAL-00001" summary="Finished CRUD functionality for ProductionManagementSystem. Isn't compatible yet with file writing.">
       <created>1586123148842</created>
@@ -157,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586123232307</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Converted Emma's functional CreditManagementSystem code to GUI, with ProductionManagementSystem included. Isn't compatible yet with file writing.">
+      <created>1586532118444</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1586532118444</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +181,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Finished CRUD functionality for ProductionManagementSystem. Isn't compatible yet with file writing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished CRUD functionality for ProductionManagementSystem. Isn't compatible yet with file writing." />
+    <MESSAGE value="Converted Emma's functional CreditManagementSystem code to GUI, with ProductionManagementSystem included. Isn't compatible yet with file writing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Converted Emma's functional CreditManagementSystem code to GUI, with ProductionManagementSystem included. Isn't compatible yet with file writing." />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1585656535906">
@@ -208,35 +212,35 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="516" y="268" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586082852967" />
-    <state x="430" y="14" key="CommitChangelistDialog2" timestamp="1586123231812">
+    <state x="118" y="14" key="CommitChangelistDialog2" timestamp="1586532262372">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="430" y="14" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123231812" />
+    <state x="118" y="14" key="CommitChangelistDialog2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586532262372" />
     <state x="538" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585656675278" />
     <state x="717" y="153" key="CommitChangelistDialog2/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585911152171" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1586083635180">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586083635180" />
-    <state width="1493" height="57" key="GridCell.Tab.0.bottom" timestamp="1586531971439">
+    <state width="1493" height="57" key="GridCell.Tab.0.bottom" timestamp="1586533060045">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="57" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586531971439" />
+    <state width="1493" height="57" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586533060045" />
     <state width="1493" height="127" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586441762141" />
-    <state width="1493" height="57" key="GridCell.Tab.0.center" timestamp="1586531971439">
+    <state width="1493" height="57" key="GridCell.Tab.0.center" timestamp="1586533060045">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="57" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586531971439" />
+    <state width="1493" height="57" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586533060045" />
     <state width="1493" height="127" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586441762141" />
-    <state width="1493" height="57" key="GridCell.Tab.0.left" timestamp="1586531971439">
+    <state width="1493" height="57" key="GridCell.Tab.0.left" timestamp="1586533060045">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="57" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586531971439" />
+    <state width="1493" height="57" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586533060045" />
     <state width="1493" height="127" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586441762140" />
-    <state width="1493" height="57" key="GridCell.Tab.0.right" timestamp="1586531971439">
+    <state width="1493" height="57" key="GridCell.Tab.0.right" timestamp="1586533060045">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="57" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586531971439" />
+    <state width="1493" height="57" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586533060045" />
     <state width="1493" height="127" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586441762141" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586528592798">
       <screen x="0" y="0" width="1536" height="824" />
@@ -262,10 +266,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585909779504" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586123239985">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586532123711">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586123239985" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586532123711" />
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1585914398096" />
     <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1585656583390">
       <screen x="0" y="0" width="1920" height="1040" />
