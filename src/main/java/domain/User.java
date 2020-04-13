@@ -26,18 +26,6 @@ public class User {
         //not implemented yet
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", accessLevel=" + accessLevel +
-                '}';
-    }
-
     public String getUsername() {
         return username;
     }
@@ -80,5 +68,10 @@ public class User {
 
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
+    }
+
+    @Override
+    public String toString() {
+        return username + ";" + password + ";" + email + ";" + firstName + ";" + lastName + ";" + accessLevel;
     }
 }
