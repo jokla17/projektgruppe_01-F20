@@ -28,14 +28,16 @@ public class ProductionManagementSystem {
      * @param productionArgs - String[] array parameter, with production related arguments from presentation layer.
      */
     public void createProduction(String[] productionArgs){
-        productionList.add(new Production(
+        Production production = new Production(
                 generateProductionId(),
                 productionArgs[0],
                 productionArgs[1],
                 Integer.parseInt(productionArgs[2]),
                 Integer.parseInt(productionArgs[3]),
                 productionArgs[4],
-                productionArgs[5]));
+                productionArgs[5]);
+        productionList.add(production);
+        fms.appendToFile(production);
     }
 
     /**
@@ -72,6 +74,8 @@ public class ProductionManagementSystem {
         production.setProductionYear(Integer.parseInt(productionArgs[3]));
         production.setProductionCountry(productionArgs[4]);
         production.setProducedBy(productionArgs[5]);
+        List<Object> tempProductionList = new ArrayList<Object>(productionList);
+        fms.writeToFile(tempProductionList);
     }
 
     /**
@@ -80,6 +84,8 @@ public class ProductionManagementSystem {
      */
     public void deleteProduction(Production production){
         productionList.remove(production);
+        List<Object> tempProductionList = new ArrayList<Object>(productionList);
+        fms.writeToFile(tempProductionList);
     }
 
     /**

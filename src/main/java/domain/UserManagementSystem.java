@@ -1,11 +1,17 @@
 package domain;
 
+import persistence.FileManagementSystem;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 // User management system - create, read, update and delete user (not file compatible yet)
 public class UserManagementSystem {
     private List<User> userList;
+    private FileManagementSystem fms = new FileManagementSystem(new File("users.txt"));
 
     public UserManagementSystem() {
         userList = new ArrayList<>();
@@ -54,6 +60,24 @@ public class UserManagementSystem {
         }
     }
 
+    public void readUsers(List<User> userList) {
+        Scanner scanner = null;
+        List<User> tempUsers = new ArrayList<>();
+        try {
+            scanner = new Scanner(new File("users.txt"));
+            while (scanner.hasNext()) {
+                String[] splitLine = scanner.nextLine().split(";");
+                User user = new User(splitLine[0], splitLine[1], splitLine[2], splitLine[3], splitLine[4], Integer.parseInt(splitLine[5]));
+                tempUsers.add(user);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
+        userList.addAll(tempUsers);
+    }
+
     /**
      * Updates a single user, by using the set mutators in the user class. Not yet compatible to update parameters, in
      * extended classes.
@@ -66,6 +90,8 @@ public class UserManagementSystem {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAccessLevel(accessLevel);
+        List<Object> tempUsersList = new ArrayList<>(userList);
+        fms.writeToFile(tempUsersList);
     }
 
     /**
@@ -74,6 +100,8 @@ public class UserManagementSystem {
      */
     public void deleteUser(User user) {
         userList.remove(user);
+        List<Object> tempUsersList = new ArrayList<>(userList);
+        fms.writeToFile(tempUsersList);
     }
 
     /**
@@ -92,33 +120,5 @@ public class UserManagementSystem {
             adminIndex++;
             return "S" + adminIndex;
         }
-    }
-
-    public static void main(String[] args) {
-        UserManagementSystem userManagementSystem = new UserManagementSystem();
-
-        System.out.println("\nCreate users (CLI): ");
-        userManagementSystem.createUser("BigdickWT69", "trussekongen123", "james@hotmail.com",
-                "James", "Richard", 1, "TV2");
-        userManagementSystem.createUser("JohnDoe", "123doe", "doe@hotmail.com",
-                "John", "Doe", 2);
-        userManagementSystem.readUser();
-
-        System.out.println("\nDelete a user (CLI): ");
-        for (User u: userManagementSystem.getUserList()) {
-            if (u.getFirstName().contains("James")) {
-                userManagementSystem.deleteUser(u);
-                break;
-            }
-        }
-        userManagementSystem.readUser();
-
-        System.out.println("\nUpdate a user (CLI): ");
-        for (User u: userManagementSystem.getUserList()) {
-            if (u.getFirstName().contains("John")) {
-                userManagementSystem.updateUser(u, "N/A", "N/A", "N/A", "N/A", "N/A", 2);
-            }
-        }
-        userManagementSystem.readUser();
     }
 }
