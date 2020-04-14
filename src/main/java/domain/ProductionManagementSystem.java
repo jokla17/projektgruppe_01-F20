@@ -1,5 +1,8 @@
 package domain;
 
+import persistence.FileManagementSystem;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,16 +12,15 @@ import java.util.List;
 public class ProductionManagementSystem {
     private List<Production> productionList;
 
+    FileManagementSystem fms = new FileManagementSystem(new File("productions.txt"));
+
     public ProductionManagementSystem() {
         productionList = new ArrayList<>();
+        fms.readProductions(productionList);
     }
 
     public List<Production> getProductionList() {
         return productionList;
-    }
-
-    public void setProductionList(List<Production> productionList) {
-        this.productionList = productionList;
     }
 
     /**
@@ -26,14 +28,16 @@ public class ProductionManagementSystem {
      * @param productionArgs - String[] array parameter, with production related arguments from presentation layer.
      */
     public void createProduction(String[] productionArgs){
-        productionList.add(new Production(
+        Production production = new Production(
                 generateProductionId(),
                 productionArgs[0],
                 productionArgs[1],
                 Integer.parseInt(productionArgs[2]),
                 Integer.parseInt(productionArgs[3]),
                 productionArgs[4],
-                productionArgs[5]));
+                productionArgs[5]);
+        productionList.add(production);
+                fms.appendToFile(production);
     }
 
     /**
@@ -47,11 +51,13 @@ public class ProductionManagementSystem {
      */
     public List<Production> readProduction(List<Production> productionList, String searchText) {
         List<Production> tempProductionList = new ArrayList<>();
+
         for (Production p: productionList) {
             if (p.getTitle().equalsIgnoreCase(searchText)) {
                 tempProductionList.add(p);
             }
         }
+
         return tempProductionList;
     }
 
@@ -68,6 +74,8 @@ public class ProductionManagementSystem {
         production.setProductionYear(Integer.parseInt(productionArgs[3]));
         production.setProductionCountry(productionArgs[4]);
         production.setProducedBy(productionArgs[5]);
+        List<Object> tempProductionList = new ArrayList<Object>(productionList);
+        fms.writeToFile(tempProductionList);
     }
 
     /**
@@ -76,6 +84,8 @@ public class ProductionManagementSystem {
      */
     public void deleteProduction(Production production){
         productionList.remove(production);
+        List<Object> tempProductionList = new ArrayList<Object>(productionList);
+        fms.writeToFile(tempProductionList);
     }
 
     /**
@@ -90,5 +100,10 @@ public class ProductionManagementSystem {
             index++;
         }
         return "P" + index;
+    }
+
+    public static void main(String[] args) {
+        ProductionManagementSystem pms = new ProductionManagementSystem();
+        System.out.println(pms.productionList);
     }
 }
