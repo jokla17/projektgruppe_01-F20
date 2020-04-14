@@ -37,7 +37,7 @@ public class ProductionManagementSystem {
                 productionArgs[4],
                 productionArgs[5]);
         productionList.add(production);
-                fms.appendToFile(production);
+        fms.appendToFile(production);
     }
 
     /**

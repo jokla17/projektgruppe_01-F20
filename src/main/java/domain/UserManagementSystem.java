@@ -1,5 +1,7 @@
 package domain;
 
+import persistence.FileManagementSystem;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,8 +10,8 @@ import java.util.Scanner;
 
 // User management system - create, read, update and delete user (not file compatible yet)
 public class UserManagementSystem {
-    private static List<User> userList;
-    //private List<User> userList;
+    private List<User> userList;
+    private FileManagementSystem fms = new FileManagementSystem(new File("users.txt"));
 
     public UserManagementSystem() {
         userList = new ArrayList<>();
@@ -89,7 +91,7 @@ public class UserManagementSystem {
         user.setLastName(lastName);
         user.setAccessLevel(accessLevel);
         List<Object> tempUsersList = new ArrayList<>(userList);
-        UserManagementSystem.writeToFile(tempUsersList);
+        fms.writeToFile(tempUsersList);
     }
 
     /**
@@ -99,8 +101,7 @@ public class UserManagementSystem {
     public void deleteUser(User user) {
         userList.remove(user);
         List<Object> tempUsersList = new ArrayList<>(userList);
-        UserManagementSystem.writeToFile(tempUsersList);
-
+        fms.writeToFile(tempUsersList);
     }
 
     /**
@@ -119,14 +120,5 @@ public class UserManagementSystem {
             adminIndex++;
             return "S" + adminIndex;
         }
-    }
-
-
-    public static void main(String[] args) {
-
-        UserManagementSystem UMS = new UserManagementSystem();
-        UMS.readUsers(userList);
-        System.out.println(userList);
-
     }
 }
