@@ -48,31 +48,21 @@ public class FileManagementSystem {
         productionList.addAll(tempProduction);
     }
 
-    public void writeToFile(List<Object> list){
-        PrintWriter writer = null;
-        try {
-            writer = new PrintWriter(new FileWriter(database, false));
-            for (int i = 0; i < list.size(); i++){
-                writer.append(list.get(i).toString() + "\n");
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }finally {
-            writer.close();
-        }
+    public void writeToFile(String text){
+        //hvad skal vi bruge den her til når vi har appendToFile?
+        //vi kunne evt lave den som en searchAndReplace eller editFile på et senere tidspunkt
     }
 
-    public void appendToFile(Object object){
+    public void appendToFile(String text){
         PrintWriter writer = null;
         try{
-            writer = new PrintWriter(new FileWriter(database, true));
-            writer.append(object.toString() + "\n");
-
+            FileWriter input = new FileWriter(database, true);
+            input.write("\n");
+            input.write(text);
+            input.close();
         } catch (IOException e){
             System.out.println("IOException caught: ");
             e.printStackTrace();
-        }finally {
-            writer.close();
         }
     }
 
