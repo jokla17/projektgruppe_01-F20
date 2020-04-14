@@ -1,0 +1,17 @@
+PRODUCTIONS:
+____________________________
+
+Production:OlsenBanden1
+Credits:
+Name:Lars, Role:Lydmand
+Name:Kurt, Role:Producer
+Name:Anne, Role:Make-up
+Name:Lene, Role:Scenografi
+$end
+Production:OlsenBanden2
+Credits:
+Name:Mogens, Role:Lydmand
+Name:Flemming, Role:Actor
+Name:Sanne, Role:Actor
+Name:Mette, Role:Filmcrew
+$end

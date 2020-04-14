@@ -10,5 +10,8 @@
         <module name="projektgruppe_01-F20" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="TestCreditsManagement" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
