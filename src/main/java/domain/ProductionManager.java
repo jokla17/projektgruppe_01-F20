@@ -1,6 +1,6 @@
 package domain;
 
-import persistence.FileManagementSystem;
+import persistence.FileManager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * ProductionManagementSystem - Create, read, update, and delete production(s).
  */
-public class ProductionManagementSystem {
+public class ProductionManager {
     private List<Production> productionList;
+    private FileManager fms;
 
-    FileManagementSystem fms = new FileManagementSystem(new File("productions.txt"));
-
-    public ProductionManagementSystem() {
+    public ProductionManager() {
         productionList = new ArrayList<>();
+        fms = new FileManager(new File("productions.txt"));
         fms.readProductions(productionList);
     }
 
@@ -103,7 +103,7 @@ public class ProductionManagementSystem {
     }
 
     public static void main(String[] args) {
-        ProductionManagementSystem pms = new ProductionManagementSystem();
+        ProductionManager pms = new ProductionManager();
         System.out.println(pms.productionList);
     }
 }

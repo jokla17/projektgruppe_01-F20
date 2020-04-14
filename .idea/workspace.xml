@@ -19,8 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="CRUD">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="Not finished yet.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain/UserManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_45__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_45__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_45__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_45__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_51__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_51__Default_Changelist_.xml" afterDir="false" />
@@ -31,11 +31,25 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/productions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/productions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ProductionManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ProductionManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/UserManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/UserManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/FileManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/FileManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/UserManagementSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/UserManagementSystem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/persistence/FileManagementSystem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/persistence/FileManagementSystem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/AuthentificationSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/AuthentificationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/CreditManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/CreditManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Producer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ProductionManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ProductionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/UserManagementSystem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/DatabaseManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/persistence/FileManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/persistence/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/CreditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/CreditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/AuthentificationSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/CreditManagementSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/Producer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/domain/Producer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/ProductionManagementSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/domain/UserManagementSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/persistence/DatabaseManagementSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/persistence/FileManagementSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/CreditController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/CreditController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/ProductionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/ProductionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/users.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,8 +121,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileManagementSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="persistence.FileManagementSystem" />
+    <configuration name="FileManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="persistence.FileManager" />
       <module name="projektgruppe_01-F20" />
       <extension name="coverage">
         <pattern>
@@ -120,8 +134,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductionManagementSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="domain.ProductionManagementSystem" />
+    <configuration name="ProductionManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="domain.ProductionManager" />
       <module name="projektgruppe_01-F20" />
       <extension name="coverage">
         <pattern>
@@ -133,8 +147,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserManagementSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="domain.UserManagementSystem" />
+    <configuration name="UserManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="domain.UserManager" />
       <module name="projektgruppe_01-F20" />
       <extension name="coverage">
         <pattern>
@@ -149,10 +163,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.UserManagementSystem" />
-        <item itemvalue="Application.ProductionManagementSystem" />
+        <item itemvalue="Application.UserManager" />
+        <item itemvalue="Application.ProductionManager" />
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.FileManagementSystem" />
+        <item itemvalue="Application.FileManager" />
       </list>
     </recent_temporary>
   </component>
@@ -173,6 +187,14 @@
       <workItem from="1586842174803" duration="5200000" />
       <workItem from="1586852272089" duration="5292000" />
     </task>
+    <task id="LOCAL-00001" summary="Not finished yet.">
+      <created>1586866167744</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586866167745</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,28 +249,28 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="139" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586865277027" />
-    <state width="1493" height="80" key="GridCell.Tab.0.bottom" timestamp="1586866106045">
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1586869406077">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586866106045" />
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586869406077" />
     <state width="1493" height="104" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586862689187" />
     <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
-    <state width="1493" height="80" key="GridCell.Tab.0.center" timestamp="1586866106045">
+    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1586869406077">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586866106045" />
+    <state width="1493" height="192" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586869406077" />
     <state width="1493" height="104" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586862689187" />
     <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
-    <state width="1493" height="80" key="GridCell.Tab.0.left" timestamp="1586866106044">
+    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1586869406076">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586866106044" />
+    <state width="1493" height="192" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586869406076" />
     <state width="1493" height="104" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586862689187" />
     <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
-    <state width="1493" height="80" key="GridCell.Tab.0.right" timestamp="1586866106045">
+    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1586869406077">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="80" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586866106045" />
+    <state width="1493" height="192" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586869406077" />
     <state width="1493" height="104" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586862689187" />
     <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
     <state x="781" y="343" key="SettingsEditor" timestamp="1585909779504">

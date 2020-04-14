@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 //CreditManagementSystem - Create, read, update and delete credits within the system
-public class CreditManagementSystem {
+public class CreditManager {
     private List<Credit> creditList;
 
-    public CreditManagementSystem() {creditList = new ArrayList<>();}
+    public CreditManager() {creditList = new ArrayList<>();}
 
     public List<Credit> getCreditList() {
         return creditList;

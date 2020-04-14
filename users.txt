@@ -1,3 +1,0 @@
-HansHansen;password123;hanshansen@hotmail.com;Hans;Hansen;1
-HansHansen;password123;hanshansen@hotmail.com;Hans;Hansen;1
-HansHansen;password123;hanshansen@hotmail.com;Hans;Hansen;1

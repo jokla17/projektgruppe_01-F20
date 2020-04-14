@@ -1,7 +1,7 @@
 package presentation;
 
 import domain.Credit;
-import domain.CreditManagementSystem;
+import domain.CreditManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -25,14 +25,14 @@ public class CreditController extends ProductionController implements Initializa
     public Button btnUpdateCredit;
     public Button btnDeleteCredit;
 
-    CreditManagementSystem cms;
+    CreditManager cms;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tcId.setCellValueFactory(new PropertyValueFactory<>("CreditId"));
         tcRole.setCellValueFactory(new PropertyValueFactory<>("CreditRole"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("CreditName"));
-        cms = new CreditManagementSystem();
+        cms = new CreditManager();
     }
 
     // Create multiple credits handler

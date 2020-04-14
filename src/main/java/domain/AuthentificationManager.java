@@ -1,6 +1,6 @@
 package domain;
 
-public class AuthentificationSystem {
+public class AuthentificationManager {
     public void login(){
         //not implemented yet
     }

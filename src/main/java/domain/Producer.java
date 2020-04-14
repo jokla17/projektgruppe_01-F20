@@ -29,6 +29,6 @@ public class Producer extends User {
 
     @Override
     public String toString() {
-        return super.toString() + ";" + producerId + ";" + employedBy;
+        return super.toString() + ";" + employedBy + ";" + producerId;
     }
 }

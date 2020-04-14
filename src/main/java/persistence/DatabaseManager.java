@@ -1,6 +1,6 @@
 package persistence;
 
-public class DatabaseManagementSystem {
+public class DatabaseManager {
     /**
      * here should be a Connection-type attribute to connect with the database
      */

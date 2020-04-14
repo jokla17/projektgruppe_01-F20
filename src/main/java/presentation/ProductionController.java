@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import domain.Production;
-import domain.ProductionManagementSystem;
+import domain.ProductionManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -37,7 +37,7 @@ public class ProductionController implements Initializable {
     public Text navCreateProduction;
     public TextField tfProductionYear;
 
-    ProductionManagementSystem pms;
+    ProductionManager pms;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,7 +45,7 @@ public class ProductionController implements Initializable {
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
-        pms = new ProductionManagementSystem();
+        pms = new ProductionManager();
         tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
     }
 
