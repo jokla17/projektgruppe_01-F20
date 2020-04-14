@@ -1,9 +1,3 @@
-USERS:
-____________________________
-
-Username:Jonas1 Password: test123
-Username:Jonas2 Password: test234
-Username:Jonas3 Password: test345
-Username:Jonas4 Password: test456
-
-testtesttesttesttest
+HansHansen;password123;hanshansen@hotmail.com;Hans;Hansen;1
+HansHansen;password123;hanshansen@hotmail.com;Hans;Hansen;1
+HansHansen;password123;hanshansen@hotmail.com;Hans;Hansen;1
