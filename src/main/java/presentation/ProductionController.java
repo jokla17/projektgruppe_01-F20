@@ -36,6 +36,7 @@ public class ProductionController implements Initializable {
     public Text navCreateCredits;
     public Text navCreateProduction;
     public TextField tfProductionYear;
+    public Button btnLogout;
 
     ProductionManager pms;
 
@@ -94,5 +95,10 @@ public class ProductionController implements Initializable {
     // Navigate to createProduction handler
     public void navigateToCreateProduction(MouseEvent mouseEvent) throws IOException {
         App.setRoot("production");
+    }
+
+    public void Logout(ActionEvent actionEvent) {
+        System.exit(0);
+
     }
 }

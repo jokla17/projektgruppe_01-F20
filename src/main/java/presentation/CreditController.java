@@ -24,6 +24,8 @@ public class CreditController extends ProductionController implements Initializa
     public TableColumn<Credit, String> tcName;
     public Button btnUpdateCredit;
     public Button btnDeleteCredit;
+    public Button btnGem;
+    public TextField tfProductionID;
 
     CreditManager cms;
 
@@ -64,12 +66,16 @@ public class CreditController extends ProductionController implements Initializa
     @Override
     public void searchFunctionality(ActionEvent actionEvent) {
         tvCreditTable.setItems(
-                FXCollections.observableArrayList(cms.readCredit(cms.getCreditList(), tfSearch.getText())));
+                FXCollections.observableArrayList(cms.searchCredit(cms.getCreditList(), tfSearch.getText())));
     }
 
     // Select credit handler
     public void selectCredit(MouseEvent mouseEvent) {
         tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getCreditRole());
         tfCreditName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getCreditName());
+    }
+
+    public void Gem(ActionEvent actionEvent) {
+        cms.saveCredits(tfProductionID);
     }
 }

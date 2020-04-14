@@ -1,9 +1,6 @@
 package persistence;
 
-import domain.Producer;
-import domain.Production;
-import domain.Systemadministrator;
-import domain.User;
+import domain.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,7 +11,7 @@ public class FileManager {
 
     private File file;
 
-    public FileManager(File file){
+    public FileManager(File file) {
         this.file = file;
     }
 
@@ -64,31 +61,49 @@ public class FileManager {
         userList.addAll(tempUsers);
     }
 
+    public static void readCredit(List<Credit> creditList) {
+        Scanner scanner = null;
+        List<Credit> tempCredit = new ArrayList<>();
+        try {
+            scanner = new Scanner(new File("credits.txt"));
+            while (scanner.hasNext()) {
+                String[] splitLine = scanner.nextLine().split(";");
+                Credit credit = new Credit(splitLine[0], splitLine[1], splitLine[2]);
+                tempCredit.add(credit);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
+        creditList.addAll(tempCredit);
+    }
 
-    public void writeToFile(List<Object> list){
+
+    public void writeToFile(List<Object> list) {
         PrintWriter writer = null;
         try {
             writer = new PrintWriter(new FileWriter(file, false));
-            for (int i = 0; i < list.size(); i++){
+            for (int i = 0; i < list.size(); i++) {
                 writer.append(list.get(i).toString() + "\n");
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             writer.close();
         }
     }
 
-    public void appendToFile(Object object){
+    public void appendToFile(Object object) {
         PrintWriter writer = null;
-        try{
+        try {
             writer = new PrintWriter(new FileWriter(file, true));
             writer.append(object.toString() + "\n");
 
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("IOException caught: ");
             e.printStackTrace();
-        }finally {
+        } finally {
             writer.close();
         }
     }

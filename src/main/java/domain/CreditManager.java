@@ -1,13 +1,19 @@
 package domain;
 
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import persistence.FileManager;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 //CreditManagementSystem - Create, read, update and delete credits within the system
 public class CreditManager {
     private List<Credit> creditList;
+    FileManager filemanager = new FileManager(new File("credits.txt"));
 
     public CreditManager() {creditList = new ArrayList<>();}
 
@@ -22,7 +28,22 @@ public class CreditManager {
      */
     public void createCredit(String role, String name){
         creditList.add(new Credit(generateCreditId(), role, name));
+        filemanager.appendToFile(new Credit(generateCreditId(), role, name));
     }
+
+    public void saveCredits(TextField tfProductionID){
+        PrintWriter pw = null;
+        try{
+            pw = new PrintWriter(new FileWriter(new File("credits.txt"),true));
+            pw.append(tfProductionID.getText() + ";" + creditList + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            pw.close();
+        }
+    }
+
+
 
     /**
      * OVERLOADED - Add multiple credits to the creditList at once.
@@ -55,7 +76,7 @@ public class CreditManager {
      * @param searchText - specific search parameter from user.
      * @return - returns temporary creditList, which is used in the presentation layer.
      */
-    public List<Credit> readCredit(List<Credit> creditList, String searchText){
+    public List<Credit> searchCredit (List<Credit> creditList, String searchText){
         List<Credit> tempCreditList = new ArrayList<>();
         for (Credit c: creditList) {
             if (c.getCreditName().equalsIgnoreCase(searchText)) {
@@ -83,14 +104,20 @@ public class CreditManager {
      */
     public void deleteCredit(Credit credit) {
         creditList.remove(credit);
+
     }
+
+
+
 
     /**
      * Automatically generates an ID for a created Credit class object.
      * It iterates through the credit list. Index variable counts each iteration, when
      * a credit is added to the creditList. - Not read file friendly yet.
      * @return Credit ID (example: C1, C2, C3)
+     *
      */
+
     public String generateCreditId(){
         int index = 1;
         for (int i = 0; i < creditList.size(); i++) {
