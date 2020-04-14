@@ -1,5 +1,8 @@
 package domain;
 
+import persistence.FileManagementSystem;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,16 +12,15 @@ import java.util.List;
 public class ProductionManagementSystem {
     private List<Production> productionList;
 
+    FileManagementSystem fms = new FileManagementSystem(new File("productions.txt"));
+
     public ProductionManagementSystem() {
         productionList = new ArrayList<>();
+        fms.readProductions(productionList);
     }
 
     public List<Production> getProductionList() {
         return productionList;
-    }
-
-    public void setProductionList(List<Production> productionList) {
-        this.productionList = productionList;
     }
 
     /**
@@ -47,11 +49,13 @@ public class ProductionManagementSystem {
      */
     public List<Production> readProduction(List<Production> productionList, String searchText) {
         List<Production> tempProductionList = new ArrayList<>();
+
         for (Production p: productionList) {
             if (p.getTitle().equalsIgnoreCase(searchText)) {
                 tempProductionList.add(p);
             }
         }
+
         return tempProductionList;
     }
 
@@ -90,5 +94,10 @@ public class ProductionManagementSystem {
             index++;
         }
         return "P" + index;
+    }
+
+    public static void main(String[] args) {
+        ProductionManagementSystem pms = new ProductionManagementSystem();
+        System.out.println(pms.productionList);
     }
 }

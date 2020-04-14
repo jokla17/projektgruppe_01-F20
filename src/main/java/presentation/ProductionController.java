@@ -21,7 +21,6 @@ public class ProductionController implements Initializable {
     public TextField tfTitle;
     public TextField tfGenre;
     public TextField tfEpisodeNumber;
-    public TextField tfProductionYear;
     public TextField tfProductionCountry;
     public TextField tfProducedBy;
     public Button btnCreate;
@@ -36,6 +35,7 @@ public class ProductionController implements Initializable {
     public Button btnSearch;
     public Text navCreateCredits;
     public Text navCreateProduction;
+    public TextField tfProductionYear;
 
     ProductionManagementSystem pms;
 
@@ -46,6 +46,7 @@ public class ProductionController implements Initializable {
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
         pms = new ProductionManagementSystem();
+        tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
     }
 
     // Create production handler
