@@ -124,4 +124,40 @@ public class FileManager {
             writer.close();
         }
     }
+
+    public void replaceLineInFile(String oldCredit, String newCredit) {
+        PrintWriter writer = null;
+        File file = new File("credits.txt");
+        try {
+            Scanner reader = new Scanner(file);
+
+            StringBuffer buffer = new StringBuffer();
+            while (reader.hasNext()) {
+                buffer.append(reader.nextLine() + "\n");
+            }
+            reader.close();
+
+            String fileContents = buffer.toString();
+            String oldLine = oldCredit;
+            String newLine = newCredit;
+
+            Scanner reader2 = new Scanner(fileContents);
+
+            while (reader2.hasNext()) {
+                System.out.println(reader2.nextLine());
+            }
+
+            fileContents = fileContents.replaceAll(oldCredit, newLine);
+
+            writer = new PrintWriter(new FileWriter(file));
+            writer.append(fileContents);
+            writer.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            writer.close();
+        }
+    }
 }

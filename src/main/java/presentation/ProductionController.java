@@ -40,7 +40,6 @@ public class ProductionController extends MainController implements Initializabl
     public TextField tfProductionYear;
 
     private ProductionManager pms;
-    private static String selectedProductionId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,10 +50,6 @@ public class ProductionController extends MainController implements Initializabl
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
         pms = new ProductionManager();
         tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
-    }
-
-    public static String getSelectedProductionId() {
-        return selectedProductionId;
     }
 
     // Create production handler
