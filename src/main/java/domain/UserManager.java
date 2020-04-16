@@ -7,44 +7,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private List<User> userList;
+    public FileManager getFm() {
+        return fm;
+    }
+
+    private List<User> adminList;
+    private List<User> producerList;
     private FileManager fm;
     private static int accessLevel = 2;
 
-    public UserManager() {
-        userList = new ArrayList<>();
-        fm = new FileManager(new File("users.txt"));
-        fm.readUsers(userList);
+    public List<User> getProducerList() {
+        return producerList;
     }
 
-    public List<User> getUserList() {
-        return userList;
+    public UserManager() {
+        adminList = new ArrayList<>();
+        producerList = new ArrayList<>();
+        fm = new FileManager(new File("users.txt"));
+        fm.readUsers(adminList, producerList);
+    }
+
+    public List<User> getAdminList() {
+        return adminList;
     }
 
     public void createUser(String username, String password, String email, String firstName,
-                           String lastName, int accessLevel, String ... other) {
+                           String lastName, int accessLevel, String... other) {
         User user = null;
         switch (accessLevel) {
             case 1:
                 user = new Producer(username, password, email, firstName, lastName,
-                        accessLevel, generateUserId(accessLevel), other[0]);
+                        accessLevel, generateProducerId(), other[0]);
+                producerList.add(user);
                 break;
             case 2:
                 user = new Systemadministrator(username, password, email, firstName, lastName,
-                        accessLevel, generateUserId(accessLevel));
+                        accessLevel, generateAdminId());
+                adminList.add(user);
                 break;
         }
-        userList.add(user);
         fm.appendToFile(user);
     }
 
-    public void readUser() {
-        for (int i = 0; i < userList.size(); i++) {
-            System.out.println(userList.get(i));
-        }
-    }
 
-    public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String ... other) {
+    public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String... other) {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
@@ -58,26 +64,37 @@ public class UserManager {
         }
     }
 
-    public void deleteUser(User user) {
-        userList.remove(user);
-        List<Object> tempUsersList = new ArrayList<>(userList);
-        fm.writeToFile(tempUsersList);
+     public void deleteAdmin(User user) {
+        adminList.remove(user);
+        List<Object> tempAdminList = new ArrayList<>(adminList);
+        fm.writeToFile(tempAdminList);
     }
 
-    public String generateUserId(int accessLevel) {
-        int producerIndex = 0;
-        int adminIndex = 0;
+    public void deleteProducer(User user) {
+        producerList.remove(user);
+        List<Object> tempProducerList = new ArrayList<>(producerList);
+        fm.writeToFile(tempProducerList);
+    }
 
-        if (accessLevel == 1) {
-            producerIndex++;
-            return "P" + producerIndex;
-        } else {
-            adminIndex++;
-            return "S" + adminIndex;
+    public String generateAdminId(){
+        int index = 1;
+        for (int i = 0; i < adminList.size(); i++) {
+            index++;
         }
+        return "S" + index;
+    }
+
+    public String generateProducerId(){
+        int index = 1;
+        for (int i = 0; i < producerList.size(); i++) {
+            index++;
+        }
+
+        return "P" + index;
     }
 
     public static int getAccessLevel() {
         return accessLevel;
     }
 }
+
