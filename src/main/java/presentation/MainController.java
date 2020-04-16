@@ -1,7 +1,6 @@
 package presentation;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -46,6 +45,5 @@ public class MainController {
 
     public void Logout(ActionEvent actionEvent) throws IOException{
         App.setRoot("Login");
-        // Change current user to null.
     }
 }

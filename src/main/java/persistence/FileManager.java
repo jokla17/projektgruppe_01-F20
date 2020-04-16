@@ -3,7 +3,6 @@ package persistence;
 import domain.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,8 +34,6 @@ public class FileManager {
         }
         productionList.addAll(tempProduction);
     }
-
-
 
     // Read users
     public void readUsers(List<User> adminList, List<User> producerList) {
@@ -70,7 +67,7 @@ public class FileManager {
     // Read credits
     public void readCredits(String productionId, List<Credit> creditList) {
         Scanner scanner = null;
-        List<Credit> tempCredit = new ArrayList<>();
+        List<Credit> tempCredits = new ArrayList<>();
         try {
             scanner = new Scanner(new File("credits.txt"));
             while (scanner.hasNext()) {
@@ -83,7 +80,7 @@ public class FileManager {
                     for (String s : creditsToArray) {
                         String[] splitCredit = s.split(";");
                         Credit credit = new Credit(splitCredit[0].trim(), splitCredit[1].trim(), splitCredit[2].trim());
-                        tempCredit.add(credit);
+                        tempCredits.add(credit);
                     }
                 }
             }
@@ -92,7 +89,7 @@ public class FileManager {
         } finally {
             scanner.close();
         }
-        creditList.addAll(tempCredit);
+        creditList.addAll(tempCredits);
     }
 
     // Write to file
@@ -125,39 +122,32 @@ public class FileManager {
         }
     }
 
-    public void replaceLineInFile(String oldCredit, String newCredit) {
-        PrintWriter writer = null;
+    // Replace a specific line in a file by using a buffer in order to contain the contents of a file
+    public void replaceLineInFile(String oldCredits, String newCredits) {
+        Scanner reader = null;
         File file = new File("credits.txt");
         try {
-            Scanner reader = new Scanner(file);
+            reader = new Scanner(file);
 
             StringBuffer buffer = new StringBuffer();
             while (reader.hasNext()) {
                 buffer.append(reader.nextLine() + "\n");
             }
-            reader.close();
 
             String fileContents = buffer.toString();
-            String oldLine = oldCredit;
-            String newLine = newCredit;
 
-            Scanner reader2 = new Scanner(fileContents);
+            fileContents = fileContents.replaceAll(oldCredits, newCredits);
 
-            while (reader2.hasNext()) {
-                System.out.println(reader2.nextLine());
-            }
-
-            fileContents = fileContents.replaceAll(oldCredit, newLine);
-
-            writer = new PrintWriter(new FileWriter(file));
+            PrintWriter writer = new PrintWriter(new FileWriter(file));
             writer.append(fileContents);
             writer.flush();
+            writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            writer.close();
+            reader.close();
         }
     }
 }

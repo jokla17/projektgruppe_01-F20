@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import domain.Credit;
 import domain.CreditManager;
 import domain.Production;
 import domain.ProductionManager;
@@ -87,5 +88,12 @@ public class ProductionController extends MainController implements Initializabl
         tfProductionYear.setText(String.valueOf(tvProductions.getSelectionModel().getSelectedItem().getProductionYear()));
         tfProductionCountry.setText(tvProductions.getSelectionModel().getSelectedItem().getProductionCountry());
         tfProducedBy.setText(tvProductions.getSelectionModel().getSelectedItem().getProducedBy());
+
+        if (mouseEvent.getClickCount() == 2) {
+            CreditManager cm = CreditManager.getInstance();
+            cm.getCreditList().clear();
+            cm.setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
+            App.setRoot("credit");
+        }
     }
 }

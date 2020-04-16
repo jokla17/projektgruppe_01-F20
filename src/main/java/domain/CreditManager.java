@@ -1,31 +1,33 @@
 package domain;
 
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import persistence.FileManager;
-import presentation.ProductionController;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 //CreditManagementSystem - Create, read, update and delete credits within the system
 public class CreditManager {
-    private static List<Credit> creditList;
-
-
-    FileManager fm;
+    private static CreditManager instance = new CreditManager();
+    private List<Credit> creditList;
+    private FileManager fm;
 
     public CreditManager() {
         creditList = new ArrayList<>();
         fm = new FileManager(new File("credits.txt"));
+    }
 
+    public static CreditManager getInstance() {
+        return instance;
     }
 
     public List<Credit> getCreditList() {
         return creditList;
+    }
+
+    public void setCreditList(String productionId) {
+        fm.readCredits(productionId, creditList);
     }
 
     /**
@@ -35,18 +37,6 @@ public class CreditManager {
      */
     public void createCredit(String role, String name){
         creditList.add(new Credit(generateCreditId(), role, name));
-    }
-
-    public void saveCredits(TextField tfProductionID){
-        PrintWriter pw = null;
-        try{
-            pw = new PrintWriter(new FileWriter(new File("credits.txt"),true));
-            pw.append(tfProductionID.getText() + ";" + creditList + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            pw.close();
-        }
     }
 
     /**
@@ -70,7 +60,6 @@ public class CreditManager {
             reader.close();
         }
     }
-
 
     /**
      * Reads one or multiple credits, based on a specific search result - in this case, only the credit name.
@@ -109,11 +98,33 @@ public class CreditManager {
      */
     public void deleteCredit(Credit credit) {
         creditList.remove(credit);
-
     }
 
-
-
+    /**
+     * Saves all credits to a particular production - if the production exists, update the credits,
+     * if not, create a new credit list.
+     * @param productionId - needed argument to check a particular production id.
+     */
+    public void saveCredits(String productionId){
+        Scanner reader = null;
+        try{
+            reader = new Scanner(new File("credits.txt"));
+            while (reader.hasNext()) {
+                String[] split = reader.nextLine().split("\\[");
+                String prodId = split[0].replace(";","");
+                String credits = split[1];
+                if (prodId.contains(productionId)) {
+                    fm.replaceLineInFile(prodId + ";\\[" + credits, productionId + ";" + creditList);
+                    return;
+                }
+            }
+            fm.appendToFile(productionId + ";" + creditList);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            reader.close();
+        }
+    }
 
     /**
      * Automatically generates an ID for a created Credit class object.
@@ -122,7 +133,6 @@ public class CreditManager {
      * @return Credit ID (example: C1, C2, C3)
      *
      */
-
     public String generateCreditId(){
         int index = 1;
         for (int i = 0; i < creditList.size(); i++) {

@@ -2,11 +2,9 @@ package domain;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class AuthentificationManager {
-
     private static User currentUser;
 
     public static User getCurrentUser() {
@@ -28,13 +26,8 @@ public class AuthentificationManager {
                 String user = split[0];
                 String pass = split[1];
                 if (user.equals(username) & pass.equals(password)) {
-                    System.out.println("Logged in");
                     loggedIn = true;
                     break;
-
-                } else {
-                    System.out.println("Incorrect username or password");
-                    loggedIn = false;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -62,6 +55,4 @@ public class AuthentificationManager {
             return false;
         }
     }
-
-
 }

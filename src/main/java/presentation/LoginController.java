@@ -11,12 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -27,12 +25,13 @@ public class LoginController implements Initializable {
     public GridPane gpBackground;
     public ImageView ivLogo;
     private AuthentificationManager am;
-    private UserManager um = new UserManager();
+    private UserManager um;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ivLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
         am = new AuthentificationManager();
+        um = new UserManager();
     }
 
     public void Login(ActionEvent actionEvent) throws IOException {

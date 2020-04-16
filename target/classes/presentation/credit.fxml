@@ -84,7 +84,7 @@
                <children>
                   <Label text="Produktions ID" />
                   <TextField fx:id="tfProductionID" promptText="f.eks. P1" />
-                  <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#Gem" prefHeight="30.0" prefWidth="60.0" text="Gem" />
+                  <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="60.0" text="Gem" />
                </children>
             </VBox>
          </children></AnchorPane>

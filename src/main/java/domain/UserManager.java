@@ -1,30 +1,25 @@
 package domain;
 
 import persistence.FileManager;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    public FileManager getFm() {
-        return fm;
-    }
-
     private List<User> adminList;
     private List<User> producerList;
     private FileManager fm;
     private static int accessLevel = 2;
-
-    public List<User> getProducerList() {
-        return producerList;
-    }
 
     public UserManager() {
         adminList = new ArrayList<>();
         producerList = new ArrayList<>();
         fm = new FileManager(new File("users.txt"));
         fm.readUsers(adminList, producerList);
+    }
+
+    public List<User> getProducerList() {
+        return producerList;
     }
 
     public List<User> getAdminList() {
@@ -49,7 +44,6 @@ public class UserManager {
         fm.appendToFile(user);
     }
 
-
     public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String... other) {
         user.setUsername(username);
         user.setPassword(password);
@@ -58,10 +52,10 @@ public class UserManager {
         user.setLastName(lastName);
         user.setAccessLevel(accessLevel);
 
-        if (accessLevel == 1) {
-            Producer producer = (Producer) user;
-            producer.setEmployedBy(other[0]);
-        }
+        List<Object> tempList = new ArrayList<>();
+        tempList.addAll(adminList);
+        tempList.addAll(producerList);
+        fm.writeToFile(tempList);
     }
 
      public void deleteAdmin(User user) {
@@ -89,7 +83,6 @@ public class UserManager {
         for (int i = 0; i < producerList.size(); i++) {
             index++;
         }
-
         return "P" + index;
     }
 

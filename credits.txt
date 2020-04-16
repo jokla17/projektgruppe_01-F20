@@ -1,2 +1,5 @@
-P6;[C1;test;test, C2;Fotograf;Jonas Svane, C3;test;test, C4;test;test, C5;test;test]
-P2;[C1;test;test, C2;Fotograf;Jonas Svane, C3;test;test, C4;test;test, C5;test;test]
+P1;[C1;Arkiv;Lone Andersen, C2;Rettighedshaver;Niels Job]
+P2;[C1;Fotograf;Hans Hansen, C2;Frisør;Bo Svend, C3;Redigering;Verner Larsen]
+P3;[C1;Klipper;Carsten Larsen, C2;Lysdesign;Gertrud Lis, C3;Kran foto;Sonny Valentin]
+P4;[C1;Special effekt;Jacob Rusted, C2;Tilrettelægger;Xavier Xee, C3;Stylist;Lis Hansen, C4;Storskærmsproducer;Alex Bo]
+P5;[C1;Vært;Rune Daniel, C2;Stillfotograf;Frederik Mole, C3;Sminkør;Katrine Andersen]

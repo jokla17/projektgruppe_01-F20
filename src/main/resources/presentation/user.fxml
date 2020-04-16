@@ -32,50 +32,50 @@
     <children>
         <AnchorPane fx:id="apMainScreen" prefHeight="396.0" prefWidth="757.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
-            <VBox layoutX="22.0" layoutY="15.0" prefHeight="442.0" prefWidth="204.0" spacing="6.0">
+            <VBox layoutX="14.0" layoutY="8.0" prefHeight="392.0" prefWidth="204.0" spacing="5.0">
                <children>
                   <Label text="Brugernavn" />
-                  <TextField fx:id="tfUsername" promptText="f.eks. HansHansen" />
+                  <TextField fx:id="tfUsername" focusTraversable="false" promptText="f.eks. HansHansen" />
                   <Label text="Kodeord" />
-                  <TextField fx:id="tfPassword" promptText="f.eks. password123" />
+                  <TextField fx:id="tfPassword" focusTraversable="false" promptText="f.eks. password123" />
                   <Label text="Email" />
-                  <TextField fx:id="tfEmail" promptText="f.eks. hanshansen@hotmail.com" />
+                  <TextField fx:id="tfEmail" focusTraversable="false" promptText="f.eks. hanshansen@hotmail.com" />
                   <Label text="Navn" />
-                  <TextField fx:id="tfFirstName" promptText="f.eks. Hans" />
+                  <TextField fx:id="tfFirstName" focusTraversable="false" promptText="f.eks. Hans" />
                   <Label text="Efternavn" />
-                  <TextField fx:id="tfLastName" promptText="f.eks. Hansen" />
+                  <TextField fx:id="tfLastName" focusTraversable="false" promptText="f.eks. Hansen" />
                   <Label text="Adgangsniveau" />
-                  <TextField fx:id="tfAccessLevel" />
+                  <TextField fx:id="tfAccessLevel" focusTraversable="false" prefHeight="30.0" prefWidth="62.0" promptText="f.eks. 1 eller 2" />
                   <Label text="Arbejdsgiver" />
-                  <TextField fx:id="tfEmployedBy" />
-                  <HBox prefHeight="39.0" prefWidth="152.0">
-                     <children>
-                        <Button fx:id="btnCreate" focusTraversable="false" mnemonicParsing="false" onAction="#createUser" prefHeight="30.0" prefWidth="70.0" text="Opret" />
-                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#updateUser" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
-                     </children>
-                  </HBox>
+                  <TextField fx:id="tfEmployedBy" focusTraversable="false" promptText="f.eks. John Doe" />
                </children>
             </VBox>
-            <TableView fx:id="tvAdmin" layoutX="244.0" layoutY="14.0" prefHeight="199.0" prefWidth="514.0">
+            <TableView fx:id="tvAdmin" focusTraversable="false" layoutX="234.0" layoutY="14.0" onMouseClicked="#selectAdmin" prefHeight="174.0" prefWidth="518.0">
               <columns>
                 <TableColumn fx:id="tcAdminID" prefWidth="85.0" text="ID" />
                 <TableColumn fx:id="tcAdminUsername" prefWidth="101.0" text="Brugernavn" />
                   <TableColumn fx:id="tcAdminPassword" prefWidth="117.0" text="Kodeord" />
                   <TableColumn fx:id="tcAdminFirstName" prefWidth="115.0" text="Navn" />
-                  <TableColumn fx:id="tcAdminLastName" prefWidth="95.0" text="Efternavn" />
+                  <TableColumn fx:id="tcAdminLastName" prefWidth="93.5999755859375" text="Efternavn" />
               </columns>
             </TableView>
-            <Button fx:id="btnDelete" layoutX="244.0" layoutY="428.0" mnemonicParsing="false" onAction="#deleteProducer" prefHeight="29.0" prefWidth="70.0" text="Slet" />
-            <TableView fx:id="tvProducer" layoutX="244.0" layoutY="258.0" prefHeight="155.0" prefWidth="514.0">
+            <Button fx:id="btnDelete" focusTraversable="false" layoutX="234.0" layoutY="413.0" mnemonicParsing="false" onAction="#deleteProducer" prefHeight="30.0" prefWidth="111.0" text="Slet producer" />
+            <TableView fx:id="tvProducer" focusTraversable="false" layoutX="234.0" layoutY="251.0" onMouseClicked="#selectProducer" prefHeight="152.0" prefWidth="518.0">
               <columns>
                 <TableColumn fx:id="tcProducerID" prefWidth="79.0" text="ID" />
                 <TableColumn fx:id="tcProducerUsername" prefWidth="112.0" text="Brugernavn" />
                   <TableColumn fx:id="tcProducerPassword" prefWidth="107.0" text="Kodeord" />
                   <TableColumn fx:id="tcProducerFirstName" prefWidth="111.0" text="Navn" />
-                  <TableColumn fx:id="tcProducerLastName" prefWidth="104.0" text="Efternavn" />
+                  <TableColumn fx:id="tcProducerLastName" prefWidth="103.2000732421875" text="Efternavn" />
               </columns>
             </TableView>
-            <Button fx:id="btnDelete" layoutX="252.0" layoutY="223.0" mnemonicParsing="false" onAction="#deleteAdmin" text="Slet" />
+            <Button fx:id="btnDelete" focusTraversable="false" layoutX="234.0" layoutY="204.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="30.0" prefWidth="89.0" text="Slet admin" />
+            <HBox layoutX="14.0" layoutY="412.0" prefHeight="30.0" prefWidth="152.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btnCreate" focusTraversable="false" mnemonicParsing="false" onAction="#createUser" prefHeight="30.0" prefWidth="70.0" text="Opret" />
+                  <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#updateUser" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
+               </children>
+            </HBox>
          </children></AnchorPane>
         <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
             <children>

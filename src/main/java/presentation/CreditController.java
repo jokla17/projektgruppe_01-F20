@@ -22,16 +22,17 @@ public class CreditController extends MainController implements Initializable {
     public TableColumn<Credit, String> tcRole;
     public TableColumn<Credit, String> tcName;
     public TextField tfProductionID;
-
     private CreditManager cms;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vbSideBarLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
+
         tcId.setCellValueFactory(new PropertyValueFactory<>("CreditId"));
         tcRole.setCellValueFactory(new PropertyValueFactory<>("CreditRole"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("CreditName"));
-        cms = new CreditManager();
+
+        cms = CreditManager.getInstance();
         tvCreditTable.setItems(FXCollections.observableArrayList(cms.getCreditList()));
     }
 
@@ -72,7 +73,7 @@ public class CreditController extends MainController implements Initializable {
         tfCreditName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getCreditName());
     }
 
-    public void Gem(ActionEvent actionEvent) {
-        cms.saveCredits(tfProductionID);
+    public void save(ActionEvent actionEvent) {
+        cms.saveCredits(tfProductionID.getText());
     }
 }
