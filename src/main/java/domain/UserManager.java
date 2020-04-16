@@ -14,6 +14,7 @@ public class UserManager {
     private List<User> adminList;
     private List<User> producerList;
     private FileManager fm;
+    private static int accessLevel = 2;
 
     public List<User> getProducerList() {
         return producerList;
@@ -92,5 +93,8 @@ public class UserManager {
         return "P" + index;
     }
 
-        }
+    public static int getAccessLevel() {
+        return accessLevel;
+    }
+}
 

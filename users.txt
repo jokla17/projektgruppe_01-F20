@@ -1,8 +1,1 @@
-Admin;password123;producer@gmail.com;Jens;Jensen;2;S1
-Admin;123;hanshensen;Jette;Jettesen;2;S3
-Admin;123;hanshensen;Jette;Jettesen;2;S3
-Admin;123;hanshensen;Jette;Jettesen;2;S5
-Admin;123;hanshensen;Jette;Jettesen;2;S6
-Admin;123;hanshensen;Jette;Jettesen;2;S7
-Admin;123;hanshensen;Jette;Jettesen;2;S7
-Admin;123;hanshensen;Jette;Jettesen;2;S8
+Admin;password123;producer@gmail.com;Jens;Jensen;2;S1'

@@ -12,6 +12,7 @@ import java.util.List;
 public class ProductionManager {
     private List<Production> productionList;
     private FileManager fm;
+    private static int accessLevel = 2;
 
     public ProductionManager() {
         productionList = new ArrayList<>();
@@ -100,5 +101,9 @@ public class ProductionManager {
             index++;
         }
         return "P" + index;
+    }
+
+    public static int getAccessLevel() {
+        return accessLevel;
     }
 }
