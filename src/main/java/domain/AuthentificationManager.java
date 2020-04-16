@@ -51,7 +51,15 @@ public class AuthentificationManager {
 
     }
 
-    public void authenticate(User user) { //should return boolean
-        //not implemented yet
+    public boolean authenticate(int accessLevelUser, int accessLevelClass) {
+        if(accessLevelClass <= accessLevelUser){
+            System.out.println("Its true.");
+            return  true;
+        }else{
+            System.out.println("Its false");
+            return false;
+        }
     }
+
+
 }

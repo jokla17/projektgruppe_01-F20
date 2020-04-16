@@ -1,4 +1,1 @@
-P2;Sporten;Sport;43;2020;Danmark;John Doe
-P3;Vejret;Oplysning;43;2020;Danmark;John Doe
-P4;Nyhederne;Aktualitet;44;2020;Danmark;John Doe
-P5;Go' morgen Danmark;Oplysning;15;2020;Danmark;John Doe
+
