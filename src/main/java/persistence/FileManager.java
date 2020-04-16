@@ -3,6 +3,7 @@ package persistence;
 import domain.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -35,31 +36,35 @@ public class FileManager {
         productionList.addAll(tempProduction);
     }
 
+
+
     // Read users
-    public void readUsers(List<User> userList) {
+    public void readUsers(List<User> adminList, List<User> producerList) {
         Scanner scanner = null;
-        List<User> tempUsers = new ArrayList<>();
+        List<User> tempAdmin = new ArrayList<>();
+        List<User> tempProducer = new ArrayList<>();
         try {
             scanner = new Scanner(new File("users.txt"));
             while (scanner.hasNext()) {
                 String[] splitLine = scanner.nextLine().split(";");
                 User user = null;
-                int accessLevel = Integer.parseInt(splitLine[5]);
-                if (accessLevel == 2) {
+                if (Integer.parseInt(splitLine[5]) == 2) {
                     user = new Systemadministrator(splitLine[0], splitLine[1],
                             splitLine[2], splitLine[3], splitLine[4], Integer.parseInt(splitLine[5]), splitLine[6]);
+                    tempAdmin.add(user);
                 } else {
                     user = new Producer(splitLine[0], splitLine[1],
                             splitLine[2], splitLine[3], splitLine[4], Integer.parseInt(splitLine[5]), splitLine[6], splitLine[7]);
+                    tempProducer.add(user);
                 }
-                tempUsers.add(user);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
             scanner.close();
         }
-        userList.addAll(tempUsers);
+        adminList.addAll(tempAdmin);
+        producerList.addAll(tempProducer);
     }
 
     // Read credits
@@ -88,14 +93,6 @@ public class FileManager {
             scanner.close();
         }
         creditList.addAll(tempCredit);
-    }
-
-    // Read credits not working with gui due to compatible issues
-    public static void main(String[] args) {
-        FileManager fileManager = new FileManager(new File("credits"));
-        List<Credit> list = new ArrayList<>();
-        fileManager.readCredits("P1", list);
-        System.out.println(list);
     }
 
     // Write to file

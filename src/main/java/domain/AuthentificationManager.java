@@ -19,6 +19,8 @@ public class AuthentificationManager {
                 if (user.equals(username) & pass.equals(password)) {
                     System.out.println("Logged in");
                     loggedIn = true;
+                    break;
+
                 } else {
                     System.out.println("Incorrect username or password");
                     loggedIn = false;
