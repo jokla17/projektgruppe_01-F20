@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -37,9 +39,12 @@ public class LoginController implements Initializable {
         am.login(tfUsername.getText(), tfPassword.getText());
 
         if (am.login(tfUsername.getText(), tfPassword.getText())) {
-            for (int i = 0; i < um.getUserList().size(); i++){
-                if (um.getUserList().get(i).getUsername().equals(tfUsername.getText())){
-                    am.setCurrentUser(um.getUserList().get(i));
+            ArrayList<User> userList = new ArrayList<>();
+            userList.addAll(um.getAdminList());
+            userList.addAll(um.getProducerList());
+            for (int i = 0; i < userList.size(); i++){
+                if (userList.get(i).getUsername().equals(tfUsername.getText())){
+                    am.setCurrentUser(userList.get(i));
                 }
             }
             App.setRoot("home");
