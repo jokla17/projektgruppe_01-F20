@@ -3,6 +3,7 @@ package domain;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import persistence.FileManager;
+import presentation.ProductionController;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,10 +13,14 @@ import java.util.Scanner;
 
 //CreditManagementSystem - Create, read, update and delete credits within the system
 public class CreditManager {
-    private List<Credit> creditList;
-    FileManager filemanager = new FileManager(new File("credits.txt"));
+    private static List<Credit> creditList;
 
-    public CreditManager() {creditList = new ArrayList<>();}
+    FileManager fm;
+
+    public CreditManager() {
+        creditList = new ArrayList<>();
+        fm = new FileManager(new File("credits.txt"));
+    }
 
     public List<Credit> getCreditList() {
         return creditList;
@@ -28,7 +33,6 @@ public class CreditManager {
      */
     public void createCredit(String role, String name){
         creditList.add(new Credit(generateCreditId(), role, name));
-        filemanager.appendToFile(new Credit(generateCreditId(), role, name));
     }
 
     public void saveCredits(TextField tfProductionID){
@@ -42,8 +46,6 @@ public class CreditManager {
             pw.close();
         }
     }
-
-
 
     /**
      * OVERLOADED - Add multiple credits to the creditList at once.

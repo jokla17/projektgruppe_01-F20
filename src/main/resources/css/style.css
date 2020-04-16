@@ -1,4 +1,163 @@
-#btnLogin{
-    -fx-background-color: RED;
-    -fx-padding: 20 20 20 20;
+#gpBackground {
+    -fx-background-color: base-color-1;
 }
+
+#apMainScreen {}
+
+/** BUTTONS **/
+.button {
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
+#btnCreate {
+    -fx-background-color: success-button-color;
+    -fx-border-color: success-hover-button-color;
+}
+
+#btnCreate:hover {
+    -fx-background-color: success-hover-button-color;
+}
+
+#btnUpdate {
+    -fx-background-color: update-button-color;
+    -fx-border-color: update-hover-button-color;
+}
+
+#btnUpdate:hover {
+    -fx-background-color: update-hover-button-color;
+}
+
+#btnDelete {
+    -fx-background-color: warning-button-color;
+    -fx-border-color: warning-hover-button-color;
+}
+
+#btnDelete:hover {
+    -fx-background-color: warning-hover-button-color;
+}
+
+/** TEXT FIELDS **/
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: base-color-3;
+    -fx-border-width: 1px;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/** TABLE VIEW **/
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header{
+    -fx-background-color: base-color-3;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: base-color-3;
+    -fx-padding: 3px
+}
+
+.table-view .table-row-cell{
+    -fx-table-cell-border-color: base-color-2;
+}
+
+/** LOGIN FORM **/
+#vbLogin {
+    -fx-background-color: base-color-2;
+    -fx-background-radius: 10px;
+    -fx-border-color: base-color-3;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 20px 30px 20px 30px;
+}
+
+#vbLogin .text-field {
+    -fx-background-radius: 10px;
+    -fx-background-color: base-color-1;
+    -fx-border-color: base-color-3;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+}
+
+#vbLogin .button {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-background-color: default-button-color;
+    -fx-border-color: default-hover-button-color;
+    -fx-text-fill: general-text-color-2;
+    -fx-padding: 10px 30px 10px 30px;
+}
+
+#vbLogin .button:hover {
+    -fx-background-color: default-hover-button-color;
+}
+
+/** SIDEBAR **/
+#vbSideBarHeader {
+    -fx-background-color: base-color-2;
+}
+
+#vbSideBarCenter {
+    -fx-background-color: base-color-2;
+    -fx-padding: 50px 0px 0px 0px;
+    -fx-font-size: 14px;
+}
+
+#vbSideBarFooter {
+    -fx-background-color: base-color-4;
+}
+
+/** SIDEBAR NAVIGATION **/
+#navHome, #navCreateProduction, #navCreateCredits, #navCreateUser {
+    -fx-padding: 10px 0px 10px 20px;
+}
+
+#navHome:hover, #navCreateProduction:hover, #navCreateCredits:hover, #navCreateUser:hover {
+    -fx-background-color: nav-hover-highlight-color;
+    -fx-cursor: hand;
+}
+
+/** TOP HEADER BAR **/
+#hbTopHeaderBar {
+    -fx-background-color: base-color-3;
+}
+
+#tfSearch {
+    -fx-background-color: base-color-2;
+    -fx-border-color: base-color-2;
+    -fx-border-radius: 10px 0px 0px 10px;
+    -fx-background-radius: 10px 0px 0px 10px;
+}
+
+#btnSearch {
+    -fx-background-color: default-button-color;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 0px 10px 10px 0px;
+    -fx-background-radius: 0px 10px 10px 0px;
+}
+
+#btnSearch:hover {
+    -fx-background-color: default-hover-button-color;
+}
+
+#btnLogout {
+    -fx-background-color: warning-button-color;
+    -fx-border-color: warning-hover-button-color;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
+#btnLogout:hover {
+    -fx-background-color: warning-hover-button-color;
+}
+

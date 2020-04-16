@@ -1,9 +1,11 @@
 package presentation;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import domain.CreditManager;
 import domain.Production;
 import domain.ProductionManager;
 import javafx.collections.FXCollections;
@@ -14,10 +16,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class ProductionController implements Initializable {
+public class ProductionController extends MainController implements Initializable {
     public TextField tfTitle;
     public TextField tfGenre;
     public TextField tfEpisodeNumber;
@@ -33,21 +37,24 @@ public class ProductionController implements Initializable {
     public Button btnDelete;
     public TextField tfSearch;
     public Button btnSearch;
-    public Text navCreateCredits;
-    public Text navCreateProduction;
     public TextField tfProductionYear;
-    public Button btnLogout;
 
-    ProductionManager pms;
+    private ProductionManager pms;
+    private static String selectedProductionId;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        vbSideBarLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
         tcID.setCellValueFactory(new PropertyValueFactory<>("ProductionId"));
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
         pms = new ProductionManager();
         tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
+    }
+
+    public static String getSelectedProductionId() {
+        return selectedProductionId;
     }
 
     // Create production handler
@@ -78,27 +85,12 @@ public class ProductionController implements Initializable {
     }
 
     // Select production handler
-    public void selectProduction(MouseEvent mouseEvent) {
+    public void selectProduction(MouseEvent mouseEvent) throws IOException {
         tfTitle.setText(tvProductions.getSelectionModel().getSelectedItem().getTitle());
         tfGenre.setText(tvProductions.getSelectionModel().getSelectedItem().getGenre());
         tfEpisodeNumber.setText(String.valueOf(tvProductions.getSelectionModel().getSelectedItem().getEpisodeNumber()));
         tfProductionYear.setText(String.valueOf(tvProductions.getSelectionModel().getSelectedItem().getProductionYear()));
         tfProductionCountry.setText(tvProductions.getSelectionModel().getSelectedItem().getProductionCountry());
         tfProducedBy.setText(tvProductions.getSelectionModel().getSelectedItem().getProducedBy());
-    }
-
-    // Navigate to createCredits handler
-    public void navigateToCreateCredits(MouseEvent mouseEvent) throws IOException {
-        App.setRoot("credit");
-    }
-
-    // Navigate to createProduction handler
-    public void navigateToCreateProduction(MouseEvent mouseEvent) throws IOException {
-        App.setRoot("production");
-    }
-
-    public void Logout(ActionEvent actionEvent) {
-        System.exit(0);
-
     }
 }

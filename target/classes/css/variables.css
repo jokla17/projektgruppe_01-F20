@@ -1,0 +1,23 @@
+* {
+    base-color-1: #FFFFFF;
+    base-color-2: #F1F1F5;
+    base-color-3: #CED6E1;
+    base-color-4: #DFE4EA;
+
+    general-text-color-1: #1A272E;
+    general-text-color-2: #FFFFFF;
+
+    nav-hover-highlight-color: #DDE5EE;
+
+    default-button-color: linear-gradient(#4A7A8f, #1E5974);
+    default-hover-button-color: linear-gradient(#1E5974, #4A7A8f);
+
+    warning-button-color: linear-gradient(#FF5E57, #FF3F34);
+    warning-hover-button-color: linear-gradient(#FF3F34, #FF5E57);
+
+    success-button-color: linear-gradient(#0BE881, #05C46B);
+    success-hover-button-color: linear-gradient(#05C46B, #0BE881);
+
+    update-button-color: linear-gradient(#4bcffa, #0fbcf9);
+    update-hover-button-color: linear-gradient(#0FBCF9, #4BCFFA);
+}

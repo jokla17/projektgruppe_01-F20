@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class ProductionManager {
     private List<Production> productionList;
-    private FileManager fms;
+    private FileManager fm;
 
     public ProductionManager() {
         productionList = new ArrayList<>();
-        fms = new FileManager(new File("productions.txt"));
-        fms.readProductions(productionList);
+        fm = new FileManager(new File("productions.txt"));
+        fm.readProductions(productionList);
     }
 
     public List<Production> getProductionList() {
@@ -37,7 +37,7 @@ public class ProductionManager {
                 productionArgs[4],
                 productionArgs[5]);
         productionList.add(production);
-        fms.appendToFile(production);
+        fm.appendToFile(production);
     }
 
     /**
@@ -75,7 +75,7 @@ public class ProductionManager {
         production.setProductionCountry(productionArgs[4]);
         production.setProducedBy(productionArgs[5]);
         List<Object> tempProductionList = new ArrayList<Object>(productionList);
-        fms.writeToFile(tempProductionList);
+        fm.writeToFile(tempProductionList);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ProductionManager {
     public void deleteProduction(Production production){
         productionList.remove(production);
         List<Object> tempProductionList = new ArrayList<Object>(productionList);
-        fms.writeToFile(tempProductionList);
+        fm.writeToFile(tempProductionList);
     }
 
     /**
@@ -100,10 +100,5 @@ public class ProductionManager {
             index++;
         }
         return "P" + index;
-    }
-
-    public static void main(String[] args) {
-        ProductionManager pms = new ProductionManager();
-        System.out.println(pms.productionList);
     }
 }

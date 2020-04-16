@@ -37,6 +37,6 @@ public class Credit {
 
     @Override
     public String toString() {
-        return creditId + ";" + creditName + ";" + creditRole;
+        return creditId + ";" + creditRole + ";" + creditName;
     }
 }

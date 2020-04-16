@@ -15,6 +15,7 @@ public class FileManager {
         this.file = file;
     }
 
+    // Read productions
     public void readProductions(List<Production> productionList) {
         Scanner scanner = null;
         List<Production> tempProduction = new ArrayList<>();
@@ -34,6 +35,7 @@ public class FileManager {
         productionList.addAll(tempProduction);
     }
 
+    // Read users
     public void readUsers(List<User> userList) {
         Scanner scanner = null;
         List<User> tempUsers = new ArrayList<>();
@@ -41,7 +43,6 @@ public class FileManager {
             scanner = new Scanner(new File("users.txt"));
             while (scanner.hasNext()) {
                 String[] splitLine = scanner.nextLine().split(";");
-
                 User user = null;
                 int accessLevel = Integer.parseInt(splitLine[5]);
                 if (accessLevel == 2) {
@@ -61,15 +62,25 @@ public class FileManager {
         userList.addAll(tempUsers);
     }
 
-    public static void readCredit(List<Credit> creditList) {
+    // Read credits
+    public void readCredits(String productionId, List<Credit> creditList) {
         Scanner scanner = null;
         List<Credit> tempCredit = new ArrayList<>();
         try {
             scanner = new Scanner(new File("credits.txt"));
             while (scanner.hasNext()) {
-                String[] splitLine = scanner.nextLine().split(";");
-                Credit credit = new Credit(splitLine[0], splitLine[1], splitLine[2]);
-                tempCredit.add(credit);
+                String[] splitLine = scanner.nextLine().split("\\[");
+                String prodId = splitLine[0].replace(";", "");
+                String creditsAsString = splitLine[1].replace("]", "");
+                String[] creditsToArray = creditsAsString.split(",");
+
+                if (prodId.contains(productionId)) {
+                    for (String s : creditsToArray) {
+                        String[] splitCredit = s.split(";");
+                        Credit credit = new Credit(splitCredit[0].trim(), splitCredit[1].trim(), splitCredit[2].trim());
+                        tempCredit.add(credit);
+                    }
+                }
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -79,7 +90,15 @@ public class FileManager {
         creditList.addAll(tempCredit);
     }
 
+    // Read credits not working with gui due to compatible issues
+    public static void main(String[] args) {
+        FileManager fileManager = new FileManager(new File("credits"));
+        List<Credit> list = new ArrayList<>();
+        fileManager.readCredits("P1", list);
+        System.out.println(list);
+    }
 
+    // Write to file
     public void writeToFile(List<Object> list) {
         PrintWriter writer = null;
         try {
@@ -94,6 +113,7 @@ public class FileManager {
         }
     }
 
+    // Append to file
     public void appendToFile(Object object) {
         PrintWriter writer = null;
         try {

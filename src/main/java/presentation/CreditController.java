@@ -7,34 +7,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CreditController extends ProductionController implements Initializable {
+public class CreditController extends MainController implements Initializable {
     public TextField tfCreditRole;
     public TextField tfCreditName;
-    public Button btnCreateSingle;
-    public Button btnCreateMultiple;
     public TextArea taCreditsArea;
     public TableView<Credit> tvCreditTable;
     public TableColumn<Credit, String> tcId;
     public TableColumn<Credit, String> tcRole;
     public TableColumn<Credit, String> tcName;
-    public Button btnUpdateCredit;
-    public Button btnDeleteCredit;
-    public Button btnGem;
     public TextField tfProductionID;
 
-    CreditManager cms;
+    private CreditManager cms;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        vbSideBarLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
         tcId.setCellValueFactory(new PropertyValueFactory<>("CreditId"));
         tcRole.setCellValueFactory(new PropertyValueFactory<>("CreditRole"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("CreditName"));
         cms = new CreditManager();
+        tvCreditTable.setItems(FXCollections.observableArrayList(cms.getCreditList()));
     }
 
     // Create multiple credits handler
@@ -63,7 +61,6 @@ public class CreditController extends ProductionController implements Initializa
     }
 
     // Search functionality handler
-    @Override
     public void searchFunctionality(ActionEvent actionEvent) {
         tvCreditTable.setItems(
                 FXCollections.observableArrayList(cms.searchCredit(cms.getCreditList(), tfSearch.getText())));

@@ -8,12 +8,12 @@ import java.util.List;
 
 public class UserManager {
     private List<User> userList;
-    private FileManager fms;
+    private FileManager fm;
 
     public UserManager() {
         userList = new ArrayList<>();
-        fms = new FileManager(new File("users.txt"));
-        fms.readUsers(userList);
+        fm = new FileManager(new File("users.txt"));
+        fm.readUsers(userList);
     }
 
     public List<User> getUserList() {
@@ -34,7 +34,7 @@ public class UserManager {
                 break;
         }
         userList.add(user);
-        fms.appendToFile(user);
+        fm.appendToFile(user);
     }
 
     public void readUser() {
@@ -60,7 +60,7 @@ public class UserManager {
     public void deleteUser(User user) {
         userList.remove(user);
         List<Object> tempUsersList = new ArrayList<>(userList);
-        fms.writeToFile(tempUsersList);
+        fm.writeToFile(tempUsersList);
     }
 
     public String generateUserId(int accessLevel) {
