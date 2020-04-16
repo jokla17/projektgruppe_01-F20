@@ -15,11 +15,13 @@ import java.util.Scanner;
 public class CreditManager {
     private static List<Credit> creditList;
 
+
     FileManager fm;
 
     public CreditManager() {
         creditList = new ArrayList<>();
         fm = new FileManager(new File("credits.txt"));
+
     }
 
     public List<Credit> getCreditList() {
@@ -68,6 +70,7 @@ public class CreditManager {
             reader.close();
         }
     }
+
 
     /**
      * Reads one or multiple credits, based on a specific search result - in this case, only the credit name.

@@ -9,6 +9,7 @@ import java.util.List;
 public class UserManager {
     private List<User> userList;
     private FileManager fm;
+    private static int accessLevel = 2;
 
     public UserManager() {
         userList = new ArrayList<>();
@@ -74,5 +75,9 @@ public class UserManager {
             adminIndex++;
             return "S" + adminIndex;
         }
+    }
+
+    public static int getAccessLevel() {
+        return accessLevel;
     }
 }

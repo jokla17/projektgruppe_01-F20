@@ -44,7 +44,8 @@ public class MainController {
         App.setRoot("user");
     }
 
-    public void Logout(ActionEvent actionEvent) {
-        System.exit(0);
+    public void Logout(ActionEvent actionEvent) throws IOException{
+        App.setRoot("Login");
+        // Change current user to null.
     }
 }
