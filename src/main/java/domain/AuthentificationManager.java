@@ -6,6 +6,17 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class AuthentificationManager {
+
+    private static User currentUser;
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        AuthentificationManager.currentUser = currentUser;
+    }
+
     public boolean login(String username, String password) {
         Scanner sc = null;
         boolean loggedIn = false;

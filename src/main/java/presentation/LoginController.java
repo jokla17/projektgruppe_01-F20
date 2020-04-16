@@ -1,6 +1,8 @@
 package presentation;
 
 import domain.AuthentificationManager;
+import domain.User;
+import domain.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -23,6 +25,7 @@ public class LoginController implements Initializable {
     public GridPane gpBackground;
     public ImageView ivLogo;
     private AuthentificationManager am;
+    private UserManager um = new UserManager();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -32,8 +35,17 @@ public class LoginController implements Initializable {
 
     public void Login(ActionEvent actionEvent) throws IOException {
         am.login(tfUsername.getText(), tfPassword.getText());
+
         if (am.login(tfUsername.getText(), tfPassword.getText())) {
+            for (int i = 0; i < um.getUserList().size(); i++){
+                if (um.getUserList().get(i).getUsername().equals(tfUsername.getText())){
+                    am.setCurrentUser(um.getUserList().get(i));
+                }
+            }
             App.setRoot("home");
+
         }
+
+
     }
 }
