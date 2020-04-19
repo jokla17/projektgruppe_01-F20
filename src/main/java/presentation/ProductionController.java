@@ -4,11 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import domain.Credit;
-import domain.CreditManager;
 import domain.Production;
-import domain.ProductionManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -18,9 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 
 public class ProductionController extends MainController implements Initializable {
     public TextField tfTitle;
@@ -40,8 +34,6 @@ public class ProductionController extends MainController implements Initializabl
     public Button btnSearch;
     public TextField tfProductionYear;
 
-    private ProductionManager pms;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vbSideBarLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
@@ -49,20 +41,19 @@ public class ProductionController extends MainController implements Initializabl
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
-        pms = new ProductionManager();
-        tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
+        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
     }
 
     // Create production handler
     public void createProduction(ActionEvent actionEvent) {
-        pms.createProduction(new String[]{tfTitle.getText(), tfGenre.getText(),
+        App.getProductionManager().createProduction(new String[]{tfTitle.getText(), tfGenre.getText(),
                 tfEpisodeNumber.getText(), tfProductionYear.getText(), tfProductionCountry.getText(), tfProducedBy.getText()});
-        tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
+        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
     }
 
     // Update production handler
     public void updateProduction(ActionEvent actionEvent) {
-        pms.updateProduction(tvProductions.getSelectionModel().getSelectedItem(),
+        App.getProductionManager().updateProduction(tvProductions.getSelectionModel().getSelectedItem(),
                 new String[]{tfTitle.getText(), tfGenre.getText(),
                         tfEpisodeNumber.getText(), tfProductionYear.getText(), tfProductionCountry.getText(), tfProducedBy.getText()});
         tvProductions.refresh();
@@ -70,14 +61,15 @@ public class ProductionController extends MainController implements Initializabl
 
     // Delete production handler
     public void deleteProduction(ActionEvent actionEvent) {
-        pms.deleteProduction(tvProductions.getSelectionModel().getSelectedItem());
-        tvProductions.setItems(FXCollections.observableArrayList(pms.getProductionList()));
+        App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem());
+        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
     }
 
     // Search handler
     public void searchFunctionality(ActionEvent actionEvent) {
         tvProductions.setItems(
-                FXCollections.observableArrayList(pms.readProduction(pms.getProductionList(), tfSearch.getText())));
+                FXCollections.observableArrayList(
+                        App.getProductionManager().readProduction(App.getProductionManager().getProductionList(), tfSearch.getText())));
     }
 
     // Select production handler
@@ -90,9 +82,8 @@ public class ProductionController extends MainController implements Initializabl
         tfProducedBy.setText(tvProductions.getSelectionModel().getSelectedItem().getProducedBy());
 
         if (mouseEvent.getClickCount() == 2) {
-            CreditManager cm = CreditManager.getInstance();
-            cm.getCreditList().clear();
-            cm.setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
+            App.getCreditManager().getCreditList().clear();
+            App.getCreditManager().setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
             App.setRoot("credit");
         }
     }

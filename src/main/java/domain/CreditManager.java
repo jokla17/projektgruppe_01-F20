@@ -1,7 +1,7 @@
 package domain;
 
 import javafx.scene.control.TextArea;
-import persistence.FileManager;
+import presentation.App;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +9,10 @@ import java.util.Scanner;
 
 //CreditManagementSystem - Create, read, update and delete credits within the system
 public class CreditManager {
-    private static CreditManager instance = new CreditManager();
     private List<Credit> creditList;
-    private FileManager fm;
 
     public CreditManager() {
         creditList = new ArrayList<>();
-        fm = new FileManager(new File("credits.txt"));
-    }
-
-    public static CreditManager getInstance() {
-        return instance;
     }
 
     public List<Credit> getCreditList() {
@@ -27,7 +20,7 @@ public class CreditManager {
     }
 
     public void setCreditList(String productionId) {
-        fm.readCredits(productionId, creditList);
+        App.getFileManager().readCredits(productionId, creditList);
     }
 
     /**
@@ -114,11 +107,11 @@ public class CreditManager {
                 String prodId = split[0].replace(";","");
                 String credits = split[1];
                 if (prodId.contains(productionId)) {
-                    fm.replaceLineInFile(prodId + ";\\[" + credits, productionId + ";" + creditList);
+                    App.getFileManager().replaceLineInFile(prodId + ";\\[" + credits, productionId + ";" + creditList);
                     return;
                 }
             }
-            fm.appendToFile(productionId + ";" + creditList);
+            App.getFileManager().appendToFile("credits.txt", productionId + ";" + creditList);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } finally {

@@ -30,8 +30,7 @@
     <children>
         <AnchorPane fx:id="apMainScreen" prefHeight="396.0" prefWidth="757.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Nuværende bruger:" />
-            <Label fx:id="currentUserLbl" layoutX="127.0" layoutY="13.0" prefHeight="18.0" prefWidth="111.0" />
+            <Label fx:id="lbCurrentUser" layoutX="14.0" layoutY="14.0" prefHeight="27.0" prefWidth="158.0" text="Nuværende bruger: user" />
          </children></AnchorPane>
         <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
             <children>

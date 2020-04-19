@@ -1,6 +1,7 @@
 package domain;
 
 import persistence.FileManager;
+import presentation.App;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,13 +12,11 @@ import java.util.List;
  */
 public class ProductionManager {
     private List<Production> productionList;
-    private FileManager fm;
     private static int accessLevel = 2;
 
     public ProductionManager() {
         productionList = new ArrayList<>();
-        fm = new FileManager(new File("productions.txt"));
-        fm.readProductions(productionList);
+        App.getFileManager().readProductions(productionList);
     }
 
     public List<Production> getProductionList() {
@@ -38,7 +37,7 @@ public class ProductionManager {
                 productionArgs[4],
                 productionArgs[5]);
         productionList.add(production);
-        fm.appendToFile(production);
+        App.getFileManager().appendToFile("productions.txt", production);
     }
 
     /**
@@ -76,7 +75,7 @@ public class ProductionManager {
         production.setProductionCountry(productionArgs[4]);
         production.setProducedBy(productionArgs[5]);
         List<Object> tempProductionList = new ArrayList<Object>(productionList);
-        fm.writeToFile(tempProductionList);
+        App.getFileManager().writeToFile("productions.txt", tempProductionList);
     }
 
     /**
@@ -86,7 +85,7 @@ public class ProductionManager {
     public void deleteProduction(Production production){
         productionList.remove(production);
         List<Object> tempProductionList = new ArrayList<Object>(productionList);
-        fm.writeToFile(tempProductionList);
+        App.getFileManager().writeToFile("productions.txt", tempProductionList);
     }
 
     /**

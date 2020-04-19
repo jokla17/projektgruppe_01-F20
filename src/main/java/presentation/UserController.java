@@ -44,7 +44,6 @@ public class UserController extends MainController implements Initializable {
     public TableColumn<Producer, String> tcProducerLastName;
     public TableView<User> tvAdmin;
     public TableView<User> tvProducer;
-    private UserManager um;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,30 +61,29 @@ public class UserController extends MainController implements Initializable {
         tcProducerFirstName.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
         tcProducerLastName.setCellValueFactory(new PropertyValueFactory<>("LastName"));
 
-        um = new UserManager();
-        tvAdmin.setItems(FXCollections.observableArrayList(um.getAdminList()));
-        tvProducer.setItems(FXCollections.observableArrayList(um.getProducerList()));
+        tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+        tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
     }
 
     public void createUser(ActionEvent actionEvent) {
         if(Integer.parseInt(tfAccessLevel.getText()) == 2) {
-            um.createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
+            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
         }
         else {
-            um.createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
         }
-        tvAdmin.setItems(FXCollections.observableArrayList(um.getAdminList()));
-        tvProducer.setItems(FXCollections.observableArrayList(um.getProducerList()));
+        tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+        tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
     }
 
     public void updateUser(ActionEvent actionEvent) {
         if (Integer.parseInt(tfAccessLevel.getText()) == 2) {
-            um.updateUser(tvAdmin.getSelectionModel().getSelectedItem(),
+            App.getUserManager().updateUser(tvAdmin.getSelectionModel().getSelectedItem(),
                     tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
                     tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
             tvAdmin.refresh();
         } else {
-            um.updateUser(tvProducer.getSelectionModel().getSelectedItem(),
+            App.getUserManager().updateUser(tvProducer.getSelectionModel().getSelectedItem(),
                     tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
                     tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
             tvProducer.refresh();
@@ -93,13 +91,13 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void deleteAdmin(ActionEvent actionEvent) {
-        um.deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
-        tvAdmin.setItems(FXCollections.observableArrayList(um.getAdminList()));
+        App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
+        tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
     }
 
     public void deleteProducer(ActionEvent actionEvent) {
-        um.deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
-        tvProducer.setItems(FXCollections.observableArrayList(um.getProducerList()));
+        App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
+        tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
     }
 
     public void selectProducer(MouseEvent mouseEvent) {

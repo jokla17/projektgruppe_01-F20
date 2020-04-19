@@ -9,11 +9,7 @@ import java.util.Scanner;
 
 public class FileManager {
 
-    private File file;
-
-    public FileManager(File file) {
-        this.file = file;
-    }
+    public FileManager() {}
 
     // Read productions
     public void readProductions(List<Production> productionList) {
@@ -93,10 +89,10 @@ public class FileManager {
     }
 
     // Write to file
-    public void writeToFile(List<Object> list) {
+    public void writeToFile(String path, List<Object> list) {
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileWriter(file, false));
+            writer = new PrintWriter(new FileWriter(new File(path), false));
             for (int i = 0; i < list.size(); i++) {
                 writer.append(list.get(i).toString() + "\n");
             }
@@ -108,10 +104,10 @@ public class FileManager {
     }
 
     // Append to file
-    public void appendToFile(Object object) {
+    public void appendToFile(String path, Object object) {
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileWriter(file, true));
+            writer = new PrintWriter(new FileWriter(path, true));
             writer.append(object.toString() + "\n");
 
         } catch (IOException e) {

@@ -1,21 +1,19 @@
 package domain;
 
-import persistence.FileManager;
-import java.io.File;
+import presentation.App;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
     private List<User> adminList;
     private List<User> producerList;
-    private FileManager fm;
     private static int accessLevel = 2;
 
     public UserManager() {
         adminList = new ArrayList<>();
         producerList = new ArrayList<>();
-        fm = new FileManager(new File("users.txt"));
-        fm.readUsers(adminList, producerList);
+        App.getFileManager().readUsers(adminList, producerList);
     }
 
     public List<User> getProducerList() {
@@ -41,7 +39,7 @@ public class UserManager {
                 adminList.add(user);
                 break;
         }
-        fm.appendToFile(user);
+        App.getFileManager().appendToFile("users.txt", user);
     }
 
     public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String... other) {
@@ -55,19 +53,19 @@ public class UserManager {
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(adminList);
         tempList.addAll(producerList);
-        fm.writeToFile(tempList);
+        App.getFileManager().writeToFile("users.txt", tempList);
     }
 
      public void deleteAdmin(User user) {
         adminList.remove(user);
         List<Object> tempAdminList = new ArrayList<>(adminList);
-        fm.writeToFile(tempAdminList);
+        App.getFileManager().writeToFile("users.txt", tempAdminList);
     }
 
     public void deleteProducer(User user) {
         producerList.remove(user);
         List<Object> tempProducerList = new ArrayList<>(producerList);
-        fm.writeToFile(tempProducerList);
+        App.getFileManager().writeToFile("users.txt", tempProducerList);
     }
 
     public String generateAdminId(){
