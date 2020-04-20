@@ -3,7 +3,6 @@ package presentation;
 import domain.Producer;
 import domain.Systemadministrator;
 import domain.User;
-import domain.UserManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;

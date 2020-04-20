@@ -1,6 +1,5 @@
 package presentation;
 
-import domain.AuthentificationManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,6 +16,6 @@ public class HomeController extends MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vbSideBarLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
-        lbCurrentUser.setText("Logget på som: " + AuthentificationManager.getCurrentUser().getUsername());
+        lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 }

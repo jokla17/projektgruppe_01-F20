@@ -8,7 +8,6 @@ import java.util.List;
 public class UserManager {
     private List<User> adminList;
     private List<User> producerList;
-    private static int accessLevel = 2;
 
     public UserManager() {
         adminList = new ArrayList<>();
@@ -26,6 +25,11 @@ public class UserManager {
 
     public void createUser(String username, String password, String email, String firstName,
                            String lastName, int accessLevel, String... other) {
+        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+            System.out.println("Functionality not available for this user type.");
+            return;
+        }
+
         User user = null;
         switch (accessLevel) {
             case 1:
@@ -43,6 +47,11 @@ public class UserManager {
     }
 
     public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String... other) {
+        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+            System.out.println("Functionality not available for this user type.");
+            return;
+        }
+
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
@@ -56,19 +65,33 @@ public class UserManager {
         App.getFileManager().writeToFile("users.txt", tempList);
     }
 
-     public void deleteAdmin(User user) {
+    public void deleteAdmin(User user) {
+        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+            System.out.println("Functionality not available for this user type.");
+            return;
+        }
+
         adminList.remove(user);
-        List<Object> tempAdminList = new ArrayList<>(adminList);
-        App.getFileManager().writeToFile("users.txt", tempAdminList);
+        List<Object> tempList = new ArrayList<>();
+        tempList.addAll(adminList);
+        tempList.addAll(producerList);
+        App.getFileManager().writeToFile("users.txt", tempList);
     }
 
     public void deleteProducer(User user) {
+        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+            System.out.println("Functionality not available for this user type.");
+            return;
+        }
+
         producerList.remove(user);
-        List<Object> tempProducerList = new ArrayList<>(producerList);
-        App.getFileManager().writeToFile("users.txt", tempProducerList);
+        List<Object> tempList = new ArrayList<>();
+        tempList.addAll(adminList);
+        tempList.addAll(producerList);
+        App.getFileManager().writeToFile("users.txt", tempList);
     }
 
-    public String generateAdminId(){
+    public String generateAdminId() {
         int index = 1;
         for (int i = 0; i < adminList.size(); i++) {
             index++;
@@ -76,16 +99,12 @@ public class UserManager {
         return "S" + index;
     }
 
-    public String generateProducerId(){
+    public String generateProducerId() {
         int index = 1;
         for (int i = 0; i < producerList.size(); i++) {
             index++;
         }
         return "P" + index;
-    }
-
-    public static int getAccessLevel() {
-        return accessLevel;
     }
 }
 

@@ -35,6 +35,7 @@ public class LoginController implements Initializable {
             ArrayList<User> userList = new ArrayList<>();
             userList.addAll(App.getUserManager().getAdminList());
             userList.addAll(App.getUserManager().getProducerList());
+
             for (int i = 0; i < userList.size(); i++){
                 if (userList.get(i).getUsername().equals(tfUsername.getText())){
                     App.getAuthentificationManager().setCurrentUser(userList.get(i));
