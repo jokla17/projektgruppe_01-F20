@@ -19,16 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="Implemented CRUD for credit management - double click on a production and the specific credit list will appear">
+    <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="User limitation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/AuthentificationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/AuthentificationManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/domain/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/presentation/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/credits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/credits.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/App.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587068437462</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="User limitation">
+      <created>1587379251063</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587379251063</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +250,8 @@
     <MESSAGE value="CRUD" />
     <MESSAGE value="Pushed new design" />
     <MESSAGE value="Implemented CRUD for credit management - double click on a production and the specific credit list will appear" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented CRUD for credit management - double click on a production and the specific credit list will appear" />
+    <MESSAGE value="User limitation" />
+    <option name="LAST_COMMIT_MESSAGE" value="User limitation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1585656535906">
@@ -289,32 +291,32 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="593" y="314" key="Github.CreateGistDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587064624472" />
-    <state width="880" height="105" key="GridCell.Tab.0.bottom" timestamp="1587379144844">
+    <state width="880" height="105" key="GridCell.Tab.0.bottom" timestamp="1587379445303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1877" height="154" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587158423968" />
-    <state width="880" height="105" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379144844" />
+    <state width="880" height="105" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379445303" />
     <state width="1493" height="154" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587060682545" />
     <state width="2517" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
-    <state width="880" height="105" key="GridCell.Tab.0.center" timestamp="1587379144844">
+    <state width="880" height="105" key="GridCell.Tab.0.center" timestamp="1587379445303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1877" height="154" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587158423967" />
-    <state width="880" height="105" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379144844" />
+    <state width="880" height="105" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379445303" />
     <state width="1493" height="154" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587060682544" />
     <state width="2517" height="401" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
-    <state width="880" height="105" key="GridCell.Tab.0.left" timestamp="1587379144844">
+    <state width="880" height="105" key="GridCell.Tab.0.left" timestamp="1587379445303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1877" height="154" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587158423967" />
-    <state width="880" height="105" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379144844" />
+    <state width="880" height="105" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379445303" />
     <state width="1493" height="154" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587060682544" />
     <state width="2517" height="401" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
-    <state width="880" height="105" key="GridCell.Tab.0.right" timestamp="1587379144844">
+    <state width="880" height="105" key="GridCell.Tab.0.right" timestamp="1587379445303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1877" height="154" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587158423967" />
-    <state width="880" height="105" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379144844" />
+    <state width="880" height="105" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587379445303" />
     <state width="1493" height="154" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587060682544" />
     <state width="2517" height="401" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780393137" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1587068675229">

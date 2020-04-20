@@ -52,7 +52,6 @@ public class App extends Application {
         return authentificationManager;
     }
 
-
     // Get static instanced production manager
     public static ProductionManager getProductionManager() {
         return productionManager;
