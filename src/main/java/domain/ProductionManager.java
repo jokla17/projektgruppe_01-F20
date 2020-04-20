@@ -4,8 +4,10 @@ import persistence.FileManager;
 import presentation.App;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * ProductionManagementSystem - Create, read, update, and delete production(s).
@@ -49,7 +51,8 @@ public class ProductionManager {
      * @param searchText - specific search parameter from user.
      * @return - returns temporary productionList, which is used in the presentation layer.
      */
-    public List<Production> readProduction(List<Production> productionList, String searchText) {
+    public List<Production> readProduction(List<Production> productionList,
+                                           String searchText) {
         List<Production> tempProductionList = new ArrayList<>();
 
         for (Production p: productionList) {
