@@ -1,6 +1,8 @@
 package presentation;
 
+import domain.UserManager;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,7 +26,6 @@ public class MainController {
     public ImageView vbSideBarLogo;
 
     public void searchFunctionality(ActionEvent actionEvent) {
-
     }
 
     public void navigateToHome(MouseEvent mouseEvent) throws IOException {

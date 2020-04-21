@@ -22,7 +22,6 @@ public class CreditController extends MainController implements Initializable {
     public TableColumn<Credit, String> tcRole;
     public TableColumn<Credit, String> tcName;
     public TextField tfProductionID;
-    private CreditManager cms;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,39 +31,38 @@ public class CreditController extends MainController implements Initializable {
         tcRole.setCellValueFactory(new PropertyValueFactory<>("CreditRole"));
         tcName.setCellValueFactory(new PropertyValueFactory<>("CreditName"));
 
-        cms = CreditManager.getInstance();
-        tvCreditTable.setItems(FXCollections.observableArrayList(cms.getCreditList()));
+        tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
     }
 
     // Create multiple credits handler
     public void createMultipleCredits(ActionEvent actionEvent) {
-        cms.createCredit(taCreditsArea);
-        tvCreditTable.setItems(FXCollections.observableArrayList(cms.getCreditList()));
+        App.getCreditManager().createCredit(taCreditsArea);
+        tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
         taCreditsArea.clear();
     }
 
     // Create single credit handler
     public void createSingleCredit(ActionEvent actionEvent) {
-        cms.createCredit(tfCreditRole.getText(), tfCreditName.getText());
-        tvCreditTable.setItems(FXCollections.observableArrayList(cms.getCreditList()));
+        App.getCreditManager().createCredit(tfCreditRole.getText(), tfCreditName.getText());
+        tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
     }
 
     // Update credit handler
     public void updateCredit(ActionEvent actionEvent) {
-        cms.updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfCreditName.getText());
+        App.getCreditManager().updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfCreditName.getText());
         tvCreditTable.refresh();
     }
 
     // Delete credit handler
     public void deleteCredit(ActionEvent actionEvent) {
-        cms.deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem());
-        tvCreditTable.setItems(FXCollections.observableArrayList(cms.getCreditList()));
+        App.getCreditManager().deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem());
+        tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
     }
 
     // Search functionality handler
     public void searchFunctionality(ActionEvent actionEvent) {
         tvCreditTable.setItems(
-                FXCollections.observableArrayList(cms.searchCredit(cms.getCreditList(), tfSearch.getText())));
+                FXCollections.observableArrayList(App.getCreditManager().searchCredit(App.getCreditManager().getCreditList(), tfSearch.getText())));
     }
 
     // Select credit handler
@@ -74,6 +72,6 @@ public class CreditController extends MainController implements Initializable {
     }
 
     public void save(ActionEvent actionEvent) {
-        cms.saveCredits(tfProductionID.getText());
+        App.getCreditManager().saveCredits(tfProductionID.getText());
     }
 }

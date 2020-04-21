@@ -1,8 +1,6 @@
 package presentation;
 
-import domain.AuthentificationManager;
 import domain.User;
-import domain.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,26 +22,23 @@ public class LoginController implements Initializable {
     public VBox vbLogin;
     public GridPane gpBackground;
     public ImageView ivLogo;
-    private AuthentificationManager am;
-    private UserManager um;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ivLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));
-        am = new AuthentificationManager();
-        um = new UserManager();
     }
 
     public void Login(ActionEvent actionEvent) throws IOException {
-        am.login(tfUsername.getText(), tfPassword.getText());
+        App.getAuthentificationManager().login(tfUsername.getText(), tfPassword.getText());
 
-        if (am.login(tfUsername.getText(), tfPassword.getText())) {
+        if (App.getAuthentificationManager().login(tfUsername.getText(), tfPassword.getText())) {
             ArrayList<User> userList = new ArrayList<>();
-            userList.addAll(um.getAdminList());
-            userList.addAll(um.getProducerList());
+            userList.addAll(App.getUserManager().getAdminList());
+            userList.addAll(App.getUserManager().getProducerList());
+
             for (int i = 0; i < userList.size(); i++){
                 if (userList.get(i).getUsername().equals(tfUsername.getText())){
-                    am.setCurrentUser(userList.get(i));
+                    App.getAuthentificationManager().setCurrentUser(userList.get(i));
                 }
             }
             App.setRoot("home");

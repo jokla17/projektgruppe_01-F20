@@ -1,19 +1,23 @@
 package presentation;
 
+import domain.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import persistence.FileManager;
 
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
+    private static FileManager fileManager = new FileManager();
+    private static UserManager userManager = new UserManager();
+    private static AuthentificationManager authentificationManager = new AuthentificationManager();
+    private static ProductionManager productionManager = new ProductionManager();
+    private static CreditManager creditManager = new CreditManager();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,8 +37,32 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+    // Get static instanced file manager
+    public static FileManager getFileManager() {
+        return fileManager;
+    }
+
+    // Get static instanced user manager
+    public static UserManager getUserManager() {
+        return userManager;
+    }
+
+    // Get static instanced authentification manager
+    public static AuthentificationManager getAuthentificationManager() {
+        return authentificationManager;
+    }
+
+    // Get static instanced production manager
+    public static ProductionManager getProductionManager() {
+        return productionManager;
+    }
+
+    // Get static instanced credit manager
+    public static CreditManager getCreditManager() {
+        return creditManager;
+    }
+
     public static void main(String[] args) {
         launch();
     }
-
 }

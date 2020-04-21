@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class AuthentificationManager {
-    private static User currentUser;
+    private User currentUser;
 
-    public static User getCurrentUser() {
+    public User getCurrentUser() {
         return currentUser;
     }
 
     public void setCurrentUser(User currentUser) {
-        AuthentificationManager.currentUser = currentUser;
+        this.currentUser = currentUser;
     }
 
     public boolean login(String username, String password) {
@@ -44,15 +44,5 @@ public class AuthentificationManager {
 
     public void signUp() {
 
-    }
-
-    public boolean authenticate(int accessLevelUser, int accessLevelClass) {
-        if(accessLevelClass <= accessLevelUser){
-            System.out.println("Its true.");
-            return  true;
-        }else{
-            System.out.println("Its false");
-            return false;
-        }
     }
 }
