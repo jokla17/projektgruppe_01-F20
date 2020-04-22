@@ -3,3 +3,6 @@ P2;Sporten;Sport;43;2020;Danmark;TV2 DANMARK
 P3;Vejret;Oplysning;43;2020;Danmark;TV2 DANMARK
 P4;Nyhederne;Aktualitet;44;2020;Danmark;TV2 DANMARK
 P5;Go' morgen Danmark;Oplysning;15;2020;Danmark; Nordisk Film A/S
+P6;Test;Test;1;2020;Danmark;Mig
+P7;test;test;1;2020;Danmark;Jonas
+P8;test;test;1;2020;Danmark;Jonas

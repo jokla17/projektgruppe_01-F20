@@ -1,2 +1,4 @@
-admin;admin123;admin@admin;john;doe;2;S1
-producer;producer123;producer@producer;jane;doe;1;P1;TV2
+admin;admin;admin@admin;admin;admin;2;S1
+producer;producer;hans@hans.dk;nej;hansen;1;P1;SDU
+Test;123;test@test.dk;Jonas;Svane;2;S2
+Test;123;test@test.dk;Jonas;Svane;1;P2;TV2

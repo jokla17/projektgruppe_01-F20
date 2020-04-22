@@ -39,6 +39,7 @@ public class ProductionManager {
                 productionArgs[5]);
         productionList.add(production);
         App.getFileManager().appendToFile("productions.txt", production);
+
     }
 
     /**

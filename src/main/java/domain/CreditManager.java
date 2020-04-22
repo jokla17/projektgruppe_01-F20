@@ -10,9 +10,19 @@ import java.util.Scanner;
 //CreditManagementSystem - Create, read, update and delete credits within the system
 public class CreditManager {
     private List<Credit> creditList;
+    private String creditProductionID;
 
     public CreditManager() {
         creditList = new ArrayList<>();
+        creditProductionID = null;
+    }
+
+    public String getCreditProductionID() {
+        return creditProductionID;
+    }
+
+    public void setCreditProductionID(String creditProductionID) {
+        this.creditProductionID = creditProductionID;
     }
 
     public List<Credit> getCreditList() {

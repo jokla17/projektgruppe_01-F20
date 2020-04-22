@@ -1,5 +1,6 @@
 package presentation;
 
+import domain.Credit;
 import domain.Producer;
 import domain.Systemadministrator;
 import domain.User;
@@ -16,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserController extends MainController implements Initializable {
@@ -23,6 +25,7 @@ public class UserController extends MainController implements Initializable {
     public Button btnUpdate;
     public Button btnDelete;
     public Button btnLogout;
+    public Button btnSearch;
     public TextField tfUsername;
     public TextField tfPassword;
     public TextField tfEmail;
@@ -30,6 +33,7 @@ public class UserController extends MainController implements Initializable {
     public TextField tfLastName;
     public TextField tfAccessLevel;
     public TextField tfEmployedBy;
+    public TextField tfSearch;
     public AnchorPane apMainScreen;
     public TableColumn<Systemadministrator, String> tcAdminID;
     public TableColumn<Systemadministrator, String> tcAdminUsername;
@@ -87,6 +91,25 @@ public class UserController extends MainController implements Initializable {
                     tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
             tvProducer.refresh();
         }
+    }
+
+    // Search functionality handler
+    public void searchFunctionality(ActionEvent actionEvent) {
+        ArrayList<User> searchResultAdmin = new ArrayList<>();
+        ArrayList<User> searchResultProducer = new ArrayList<>();
+        String searchText = tfSearch.getText().toLowerCase();
+        for (int i = 0; i < App.getUserManager().getAdminList().size(); i++){
+            if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)){
+                searchResultAdmin.add(App.getUserManager().getAdminList().get(i));
+            }
+        }
+        tvAdmin.setItems((FXCollections.observableArrayList(searchResultAdmin)));
+        for (int i = 0; i < App.getUserManager().getProducerList().size(); i++){
+            if (App.getUserManager().getProducerList().get(i).toString().toLowerCase().contains(searchText)){
+                searchResultProducer.add(App.getUserManager().getProducerList().get(i));
+            }
+        }
+        tvProducer.setItems((FXCollections.observableArrayList(searchResultProducer)));
     }
 
     public void deleteAdmin(ActionEvent actionEvent) {
