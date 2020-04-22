@@ -3,9 +3,11 @@ package presentation;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import domain.Production;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -67,9 +69,14 @@ public class ProductionController extends MainController implements Initializabl
 
     // Search handler
     public void searchFunctionality(ActionEvent actionEvent) {
-        tvProductions.setItems(
-                FXCollections.observableArrayList(
-                        App.getProductionManager().readProduction(App.getProductionManager().getProductionList(), tfSearch.getText())));
+        ArrayList<Production> searchResult = new ArrayList<>();
+        String searchText = tfSearch.getText().toLowerCase();
+        for (int i = 0; i < App.getProductionManager().getProductionList().size(); i++){
+            if (App.getProductionManager().getProductionList().get(i).toString().toLowerCase().contains(searchText)){
+                searchResult.add(App.getProductionManager().getProductionList().get(i));
+            }
+        }
+        tvProductions.setItems((FXCollections.observableArrayList(searchResult)));
     }
 
     // Select production handler
@@ -84,7 +91,12 @@ public class ProductionController extends MainController implements Initializabl
         if (mouseEvent.getClickCount() == 2) {
             App.getCreditManager().getCreditList().clear();
             App.getCreditManager().setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
+            App.getCreditManager().setCreditProductionID(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
             App.setRoot("credit");
         }
+    }
+
+    public TableView<Production> getTvProductions() {
+        return tvProductions;
     }
 }

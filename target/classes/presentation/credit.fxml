@@ -39,21 +39,20 @@
         </HBox>
         <AnchorPane fx:id="apMainScreen" prefHeight="394.0" prefWidth="857.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
-            <VBox layoutX="23.0" layoutY="24.0" prefWidth="290.0" spacing="5.0">
+            <AnchorPane layoutX="23.0" layoutY="24.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opret kreditering" />
-                  <Label text="Rolle" />
-                  <TextField fx:id="tfCreditRole" focusTraversable="false" promptText="f.eks. Fotograf" />
-                  <Label text="Navn" />
-                  <TextField fx:id="tfCreditName" focusTraversable="false" promptText="f.eks. Navn" />
-                  <Button fx:id="btnCreate" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#createSingleCredit" prefHeight="30.0" prefWidth="60.0" text="Opret ">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </Button>
+                  <VBox prefWidth="290.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opret kreditering" />
+                        <Label text="Rolle" />
+                        <TextField fx:id="tfCreditRole" focusTraversable="false" promptText="f.eks. Fotograf" />
+                        <Label text="Navn" />
+                        <TextField fx:id="tfCreditName" focusTraversable="false" promptText="f.eks. Navn" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox layoutX="23.0" layoutY="219.0" prefHeight="178.0" prefWidth="290.0" spacing="5.0">
+            </AnchorPane>
+            <VBox layoutX="23.0" layoutY="279.0" prefHeight="178.0" prefWidth="290.0" spacing="5.0">
                <children>
                   <Label text="Opret krediteringer" />
                   <TextArea fx:id="taCreditsArea" focusTraversable="false" prefHeight="116.0" prefWidth="290.0" promptText="f.eks. Fotograf;John Doe [enter] Lydmand;Jane Doe  " />
@@ -65,28 +64,22 @@
             </VBox>
             <VBox layoutX="364.0" layoutY="24.0" prefWidth="387.0" spacing="10.0">
                <children>
-                  <TableView fx:id="tvCreditTable" focusTraversable="false" onMouseClicked="#selectCredit" prefHeight="218.0" prefWidth="387.0">
+                  <TableView fx:id="tvCreditTable" focusTraversable="false" onMouseClicked="#selectCredit" prefHeight="396.0" prefWidth="387.0">
                     <columns>
                       <TableColumn fx:id="tcId" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="tcRole" prefWidth="108.80010986328125" text="Rolle" />
                         <TableColumn fx:id="tcName" prefWidth="200.79996337890623" text="Navn" />
                     </columns>
                   </TableView>
-                  <HBox prefHeight="32.0" prefWidth="387.0" spacing="10.0">
-                     <children>
-                        <Button fx:id="btnDelete" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCredit" prefHeight="30.0" prefWidth="60.0" text="Slet" />
-                        <Button fx:id="btnUpdate" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updateCredit" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
-                     </children>
-                  </HBox>
+                  <HBox prefHeight="32.0" prefWidth="387.0" spacing="10.0" />
                </children>
             </VBox>
-            <VBox layoutX="364.0" layoutY="298.0" prefHeight="98.0" prefWidth="100.0" spacing="10.0">
-               <children>
-                  <Label text="Produktions ID" />
-                  <TextField fx:id="tfProductionID" promptText="f.eks. P1" />
-                  <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="60.0" text="Gem" />
-               </children>
-            </VBox>
+            <VBox layoutX="364.0" layoutY="298.0" prefHeight="98.0" prefWidth="100.0" spacing="10.0" />
+            <Button fx:id="btnDelete" layoutX="242.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCredit" prefHeight="30.0" prefWidth="71.0" text="Slet" />
+            <Button fx:id="btnUpdate" layoutX="98.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updateCredit" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
+            <Button fx:id="btnCreate" focusTraversable="false" layoutX="23.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#createSingleCredit" prefHeight="30.0" prefWidth="69.0" text="Opret " />
+            <Label layoutX="26.0" layoutY="231.0" text="Produktions ID" />
+            <TextField fx:id="tfProductionID" layoutX="135.0" layoutY="225.0" prefHeight="29.0" prefWidth="179.0" promptText="f.eks. P1" />
          </children></AnchorPane>
         <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
             <children>
@@ -115,17 +108,17 @@
                 </StackPane>
                 <StackPane fx:id="navCreateProduction" alignment="CENTER_LEFT" onMouseClicked="#navigateToCreateProduction" prefHeight="10.0" prefWidth="187.0">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opret produktion" wrappingWidth="110.64022827148438" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Produktioner" wrappingWidth="110.64022827148438" />
                     </children>
                 </StackPane>
                 <StackPane fx:id="navCreateCredits" alignment="CENTER_LEFT" onMouseClicked="#navigateToCreateCredits">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opret krediteringer" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Krediteringer" />
                     </children>
                 </StackPane>
                 <StackPane fx:id="navCreateUser" alignment="CENTER_LEFT" onMouseClicked="#navigateToCreateUsers">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Opret bruger" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brugere" />
                     </children>
                 </StackPane>
             </children>
