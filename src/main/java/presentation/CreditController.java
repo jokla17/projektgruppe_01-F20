@@ -2,6 +2,7 @@ package presentation;
 
 import domain.Credit;
 import domain.CreditManager;
+import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CreditController extends MainController implements Initializable {
@@ -61,8 +63,14 @@ public class CreditController extends MainController implements Initializable {
 
     // Search functionality handler
     public void searchFunctionality(ActionEvent actionEvent) {
-        tvCreditTable.setItems(
-                FXCollections.observableArrayList(App.getCreditManager().searchCredit(App.getCreditManager().getCreditList(), tfSearch.getText())));
+        ArrayList<Credit> searchResult = new ArrayList<>();
+        String searchText = tfSearch.getText().toLowerCase();
+        for (int i = 0; i < App.getCreditManager().getCreditList().size(); i++){
+            if (App.getCreditManager().getCreditList().get(i).toString().toLowerCase().contains(searchText)){
+                searchResult.add(App.getCreditManager().getCreditList().get(i));
+            }
+        }
+        tvCreditTable.setItems((FXCollections.observableArrayList(searchResult)));
     }
 
     // Select credit handler
