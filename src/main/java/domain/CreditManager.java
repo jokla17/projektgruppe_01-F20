@@ -23,6 +23,11 @@ public class CreditManager {
         App.getFileManager().readCredits(productionId, creditList);
     }
 
+    public void setAllCreditList() {
+        creditList.clear();
+        App.getFileManager().readCredits(creditList);
+    }
+
     /**
      * Add a single credit to the creditList.
      * @param role - Parameter for role arg.
@@ -72,6 +77,19 @@ public class CreditManager {
         }
         return tempCreditList;
     }
+
+    public List<Credit> readCredit(String searchText) {
+        List<Credit> tempCreditList = new ArrayList<>();
+
+        for(int i = 0; i < App.getCreditManager().getCreditList().size(); i++){
+            if(App.getCreditManager().getCreditList().get(i).toString().toLowerCase().contains(
+                    searchText.toLowerCase())){
+                tempCreditList.add(App.getCreditManager().getCreditList().get(i));
+            }
+        }
+        return tempCreditList;
+    }
+
 
     /**
      * Updates a specific selected production from the production view in the presentation layer, by

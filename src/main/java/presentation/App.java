@@ -21,7 +21,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"));
+        scene = new Scene(loadFXML("Start"));
         stage.setScene(scene);
         stage.setTitle("AJATE Credit Management");
         stage.setResizable(false);

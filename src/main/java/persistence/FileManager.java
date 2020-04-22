@@ -87,6 +87,31 @@ public class FileManager {
         }
         creditList.addAll(tempCredits);
     }
+    public void readCredits(List<Credit> creditList) {
+        Scanner scanner = null;
+        List<Credit> tempCredits = new ArrayList<>();
+        try {
+            scanner = new Scanner(new File("credits.txt"));
+            while (scanner.hasNext()) {
+                String[] splitLine = scanner.nextLine().split("\\[");
+                String creditsAsString = splitLine[1].replace("]", "");
+                String[] creditsToArray = creditsAsString.split(",");
+
+
+                for (String s : creditsToArray) {
+                        String[] splitCredit = s.split(";");
+                        Credit credit = new Credit(splitCredit[0].trim(), splitCredit[1].trim(), splitCredit[2].trim());
+                        tempCredits.add(credit);
+                    }
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
+        }
+        creditList.addAll(tempCredits);
+    }
 
     // Write to file
     public void writeToFile(String path, List<Object> list) {

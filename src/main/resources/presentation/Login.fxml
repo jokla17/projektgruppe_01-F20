@@ -51,6 +51,7 @@
                </children>
             </VBox>
          </children></AnchorPane>
+      <Button fx:id="btnCreate" mnemonicParsing="false" onAction="#goBack" text="Forside" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
     </children>
     <padding>

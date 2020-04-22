@@ -65,12 +65,7 @@ public class ProductionController extends MainController implements Initializabl
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
     }
 
-    // Search handler
-    public void searchFunctionality(ActionEvent actionEvent) {
-        tvProductions.setItems(
-                FXCollections.observableArrayList(
-                        App.getProductionManager().readProduction(App.getProductionManager().getProductionList(), tfSearch.getText())));
-    }
+
 
     // Select production handler
     public void selectProduction(MouseEvent mouseEvent) throws IOException {

@@ -44,4 +44,8 @@ public class LoginController implements Initializable {
             App.setRoot("home");
         }
     }
+
+    public void goBack(ActionEvent actionEvent) throws IOException {
+        App.setRoot("Start");
+    }
 }
