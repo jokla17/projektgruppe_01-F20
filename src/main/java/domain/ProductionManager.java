@@ -1,13 +1,8 @@
 package domain;
 
-import persistence.FileManager;
 import presentation.App;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * ProductionManagementSystem - Create, read, update, and delete production(s).

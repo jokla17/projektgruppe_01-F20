@@ -13,10 +13,6 @@ public class Systemadministrator extends User {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
-    }
-
     @Override
     public String toString() {
         return super.toString() + ";" + adminId;

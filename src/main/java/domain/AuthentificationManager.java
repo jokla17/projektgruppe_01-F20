@@ -37,12 +37,4 @@ public class AuthentificationManager {
         }
         return loggedIn;
     }
-
-    public void logout() {
-        //not implemented yet
-    }
-
-    public void signUp() {
-
-    }
 }

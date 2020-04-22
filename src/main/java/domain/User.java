@@ -17,13 +17,8 @@ public abstract class User {
         this.accessLevel = accessLevel;
     }
 
-    public int getAccessLevel(){
-        //not implemented yet
+    public int getAccessLevel() {
         return accessLevel;
-    }
-
-    public void setAccessLevel(){
-        //not implemented yet
     }
 
     public String getUsername() {

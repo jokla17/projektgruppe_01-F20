@@ -15,18 +15,6 @@ public class Producer extends User {
         return producerId;
     }
 
-    public void setProducerId(String producerId) {
-        this.producerId = producerId;
-    }
-
-    public String getEmployedBy() {
-        return employedBy;
-    }
-
-    public void setEmployedBy(String employedBy) {
-        this.employedBy = employedBy;
-    }
-
     @Override
     public String toString() {
         return super.toString() + ";" + producerId + ";" + employedBy;
