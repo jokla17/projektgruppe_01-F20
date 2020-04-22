@@ -23,10 +23,6 @@ public class Production {
         return productionId;
     }
 
-    public void setProductionId(int productionId) {
-        this.productionId = "P" + productionId;
-    }
-
     public String getTitle() {
         return title;
     }

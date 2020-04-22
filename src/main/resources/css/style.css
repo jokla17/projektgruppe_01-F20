@@ -161,3 +161,105 @@
     -fx-background-color: warning-hover-button-color;
 }
 
+/** START PAGE LAYOUT **/
+#gpStartBackground {
+    -fx-background-color: base-color-6;
+}
+
+#vbStartHeader {
+    -fx-background-color: base-color-5;
+}
+
+#btnLogin {
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+#btnLogin:hover {
+    -fx-font-size: 15px;
+}
+
+#tfStartSearchfield {
+    -fx-border-color: base-color-1;
+    -fx-border-width: 1px;
+    -fx-border-radius: 20px 0px 0px 20px;
+    -fx-background-radius: 20px 0px 0px 20px;
+    -fx-text-fill: base-color-1;
+    -fx-padding: 0px 0px 0px 20px;
+}
+
+#btnStartSearch {
+    -fx-font-size: 15px;
+    -fx-background-color: transparent;
+    -fx-border-color: base-color-1;
+    -fx-border-width: 1px 1px 1px 0px;
+    -fx-border-radius: 0px 20px 20px 0px;
+    -fx-background-radius: 0px 20px 20px 0px;
+}
+
+#btnStartSearch:hover {
+    -fx-font-size: 15px;
+    -fx-text-fill: #1B1C1F;
+    -fx-background-color: base-color-1;
+}
+
+#gpStartBackground .radio-button {
+    -fx-text-fill: base-color-1;
+}
+
+#gpStartBackground .radio-button .dot {
+    -fx-padding: 5px;
+}
+
+#spSearchResultsPopUp {
+    -fx-background-color: base-color-5;
+    -fx-padding: 10px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-color: base-color-1;
+    -fx-border-width: 1px;
+}
+
+#lvProductionsResults, #lvCreditResults {
+    -fx-background-color: transparent;
+}
+
+#lvProductionsResults .list-cell, #lvCreditResults .list-cell {
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-text-fill: base-color-1;
+    -fx-padding: 10px 15px 15px 10px;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: base-color-6;
+}
+
+#gpStartBackground .scroll-pane {
+    -fx-background-color: base-color-5;
+}
+
+#gpStartBackground .scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+#gpStartBackground .increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+#gpStartBackground .scroll-bar:horizontal .track,
+#gpStartBackground .scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0px;
+}
+
+#gpStartBackground .scroll-bar:horizontal .thumb,
+#gpStartBackground .scroll-bar:vertical .thumb {
+    -fx-background-color: base-color-6;
+    -fx-background-radius: 5px;
+}
+
+#btnClose:hover {
+    -fx-background-color: warning-hover-button-color;
+}

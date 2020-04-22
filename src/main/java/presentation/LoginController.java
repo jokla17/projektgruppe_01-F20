@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void goBack(ActionEvent actionEvent) throws IOException {
+    public void backToFrontPage(ActionEvent actionEvent) throws IOException {
         App.setRoot("Start");
     }
 }

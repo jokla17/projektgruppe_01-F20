@@ -1,8 +1,6 @@
 package presentation;
 
 import domain.Credit;
-import domain.CreditManager;
-import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -10,8 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import persistence.FileManager;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -69,6 +65,7 @@ public class CreditController extends MainController implements Initializable {
     // Delete credit handler
     public void deleteCredit(ActionEvent actionEvent) {
         App.getCreditManager().deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem());
+        App.getCreditManager().saveCredits(tfProductionID.getText());
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
     }
 
@@ -88,9 +85,5 @@ public class CreditController extends MainController implements Initializable {
     public void selectCredit(MouseEvent mouseEvent) {
         tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getCreditRole());
         tfCreditName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getCreditName());
-    }
-
-    public void save(ActionEvent actionEvent) {
-        App.getCreditManager().saveCredits(tfProductionID.getText());
     }
 }

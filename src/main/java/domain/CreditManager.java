@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-//CreditManagementSystem - Create, read, update and delete credits within the system
+// CreditManagementSystem - Create, read, update and delete credits within the system
 public class CreditManager {
     private List<Credit> creditList;
     private String creditProductionID;
@@ -91,15 +91,14 @@ public class CreditManager {
     public List<Credit> readCredit(String searchText) {
         List<Credit> tempCreditList = new ArrayList<>();
 
-        for(int i = 0; i < App.getCreditManager().getCreditList().size(); i++){
-            if(App.getCreditManager().getCreditList().get(i).toString().toLowerCase().contains(
+        for(int i = 0; i < creditList.size(); i++){
+            if(creditList.get(i).toString().toLowerCase().contains(
                     searchText.toLowerCase())){
-                tempCreditList.add(App.getCreditManager().getCreditList().get(i));
+                tempCreditList.add(creditList.get(i));
             }
         }
         return tempCreditList;
     }
-
 
     /**
      * Updates a specific selected production from the production view in the presentation layer, by

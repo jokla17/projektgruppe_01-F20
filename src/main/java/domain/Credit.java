@@ -15,10 +15,6 @@ public class Credit {
         return creditId;
     }
 
-    public void setCreditId(String creditId) {
-        this.creditId = creditId;
-    }
-
     public String getCreditRole() {
         return creditRole;
     }

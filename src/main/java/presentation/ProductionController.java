@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import domain.Production;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -94,9 +93,5 @@ public class ProductionController extends MainController implements Initializabl
             App.getCreditManager().setCreditProductionID(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
             App.setRoot("credit");
         }
-    }
-
-    public TableView<Production> getTvProductions() {
-        return tvProductions;
     }
 }
