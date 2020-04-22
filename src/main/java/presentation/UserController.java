@@ -6,10 +6,7 @@ import domain.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -43,6 +40,7 @@ public class UserController extends MainController implements Initializable {
     public TableColumn<Producer, String> tcProducerLastName;
     public TableView<User> tvAdmin;
     public TableView<User> tvProducer;
+    public Label lbCurrentUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,6 +60,8 @@ public class UserController extends MainController implements Initializable {
 
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
         tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+
+        lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 
     public void createUser(ActionEvent actionEvent) {

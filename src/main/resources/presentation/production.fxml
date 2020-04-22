@@ -90,6 +90,7 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="78.0" prefWidth="466.0">
                <children>
+                  <Label fx:id="lbCurrentUser" prefHeight="27.0" prefWidth="158.0" text="Nuværende bruger: user" />
                   <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" text="Log ud">
                      <HBox.margin>
                         <Insets right="40.0" />

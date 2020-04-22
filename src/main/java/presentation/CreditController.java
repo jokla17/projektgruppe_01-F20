@@ -22,6 +22,10 @@ public class CreditController extends MainController implements Initializable {
     public TableColumn<Credit, String> tcRole;
     public TableColumn<Credit, String> tcName;
     public TextField tfProductionID;
+    public Button btnLogout;
+    public Button btnDelete;
+    public Button btnUpdate;
+    public Label lbCurrentUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,6 +36,8 @@ public class CreditController extends MainController implements Initializable {
         tcName.setCellValueFactory(new PropertyValueFactory<>("CreditName"));
 
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
+
+        lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 
     // Create multiple credits handler
