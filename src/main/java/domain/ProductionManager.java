@@ -14,7 +14,6 @@ import java.util.Scanner;
  */
 public class ProductionManager {
     private List<Production> productionList;
-    private static int accessLevel = 2;
 
     public ProductionManager() {
         productionList = new ArrayList<>();
@@ -48,22 +47,21 @@ public class ProductionManager {
      * How it works: A temporary list is initialized in the method, in order to contain the searched productions.
      * A for-each loop iterates through the original productionList, where an if-statement checks if the searchText given
      * as argument, matches any production in the original productionList. If it does, add to temporary list and return.
-     * @param productionList - parameter needed to get the original productionList.
      * @param searchText - specific search parameter from user.
      * @return - returns temporary productionList, which is used in the presentation layer.
      */
-    public List<Production> readProduction(List<Production> productionList,
-                                           String searchText) {
+    public List<Production> readProduction(String searchText) {
         List<Production> tempProductionList = new ArrayList<>();
 
-        for (Production p: productionList) {
-            if (p.getTitle().equalsIgnoreCase(searchText)) {
-                tempProductionList.add(p);
+        for(int i = 0; i < App.getProductionManager().getProductionList().size(); i++){
+            if(App.getProductionManager().getProductionList().get(i).toString().toLowerCase().contains(
+                    searchText.toLowerCase())){
+                tempProductionList.add(App.getProductionManager().getProductionList().get(i));
             }
         }
-
         return tempProductionList;
     }
+
 
     /**
      * Updates a specific selected production from the production view in the presentation layer, by
@@ -104,9 +102,5 @@ public class ProductionManager {
             index++;
         }
         return "P" + index;
-    }
-
-    public static int getAccessLevel() {
-        return accessLevel;
     }
 }
