@@ -91,7 +91,12 @@ public class ProductionController extends MainController implements Initializabl
         if (mouseEvent.getClickCount() == 2) {
             App.getCreditManager().getCreditList().clear();
             App.getCreditManager().setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
+            App.getCreditManager().setCreditProductionID(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
             App.setRoot("credit");
         }
+    }
+
+    public TableView<Production> getTvProductions() {
+        return tvProductions;
     }
 }

@@ -20,22 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1859d853-9a3d-4e40-b71a-098828b26bbd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_45__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_45__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_51__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13-04-2020_14_51__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14-04-2020_17_29_[Default_Changelist]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14-04-2020_17_29__Default_Changelist_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/credits.txt" beforeDir="false" afterPath="$PROJECT_DIR$/credits.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/productions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/CreditManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/CreditManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain/ProductionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/ProductionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/presentation/CreditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/CreditController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/ProductionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/presentation/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/presentation/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/credit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/credit.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/production.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/production.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/presentation/user.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/presentation/user.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/users.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/CreditController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/CreditController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/ProductionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/ProductionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/credit.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/credit.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/production.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/production.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/presentation/user.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/presentation/user.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +195,7 @@
       <workItem from="1586963803258" duration="13705000" />
       <workItem from="1586986688465" duration="137000" />
       <workItem from="1587019372907" duration="1932000" />
-      <workItem from="1587540555717" duration="5142000" />
+      <workItem from="1587540555717" duration="9357000" />
     </task>
     <task id="LOCAL-00001" summary="Not finished yet.">
       <created>1586866167744</created>
@@ -207,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586866167745</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Search functionality added in: Productions, Credits and Users&#10;Titles in the menu updated to better reflect functionality">
+      <created>1587546207711</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1587546207711</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +232,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CRUD" />
     <MESSAGE value="Pushed new design" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pushed new design" />
+    <MESSAGE value="Search functionality added in: Productions, Credits and Users&#10;Titles in the menu updated to better reflect functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Search functionality added in: Productions, Credits and Users&#10;Titles in the menu updated to better reflect functionality" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1585656535906">
@@ -239,11 +244,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="524" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586791222639" />
-    <state x="651" y="227" key="#com.intellij.ide.util.MemberChooser" timestamp="1586983733792">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="1085" y="417" key="#com.intellij.ide.util.MemberChooser" timestamp="1587551593123">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="651" y="227" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586983733792" />
-    <state x="1085" y="417" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585910319413" />
+    <state x="1085" y="417" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587551593123" />
     <state x="677" y="347" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586859032617">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -254,40 +259,40 @@
     </state>
     <state x="552" y="212" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586801015073" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585656491467" />
-    <state x="430" y="14" key="CommitChangelistDialog2" timestamp="1586864969409">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="717" y="153" key="CommitChangelistDialog2" timestamp="1587546206758">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="430" y="14" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586864969409" />
     <state x="538" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585656675278" />
-    <state x="717" y="153" key="CommitChangelistDialog2/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585911152171" />
+    <state x="717" y="153" key="CommitChangelistDialog2/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587546206758" />
     <state x="549" y="139" key="FileChooserDialogImpl" timestamp="1586865277027">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="139" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586865277027" />
-    <state width="2517" height="306" key="GridCell.Tab.0.bottom" timestamp="1587546110052">
+    <state width="2517" height="306" key="GridCell.Tab.0.bottom" timestamp="1587551858385">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1493" height="337" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587040260753" />
     <state width="1493" height="118" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586973772902" />
-    <state width="2517" height="306" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587546110052" />
-    <state width="2517" height="306" key="GridCell.Tab.0.center" timestamp="1587546110051">
+    <state width="2517" height="306" key="GridCell.Tab.0.bottom/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587551858385" />
+    <state width="2517" height="306" key="GridCell.Tab.0.center" timestamp="1587551858385">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1493" height="337" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587040260752" />
     <state width="1493" height="118" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586973772902" />
-    <state width="2517" height="306" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587546110051" />
-    <state width="2517" height="306" key="GridCell.Tab.0.left" timestamp="1587546110051">
+    <state width="2517" height="306" key="GridCell.Tab.0.center/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587551858385" />
+    <state width="2517" height="306" key="GridCell.Tab.0.left" timestamp="1587551858385">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1493" height="337" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587040260752" />
     <state width="1493" height="118" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586973772901" />
-    <state width="2517" height="306" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587546110051" />
-    <state width="2517" height="306" key="GridCell.Tab.0.right" timestamp="1587546110052">
+    <state width="2517" height="306" key="GridCell.Tab.0.left/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587551858385" />
+    <state width="2517" height="306" key="GridCell.Tab.0.right" timestamp="1587551858385">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1493" height="337" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587040260753" />
     <state width="1493" height="118" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586973772902" />
-    <state width="2517" height="306" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587546110052" />
+    <state width="2517" height="306" key="GridCell.Tab.0.right/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587551858385" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1586986634124">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -308,12 +313,12 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="343" key="SettingsEditor/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1585909779504" />
-    <state x="523" y="255" key="Vcs.Push.Dialog.v2" timestamp="1586865013408">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="872" y="433" key="Vcs.Push.Dialog.v2" timestamp="1587546224467">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="523" y="255" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1586851658466" />
     <state x="523" y="255" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586865013408" />
-    <state x="872" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1586780469303" />
+    <state x="872" y="433" key="Vcs.Push.Dialog.v2/0.0.2560.1400/-1920.208.1920.1040@0.0.2560.1400" timestamp="1587546224467" />
     <state x="92" y="92" width="2376" height="1216" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1586780656715">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>

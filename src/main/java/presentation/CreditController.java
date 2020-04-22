@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import persistence.FileManager;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -34,6 +36,13 @@ public class CreditController extends MainController implements Initializable {
         tcName.setCellValueFactory(new PropertyValueFactory<>("CreditName"));
 
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
+        tfProductionID.setDisable(true);
+
+        if (App.getCreditManager().getCreditProductionID() != null) {
+            tfProductionID.setText(App.getCreditManager().getCreditProductionID());
+        } else {
+            tfProductionID.setText("No production selected");
+        }
     }
 
     // Create multiple credits handler
@@ -47,11 +56,13 @@ public class CreditController extends MainController implements Initializable {
     public void createSingleCredit(ActionEvent actionEvent) {
         App.getCreditManager().createCredit(tfCreditRole.getText(), tfCreditName.getText());
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
+        App.getCreditManager().saveCredits(tfProductionID.getText());
     }
 
     // Update credit handler
     public void updateCredit(ActionEvent actionEvent) {
         App.getCreditManager().updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfCreditName.getText());
+        App.getCreditManager().saveCredits(tfProductionID.getText());
         tvCreditTable.refresh();
     }
 
