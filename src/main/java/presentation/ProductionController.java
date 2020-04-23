@@ -9,10 +9,7 @@ import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +31,7 @@ public class ProductionController extends MainController implements Initializabl
     public TextField tfSearch;
     public Button btnSearch;
     public TextField tfProductionYear;
+    public Label lbCurrentUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +41,8 @@ public class ProductionController extends MainController implements Initializabl
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
+
+        lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 
     // Create production handler

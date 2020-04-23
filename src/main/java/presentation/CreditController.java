@@ -22,6 +22,7 @@ public class CreditController extends MainController implements Initializable {
     public TableColumn<Credit, String> tcRole;
     public TableColumn<Credit, String> tcName;
     public TextField tfProductionID;
+    public Label lbCurrentUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,6 +40,8 @@ public class CreditController extends MainController implements Initializable {
         } else {
             tfProductionID.setText("No production selected");
         }
+
+        lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 
     // Create multiple credits handler
