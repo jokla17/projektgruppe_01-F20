@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import persistence.DatabaseManager;
 import persistence.FileManager;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class App extends Application {
     private static AuthentificationManager authentificationManager = new AuthentificationManager();
     private static ProductionManager productionManager = new ProductionManager();
     private static CreditManager creditManager = new CreditManager();
+    private static DatabaseManager databaseManager = new DatabaseManager();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -60,6 +62,10 @@ public class App extends Application {
     // Get static instanced credit manager
     public static CreditManager getCreditManager() {
         return creditManager;
+    }
+
+    public static DatabaseManager getDatabaseManager() {
+        return databaseManager;
     }
 
     public static void main(String[] args) {
