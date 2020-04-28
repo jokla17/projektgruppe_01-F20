@@ -12,7 +12,7 @@ public class DatabaseManager {
     private int port = 5432;
     private String databaseName = "Ajate_db";
     private String username = "postgres";
-    private String password = "";
+    private String password = "Andreas12";
     private Connection connection = null;
 
     public DatabaseManager(){
@@ -37,8 +37,22 @@ public class DatabaseManager {
         }
     }
 
-    public void insert(){
-        //not implemented yet
+    public void insertAdmin(String username, String password, String email, String firstName, String lastName, int accessLevel, String adminID){
+        try {
+            PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO systemadministrators "
+                    + "(username, password, email, first_name, last_name, access_level, admin_id)"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?)");
+            insertStatement.setString(1, username);
+            insertStatement.setString(2, password);
+            insertStatement.setString(3, email);
+            insertStatement.setString(4, firstName);
+            insertStatement.setString(5, lastName);
+            insertStatement.setInt(6, accessLevel);
+            insertStatement.setString(7, adminID);
+            insertStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void delete(){

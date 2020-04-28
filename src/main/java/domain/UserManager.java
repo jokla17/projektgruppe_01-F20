@@ -38,9 +38,11 @@ public class UserManager {
                 producerList.add(user);
                 break;
             case 2:
+              String adminID = generateAdminId();
                 user = new Systemadministrator(username, password, email, firstName, lastName,
-                        accessLevel, generateAdminId());
+                        accessLevel, adminID);
                 adminList.add(user);
+                App.getDatabaseManager().insertAdmin(username, password, email, firstName, lastName, accessLevel, adminID);
                 break;
         }
         App.getFileManager().appendToFile("users.txt", user);
@@ -100,12 +102,14 @@ public class UserManager {
     }
 
     public String generateProducerId() {
+
         int index = 1;
         for (int i = 0; i < producerList.size(); i++) {
             index++;
         }
         return "P" + index;
     }
+
 }
 
 

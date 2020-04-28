@@ -1,2 +1,3 @@
 admin;admin;admin@admin;john;doe;2;S1
 producer;producer;producer@producer;jane;doe;1;P1;SDU
+Jonas;Wahid;Arem@69420.com;Emma;Temberg;2;S2
