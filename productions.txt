@@ -1,5 +1,2 @@
-P1;Nyhederne;Aktualitet;306;2020;Danmark;TV2 DANMARK
-P2;Sporten;Sport;43;2020;Danmark;TV2 DANMARK
-P3;Vejret;Oplysning;43;2020;Danmark;TV2 DANMARK
-P4;Nyhederne;Aktualitet;44;2020;Danmark;TV2 DANMARK
-P5;Go' morgen Danmark;Oplysning;15;2020;Danmark; Nordisk Film A/S
+P1;test;hej;4;4;fhyf;yd
+P2;wrwr;xvxvx;4575;45;fhyffjfj;ydfj

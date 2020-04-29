@@ -14,12 +14,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static DatabaseManager databaseManager = new DatabaseManager();
     private static FileManager fileManager = new FileManager();
     private static UserManager userManager = new UserManager();
     private static AuthentificationManager authentificationManager = new AuthentificationManager();
     private static ProductionManager productionManager = new ProductionManager();
     private static CreditManager creditManager = new CreditManager();
-    private static DatabaseManager databaseManager = new DatabaseManager();
 
     @Override
     public void start(Stage stage) throws IOException {
