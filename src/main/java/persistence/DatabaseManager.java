@@ -84,7 +84,7 @@ public class DatabaseManager {
 
     public void updateProduction(Production production){
         try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE productions SET title = ?, genre = ?, episode_number = ?, production_year = ?, production_country = ?, produced_by = ? WHERE username = ?");
+            PreparedStatement ps = connection.prepareStatement("UPDATE productions SET title = ?, genre = ?, episode_number = ?, production_year = ?, production_country = ?, produced_by = ? WHERE id = ?");
             ps.setString(1, production.getTitle());
             ps.setString(2, production.getGenre());
             ps.setInt(3, production.getEpisodeNumber());
