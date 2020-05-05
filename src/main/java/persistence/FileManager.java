@@ -32,7 +32,7 @@ public class FileManager {
     }
 
     // Read users
-    public void readUsers(List<User> adminList, List<User> producerList) {
+    public void readUsers(List<User> producerList) {
         Scanner scanner = null;
         List<User> tempAdmin = new ArrayList<>();
         List<User> tempProducer = new ArrayList<>();
@@ -56,7 +56,6 @@ public class FileManager {
         } finally {
             scanner.close();
         }
-        adminList.addAll(tempAdmin);
         producerList.addAll(tempProducer);
     }
 

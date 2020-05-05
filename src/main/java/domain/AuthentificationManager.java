@@ -1,5 +1,7 @@
 package domain;
 
+import presentation.App;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -16,24 +18,13 @@ public class AuthentificationManager {
     }
 
     public boolean login(String username, String password) {
-        Scanner sc = null;
         boolean loggedIn = false;
-        try {
-            sc = new Scanner(new File("users.txt"));
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                String[] split = line.split(";");
-                String user = split[0];
-                String pass = split[1];
-                if (user.equals(username) & pass.equals(password)) {
-                    loggedIn = true;
-                    break;
-                }
+        for (int i = 0; i < App.getDatabaseManager().getAdminList().size(); i++) {
+            String currentUsername = App.getDatabaseManager().getAdminList().get(i).getUsername();
+            String currentPassword = App.getDatabaseManager().getAdminList().get(i).getPassword();
+            if (currentUsername.equals(username) && currentPassword.equals(password)) {
+                loggedIn = true;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            sc.close();
         }
         return loggedIn;
     }

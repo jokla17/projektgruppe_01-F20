@@ -1,5 +1,6 @@
 package domain;
 
+import persistence.DatabaseManager;
 import presentation.App;
 
 import java.util.ArrayList;
@@ -12,15 +13,15 @@ public class UserManager {
     public UserManager() {
         adminList = new ArrayList<>();
         producerList = new ArrayList<>();
-        App.getFileManager().readUsers(adminList, producerList);
+        App.getFileManager().readUsers(producerList);
     }
 
     public List<User> getProducerList() {
         return producerList;
     }
 
-    public List<User> getAdminList() {
-        return adminList;
+    public List<Systemadministrator> getAdminList() {
+        return App.getDatabaseManager().getAdminList();
     }
 
     public void createUser(String username, String password, String email, String firstName,
@@ -42,10 +43,10 @@ public class UserManager {
                 user = new Systemadministrator(username, password, email, firstName, lastName,
                         accessLevel, adminID);
                 adminList.add(user);
-                App.getDatabaseManager().insertAdmin(username, password, email, firstName, lastName, accessLevel, adminID);
+                App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel, adminID));
                 break;
         }
-        App.getFileManager().appendToFile("users.txt", user);
+        //App.getFileManager().appendToFile("users.txt", user);
     }
 
     public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String... other) {
@@ -65,19 +66,21 @@ public class UserManager {
         tempList.addAll(adminList);
         tempList.addAll(producerList);
         App.getFileManager().writeToFile("users.txt", tempList);
+        App.getDatabaseManager().updateAdmin(username, password, email, firstName, lastName, accessLevel, ((Systemadministrator) user).getAdminId());
     }
 
-    public void deleteAdmin(User user) {
+    public void deleteAdmin(Systemadministrator sysadmin) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
 
-        adminList.remove(user);
+        adminList.remove(sysadmin);
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(adminList);
         tempList.addAll(producerList);
         App.getFileManager().writeToFile("users.txt", tempList);
+        App.getDatabaseManager().deleteAdmin(sysadmin.getAdminId());
     }
 
     public void deleteProducer(User user) {
