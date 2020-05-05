@@ -1,7 +1,7 @@
 package domain;
 
 public class Production {
-    private String productionId;
+    private int productionId;
     private String title;
     private String genre;
     private int episodeNumber;
@@ -9,7 +9,7 @@ public class Production {
     private String productionCountry;
     private String producedBy;
 
-    public Production(String productionId, String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
+    public Production(int productionId, String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
         this.productionId = productionId;
         this.title = title;
         this.genre = genre;
@@ -19,7 +19,16 @@ public class Production {
         this.producedBy = producedBy;
     }
 
-    public String getProductionId() {
+    public Production(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
+        this.title = title;
+        this.genre = genre;
+        this.episodeNumber = episodeNumber;
+        this.productionYear = productionYear;
+        this.productionCountry = productionCountry;
+        this.producedBy = producedBy;
+    }
+
+    public int getProductionId() {
         return productionId;
     }
 

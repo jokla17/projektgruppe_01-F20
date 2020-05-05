@@ -70,7 +70,7 @@ public class StartController implements Initializable {
                             setText(null);
                             return;
                         }
-                        setText("Navn: " + item.getCreditName() + "\nRolle: " + item.getCreditRole());
+                        setText("Fornavn: " + item.getFirstName() + "\nEfternavn: " + item.getLastName() + "\nRolle: " + item.getRole());
                     }
                 };
                 return cell;

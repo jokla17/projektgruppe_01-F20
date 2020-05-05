@@ -1,6 +1,5 @@
 package domain;
 
-import javafx.scene.control.TextArea;
 import presentation.App;
 import java.io.*;
 import java.util.ArrayList;
@@ -9,18 +8,17 @@ import java.util.Scanner;
 
 public class CreditManager {
     private List<Credit> creditList;
-    private String creditProductionID;
+    private int creditProductionID;
 
     public CreditManager() {
         creditList = new ArrayList<>();
-        creditProductionID = null;
     }
 
-    public String getCreditProductionID() {
+    public int getCreditProductionID() {
         return creditProductionID;
     }
 
-    public void setCreditProductionID(String creditProductionID) {
+    public void setCreditProductionID(int creditProductionID) {
         this.creditProductionID = creditProductionID;
     }
 
@@ -28,8 +26,8 @@ public class CreditManager {
         return creditList;
     }
 
-    public void setCreditList(String productionId) {
-        App.getFileManager().readCredits(productionId, creditList);
+    public void setCreditList(int productionId) {
+
     }
 
     public void setAllCreditList() {
@@ -37,23 +35,12 @@ public class CreditManager {
         App.getFileManager().readCredits(creditList);
     }
 
-    public void createCredit(String role, String name){
-        creditList.add(new Credit(generateCreditId(), role, name));
-    }
-
-    public void createCredit(TextArea taCreditsArea){
-        Scanner reader = null;
-        try {
-            reader = new Scanner(taCreditsArea.getText());
-            while(reader.hasNext()) {
-                String line = reader.nextLine();
-                String[] splitLine = line.split(";");
-                Credit credit = new Credit(generateCreditId(), splitLine[0], splitLine[1]);
-                creditList.add(credit);
-            }
-        } finally {
-            reader.close();
-        }
+    public void createCredit(String role, String firstName, String lastName, int productionId){
+        Credit credit = new Credit(role, firstName, lastName);
+        creditList.add(credit);
+        App.getDatabaseManager().insertCredit(credit, productionId);
+        creditList.clear();
+        App.getDatabaseManager().creditResultSet(creditList, productionId);
     }
 
     public List<Credit> readCredit(String searchText) {
@@ -68,9 +55,13 @@ public class CreditManager {
         return tempCreditList;
     }
 
-    public void updateCredit(Credit credit, String role, String name) {
-        credit.setCreditRole(role);
-        credit.setCreditName(name);
+    public void updateCredit(Credit credit, String role, String firstName, String lastName) {
+        credit.setRole(role);
+        credit.setFirstName(firstName);
+        credit.setLastName(lastName);
+        App.getDatabaseManager().updateCredit(credit);
+        creditList.clear();
+        App.getDatabaseManager().creditResultSet(creditList);
     }
 
     public void deleteCredit(Credit credit) {
@@ -96,14 +87,6 @@ public class CreditManager {
         } finally {
             reader.close();
         }
-    }
-
-    public String generateCreditId(){
-        int index = 1;
-        for (int i = 0; i < creditList.size(); i++) {
-            index++;
-        }
-        return "C" + index;
     }
 }
 
