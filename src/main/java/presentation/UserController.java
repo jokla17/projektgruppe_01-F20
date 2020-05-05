@@ -113,7 +113,7 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void deleteAdmin(ActionEvent actionEvent) {
-        App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
+        App.getUserManager().deleteAdmin((Systemadministrator)tvAdmin.getSelectionModel().getSelectedItem());
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
     }
 
