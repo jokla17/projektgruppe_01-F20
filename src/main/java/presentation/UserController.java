@@ -44,8 +44,6 @@ public class UserController extends MainController implements Initializable {
     public TableView<Producer> tvProducer;
     public Label lbCurrentUser;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         vbSideBarLogo.setImage(new Image(new File("logo-ajate.png").toURI().toString()));

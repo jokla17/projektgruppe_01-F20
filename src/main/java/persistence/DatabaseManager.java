@@ -48,7 +48,7 @@ public class DatabaseManager {
             insertStatement.setString(4, sysadmin.getFirstName());
             insertStatement.setString(5, sysadmin.getLastName());
             insertStatement.setInt(6, sysadmin.getAccessLevel());
-            insertStatement.setString(7, sysadmin.getAdminId());
+            insertStatement.setInt(7, sysadmin.getAdminId());
             insertStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -61,20 +61,20 @@ public class DatabaseManager {
             queryStatement.setString(1, adminID);
             ResultSet queryResultSet = queryStatement.executeQuery();
             return new Systemadministrator(
-                    queryResultSet.getString(1),
+                    queryResultSet.getInt(1),
                     queryResultSet.getString(2),
                     queryResultSet.getString(3),
                     queryResultSet.getString(4),
                     queryResultSet.getString(5),
-                    queryResultSet.getInt(6),
-                    queryResultSet.getString(7));
+                    queryResultSet.getString(6),
+                    queryResultSet.getInt(7));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
         }
     }
 
-    public void updateAdmin(String username, String password, String email, String firstName, String lastName, int accessLevel, String adminId) {
+    public void updateAdmin(String username, String password, String email, String firstName, String lastName, int accessLevel, int adminId) {
         try {
             PreparedStatement updateStatement = connection.prepareStatement("UPDATE systemadministrators"
                     + " SET username = ?, password = ?, email = ?, first_name = ?, last_name = ?, access_level = ? "
@@ -85,17 +85,17 @@ public class DatabaseManager {
             updateStatement.setString(4, firstName);
             updateStatement.setString(5, lastName);
             updateStatement.setInt(6, accessLevel);
-            updateStatement.setString(7, adminId);
+            updateStatement.setInt(7, adminId);
             updateStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-    public void deleteAdmin(String adminID) {
+    public void deleteAdmin(int adminID) {
         try {
             PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM systemadministrators WHERE admin_id = ?");
-            deleteStatement.setString(1, adminID);
+            deleteStatement.setInt(1, adminID);
             deleteStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -109,13 +109,13 @@ public class DatabaseManager {
             ResultSet result = getAllAdminStatement.executeQuery();
             while (result.next()) {
                 admins.add(new Systemadministrator(
-                        result.getString(1),
+                        result.getInt(1),
                         result.getString(2),
                         result.getString(3),
                         result.getString(4),
                         result.getString(5),
-                        result.getInt(6),
-                        result.getString(7)));
+                        result.getString(6),
+                        result.getInt(7)));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

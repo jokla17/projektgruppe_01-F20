@@ -41,11 +41,10 @@ public class UserManager {
                 App.getDatabaseManager().insertProducer(username, password, email, firstName, lastName, accessLevel, producerID, employedBy);
                 break;
             case 2:
-                String adminID = generateAdminId();
                 admin = new Systemadministrator(username, password, email, firstName, lastName,
-                        accessLevel, adminID);
+                        accessLevel);
                 adminList.add(admin);
-                App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel, adminID));
+                App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
                 break;
         }
     }
@@ -112,14 +111,6 @@ public class UserManager {
         tempList.addAll(adminList);
         tempList.addAll(producerList);
         App.getDatabaseManager().deleteProducer(user);
-    }
-
-    public String generateAdminId() {
-        int index = 1;
-        for (int i = 0; i < adminList.size(); i++) {
-            index++;
-        }
-        return "S" + index;
     }
 
     public String generateProducerId() {
