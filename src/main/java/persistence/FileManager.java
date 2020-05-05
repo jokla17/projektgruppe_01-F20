@@ -12,24 +12,24 @@ public class FileManager {
     public FileManager() {}
 
     // Read productions
-    public void readProductions(List<Production> productionList) {
-        Scanner scanner = null;
-        List<Production> tempProduction = new ArrayList<>();
-        try {
-            scanner = new Scanner(new File("productions.txt"));
-            while (scanner.hasNext()) {
-                String[] splitLine = scanner.nextLine().split(";");
-                Production production = new Production(splitLine[0], splitLine[1], splitLine[2],
-                        Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]), splitLine[5], splitLine[6]);
-                tempProduction.add(production);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            scanner.close();
-        }
-        productionList.addAll(tempProduction);
-    }
+//    public void readProductions(List<Production> productionList) {
+//        Scanner scanner = null;
+//        List<Production> tempProduction = new ArrayList<>();
+//        try {
+//            scanner = new Scanner(new File("productions.txt"));
+//            while (scanner.hasNext()) {
+//                String[] splitLine = scanner.nextLine().split(";");
+//                Production production = new Production(splitLine[0], splitLine[1], splitLine[2],
+//                        Integer.parseInt(splitLine[3]), Integer.parseInt(splitLine[4]), splitLine[5], splitLine[6]);
+//                tempProduction.add(production);
+//            }
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } finally {
+//            scanner.close();
+//        }
+//        productionList.addAll(tempProduction);
+//    }
 
     // Read users
     public void readUsers(List<User> producerList) {

@@ -1,14 +1,10 @@
 package persistence;
 
-import domain.Producer;
-import domain.Systemadministrator;
-import domain.User;
+import domain.*;
 import org.postgresql.util.PSQLException;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-import domain.Production;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -130,7 +126,7 @@ public class DatabaseManager {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM productions");
             ResultSet sqlReturnValues = ps.executeQuery();
             while (sqlReturnValues.next()) {
-                String productionId = sqlReturnValues.getString(1);
+                int productionId = sqlReturnValues.getInt(1);
                 String title = sqlReturnValues.getString(2);
                 String genre = sqlReturnValues.getString(3);
                 int episodeNumber = sqlReturnValues.getInt(4);
@@ -149,14 +145,13 @@ public class DatabaseManager {
     public void insertProduction(Production production) {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO productions " +
-                    "(id, title, genre, episode_number, production_year, production_country, produced_by) VALUES (?,?,?,?,?,?,?)");
-            ps.setString(1, production.getProductionId());
-            ps.setString(2, production.getTitle());
-            ps.setString(3, production.getGenre());
-            ps.setInt(4, production.getEpisodeNumber());
-            ps.setInt(5, production.getProductionYear());
-            ps.setString(6, production.getProductionCountry());
-            ps.setString(7, production.getProducedBy());
+                    "(title, genre, episode_number, production_year, production_country, produced_by) VALUES (?,?,?,?,?,?)");
+            ps.setString(1, production.getTitle());
+            ps.setString(2, production.getGenre());
+            ps.setInt(3, production.getEpisodeNumber());
+            ps.setInt(4, production.getProductionYear());
+            ps.setString(5, production.getProductionCountry());
+            ps.setString(6, production.getProducedBy());
             ps.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -172,7 +167,7 @@ public class DatabaseManager {
             ps.setInt(4, production.getProductionYear());
             ps.setString(5, production.getProductionCountry());
             ps.setString(6, production.getProducedBy());
-            ps.setString(7, production.getProductionId());
+            ps.setInt(7, production.getProductionId());
             ps.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -182,7 +177,7 @@ public class DatabaseManager {
     public void deleteProduction(Production production) {
         try {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM productions WHERE id = ?");
-            ps.setString(1, production.getProductionId());
+            ps.setInt(1, production.getProductionId());
             ps.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -190,12 +185,12 @@ public class DatabaseManager {
     }
 
     public ArrayList<Producer> getProducerList() {
-        ArrayList<Producer> admins = new ArrayList<>();
+        ArrayList<Producer> producers = new ArrayList<>();
         try {
-            PreparedStatement getAllAdminStatement = connection.prepareStatement("SELECT * FROM producers");
-            ResultSet result = getAllAdminStatement.executeQuery();
+            PreparedStatement getAllProducerStatement = connection.prepareStatement("SELECT * FROM producers");
+            ResultSet result = getAllProducerStatement.executeQuery();
             while (result.next()) {
-                admins.add(new Producer(
+                producers.add(new Producer(
                         result.getString(1),
                         result.getString(2),
                         result.getString(3),
@@ -209,7 +204,7 @@ public class DatabaseManager {
             throwables.printStackTrace();
             return null;
         }
-        return admins;
+        return producers;
     }
 
     public void insertProducer(String username, String password, String email, String firstName, String lastName,
@@ -250,7 +245,6 @@ public class DatabaseManager {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     public void deleteProducer(User user) {
@@ -261,5 +255,84 @@ public class DatabaseManager {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public void insertCredit(Credit credit, int productionId) {
+        try {
+            PreparedStatement insertStatement = connection.prepareStatement("CALL insert_credit(?, ?, ?, ?)");
+            insertStatement.setString(1, credit.getFirstName());
+            insertStatement.setString(2, credit.getLastName());
+            insertStatement.setString(3, credit.getRole());
+            insertStatement.setInt(4, productionId);
+            insertStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void updateCredit(Credit credit) {
+        try {
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE credits "
+                    + "SET first_name = ? , last_name = ?, role = ?"
+                    + "WHERE id = ?");
+            updateStatement.setString(1, credit.getFirstName());
+            updateStatement.setString(2, credit.getLastName());
+            updateStatement.setString(3, credit.getRole());
+            updateStatement.setInt(4, credit.getId());
+            updateStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteCredit(Credit credit, int productionId) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("CALL delete_credit(?,?)");
+            ps.setInt(1, credit.getId());
+            ps.setInt(2, productionId);
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void creditResultSet(List<Credit> creditList) {
+        List<Credit> tempCreditList = new ArrayList<>();
+        try {
+            PreparedStatement cs = connection.prepareStatement("" +
+                    "SELECT * FROM productions INNER JOIN production_credits ON production_credits.production_id = productions.id INNER JOIN credits ON production_credits.credit_id = credits.id");
+            ResultSet sqlReturnValues = cs.executeQuery();
+            while (sqlReturnValues.next()) {
+                int creditId = sqlReturnValues.getInt("credit_id");
+                String firstName = sqlReturnValues.getString("first_name");
+                String lastName = sqlReturnValues.getString("last_name");
+                String role = sqlReturnValues.getString("role");
+                tempCreditList.add(new Credit(creditId, role, firstName, lastName));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        creditList.addAll(tempCreditList);
+    }
+
+    public void creditResultSet(List<Credit> creditList, int productionId) {
+        List<Credit> tempCreditList = new ArrayList<>();
+        try {
+            PreparedStatement cs = connection.prepareStatement("" +
+                    "SELECT * FROM productions INNER JOIN production_credits ON production_credits.production_id = productions.id " +
+                    "INNER JOIN credits ON production_credits.credit_id = credits.id WHERE productions.id = ?");
+            cs.setInt(1, productionId);
+            ResultSet sqlReturnValues = cs.executeQuery();
+            while (sqlReturnValues.next()) {
+                int creditId = sqlReturnValues.getInt("credit_id");
+                String firstName = sqlReturnValues.getString("first_name");
+                String lastName = sqlReturnValues.getString("last_name");
+                String role = sqlReturnValues.getString("role");
+                tempCreditList.add(new Credit(creditId, role, firstName, lastName));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        creditList.addAll(tempCreditList);
     }
 }

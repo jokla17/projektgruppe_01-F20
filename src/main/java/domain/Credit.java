@@ -1,38 +1,54 @@
 package domain;
 
 public class Credit {
-    private String creditId;
-    private String creditRole;
-    private String creditName;
+    private int id;
+    private String role;
+    private String firstName;
+    private String lastName;
 
-    public Credit(String creditId, String creditRole, String creditName) {
-        this.creditId = creditId;
-        this.creditRole = creditRole;
-        this.creditName = creditName;
+    public Credit(int Id, String role, String firstName, String lastName) {
+        this.id = Id;
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getCreditId() {
-        return creditId;
+    public Credit(String role, String firstName, String lastName) {
+        this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getCreditRole() {
-        return creditRole;
+    public int getId() {
+        return id;
     }
 
-    public void setCreditRole(String creditRole) {
-        this.creditRole = creditRole;
+    public String getRole() {
+        return role;
     }
 
-    public String getCreditName() {
-        return creditName;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public void setCreditName(String creditName) {
-        this.creditName = creditName;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
     public String toString() {
-        return creditId + ";" + creditRole + ";" + creditName;
+        return id + ";" + role + ";" + firstName + ";" + lastName;
     }
 }

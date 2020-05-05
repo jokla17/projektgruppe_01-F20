@@ -20,6 +20,7 @@ public class App extends Application {
     private static AuthentificationManager authentificationManager = new AuthentificationManager();
     private static ProductionManager productionManager = new ProductionManager();
     private static CreditManager creditManager = new CreditManager();
+    private static NotificationManager notificationManager = new NotificationManager();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -39,27 +40,22 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    // Get static instanced file manager
     public static FileManager getFileManager() {
         return fileManager;
     }
 
-    // Get static instanced user manager
     public static UserManager getUserManager() {
         return userManager;
     }
 
-    // Get static instanced authentification manager
     public static AuthentificationManager getAuthentificationManager() {
         return authentificationManager;
     }
 
-    // Get static instanced production manager
     public static ProductionManager getProductionManager() {
         return productionManager;
     }
 
-    // Get static instanced credit manager
     public static CreditManager getCreditManager() {
         return creditManager;
     }
@@ -67,6 +63,8 @@ public class App extends Application {
     public static DatabaseManager getDatabaseManager() {
         return databaseManager;
     }
+
+    public static NotificationManager getNotificationManager() { return notificationManager; }
 
     public static void main(String[] args) {
         launch();

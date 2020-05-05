@@ -17,17 +17,16 @@ public class ProductionManager {
     }
 
     public void createProduction(String[] productionArgs){
-        String productionId = generateProductionId();
         Production production = new Production(
-                productionId,
                 productionArgs[0],
                 productionArgs[1],
                 Integer.parseInt(productionArgs[2]),
                 Integer.parseInt(productionArgs[3]),
                 productionArgs[4],
                 productionArgs[5]);
-        productionList.add(production);
         App.getDatabaseManager().insertProduction(production);
+        productionList.clear();
+        App.getDatabaseManager().productionResultSet(productionList);
     }
 
     public List<Production> readProduction(String searchText) {
@@ -55,13 +54,7 @@ public class ProductionManager {
     public void deleteProduction(Production production){
         productionList.remove(production);
         App.getDatabaseManager().deleteProduction(production);
-    }
-
-    public String generateProductionId() {
-        int index = 1;
-        for (int i = 0; i < productionList.size(); i++) {
-            index++;
-        }
-        return "P" + index;
+        productionList.clear();
+        App.getDatabaseManager().productionResultSet(productionList);
     }
 }

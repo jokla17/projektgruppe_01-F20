@@ -48,7 +48,8 @@ public class StartController implements Initializable {
         } else if (rbCredits.isSelected()) {
             lvProductionsResults.setVisible(false);
             lvCreditResults.setVisible(true);
-            App.getCreditManager().setAllCreditList();
+            App.getCreditManager().getCreditList().clear();
+            App.getCreditManager().setCreditList();
             lvCreditResults.setItems(FXCollections.observableArrayList(
                     App.getCreditManager().readCredit(tfStartSearchfield.getText())));
         }
@@ -70,7 +71,7 @@ public class StartController implements Initializable {
                             setText(null);
                             return;
                         }
-                        setText("Navn: " + item.getCreditName() + "\nRolle: " + item.getCreditRole());
+                        setText("Fornavn: " + item.getFirstName() + "\nEfternavn: " + item.getLastName() + "\nRolle: " + item.getRole());
                     }
                 };
                 return cell;
