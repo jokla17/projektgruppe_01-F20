@@ -40,7 +40,7 @@ public class UserController extends MainController implements Initializable {
     public TableColumn<Producer, String> tcProducerFirstName;
     public TableColumn<Producer, String> tcProducerLastName;
     public TableColumn<Producer, String> tcProducerEmployedBy;
-    public TableView<User> tvAdmin;
+    public TableView<Systemadministrator> tvAdmin;
     public TableView<Producer> tvProducer;
     public Label lbCurrentUser;
 
@@ -82,7 +82,7 @@ public class UserController extends MainController implements Initializable {
 
     public void updateUser(ActionEvent actionEvent) {
         if (Integer.parseInt(tfAccessLevel.getText()) == 2) {
-            App.getUserManager().updateUser(tvAdmin.getSelectionModel().getSelectedItem(),
+            App.getUserManager().updateAdmin(tvAdmin.getSelectionModel().getSelectedItem(),
                     tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
                     tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
             tvAdmin.refresh();

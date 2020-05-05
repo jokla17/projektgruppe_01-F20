@@ -1,34 +1,29 @@
 package persistence;
 
+import domain.Producer;
 import domain.Systemadministrator;
 import domain.User;
 import org.postgresql.util.PSQLException;
+
 import java.sql.*;
 import java.util.ArrayList;
+
 import domain.Production;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseManager {
-    private static DatabaseManager instance;
     private String url = "localhost";
     private int port = 5432;
     private String databaseName = "Ajate_db";
     private String username = "postgres";
     private String password = "student123";
-    private String password = "Hadersarah01";
     private Connection connection = null;
 
     public DatabaseManager() {
         initializePostgresqlDatabase();
-    }
-
-    public static DatabaseManager getInstance() {
-        if (instance == null) {
-            instance = new DatabaseManager();
-        }
-        return instance;
     }
 
     private void initializePostgresqlDatabase() {
@@ -60,13 +55,22 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteAdmin(String adminID) {
+    public Systemadministrator readAdmin(String adminID) {
         try {
-            PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM systemadministrators WHERE admin_id = ?");
-            deleteStatement.setString(1, adminID);
-            deleteStatement.execute();
+            PreparedStatement queryStatement = connection.prepareStatement("SELECT * FROM systemadministrators WHERE admin_id = ?");
+            queryStatement.setString(1, adminID);
+            ResultSet queryResultSet = queryStatement.executeQuery();
+            return new Systemadministrator(
+                    queryResultSet.getString(1),
+                    queryResultSet.getString(2),
+                    queryResultSet.getString(3),
+                    queryResultSet.getString(4),
+                    queryResultSet.getString(5),
+                    queryResultSet.getInt(6),
+                    queryResultSet.getString(7));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            return null;
         }
     }
 
@@ -88,32 +92,22 @@ public class DatabaseManager {
         }
     }
 
-    public Systemadministrator readAdmin(String adminID) {
-
+    public void deleteAdmin(String adminID) {
         try {
-            PreparedStatement queryStatement = connection.prepareStatement("SELECT * FROM systemadministrators WHERE admin_id = ?");
-            queryStatement.setString(1, adminID);
-            ResultSet queryResultSet = queryStatement.executeQuery();
-            return new Systemadministrator(
-                    queryResultSet.getString(1),
-                    queryResultSet.getString(2),
-                    queryResultSet.getString(3),
-                    queryResultSet.getString(4),
-                    queryResultSet.getString(5),
-                    queryResultSet.getInt(6),
-                    queryResultSet.getString(7));
+            PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM systemadministrators WHERE admin_id = ?");
+            deleteStatement.setString(1, adminID);
+            deleteStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return null;
         }
     }
 
-    public ArrayList<Systemadministrator> getAdminList(){
+    public ArrayList<Systemadministrator> getAdminList() {
         ArrayList<Systemadministrator> admins = new ArrayList<>();
         try {
             PreparedStatement getAllAdminStatement = connection.prepareStatement("SELECT * FROM systemadministrators");
             ResultSet result = getAllAdminStatement.executeQuery();
-            while(result.next()){
+            while (result.next()) {
                 admins.add(new Systemadministrator(
                         result.getString(1),
                         result.getString(2),
@@ -128,51 +122,9 @@ public class DatabaseManager {
             return null;
         }
         return admins;
-		
-    public void insertProduction(Production production) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO productions " +
-                    "(id, title, genre, episode_number, production_year, production_country, produced_by) VALUES (?,?,?,?,?,?,?)");
-            ps.setString(1, production.getProductionId());
-            ps.setString(2, production.getTitle());
-            ps.setString(3, production.getGenre());
-            ps.setInt(4, production.getEpisodeNumber());
-            ps.setInt(5, production.getProductionYear());
-            ps.setString(6, production.getProductionCountry());
-            ps.setString(7, production.getProducedBy());
-            ps.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
     }
 
-    public void deleteProduction(Production production){
-        try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM productions WHERE id = ?");
-            ps.setString(1, production.getProductionId());
-            ps.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void updateProduction(Production production){
-        try {
-            PreparedStatement ps = connection.prepareStatement("UPDATE productions SET title = ?, genre = ?, episode_number = ?, production_year = ?, production_country = ?, produced_by = ? WHERE id = ?");
-            ps.setString(1, production.getTitle());
-            ps.setString(2, production.getGenre());
-            ps.setInt(3, production.getEpisodeNumber());
-            ps.setInt(4, production.getProductionYear());
-            ps.setString(5, production.getProductionCountry());
-            ps.setString(6, production.getProducedBy());
-            ps.setString(7, production.getProductionId());
-            ps.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void productionResultSet(List<Production> productionList){
+    public void productionResultSet(List<Production> productionList) {
         List<Production> tempProductionList = new ArrayList<>();
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM productions");
@@ -192,7 +144,74 @@ public class DatabaseManager {
             ex.printStackTrace();
         }
         productionList.addAll(tempProductionList);
-		
+    }
+
+    public void insertProduction(Production production) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO productions " +
+                    "(id, title, genre, episode_number, production_year, production_country, produced_by) VALUES (?,?,?,?,?,?,?)");
+            ps.setString(1, production.getProductionId());
+            ps.setString(2, production.getTitle());
+            ps.setString(3, production.getGenre());
+            ps.setInt(4, production.getEpisodeNumber());
+            ps.setInt(5, production.getProductionYear());
+            ps.setString(6, production.getProductionCountry());
+            ps.setString(7, production.getProducedBy());
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateProduction(Production production) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE productions SET title = ?, genre = ?, episode_number = ?, production_year = ?, production_country = ?, produced_by = ? WHERE id = ?");
+            ps.setString(1, production.getTitle());
+            ps.setString(2, production.getGenre());
+            ps.setInt(3, production.getEpisodeNumber());
+            ps.setInt(4, production.getProductionYear());
+            ps.setString(5, production.getProductionCountry());
+            ps.setString(6, production.getProducedBy());
+            ps.setString(7, production.getProductionId());
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void deleteProduction(Production production) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM productions WHERE id = ?");
+            ps.setString(1, production.getProductionId());
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public ArrayList<Producer> getProducerList() {
+        ArrayList<Producer> admins = new ArrayList<>();
+        try {
+            PreparedStatement getAllAdminStatement = connection.prepareStatement("SELECT * FROM producers");
+            ResultSet result = getAllAdminStatement.executeQuery();
+            while (result.next()) {
+                admins.add(new Producer(
+                        result.getString(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getString(4),
+                        result.getString(5),
+                        result.getInt(6),
+                        result.getString(7),
+                        result.getString(8)));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+        return admins;
+    }
+
     public void insertProducer(String username, String password, String email, String firstName, String lastName,
                                int accessLevel, String producerId, String employedBy) {
         try {
@@ -239,25 +258,6 @@ public class DatabaseManager {
             PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM producers WHERE username = ? ");
             deleteStatement.setString(1, user.getUsername());
             deleteStatement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void updateUser(String username, String password, String email, String firstName,
-                           String lastName, int accessLevel, String employedBy) {
-        try {
-            PreparedStatement updateStatement = connection.prepareStatement("UPDATE users "
-                    + "(username, password, email, first_name, last_name, access_level, employed_by)"
-                    + " VALUES (?, ?, ?, ?, ?, ?, ?)");
-            updateStatement.setString(1, username);
-            updateStatement.setString(2, password);
-            updateStatement.setString(3, email);
-            updateStatement.setString(4, firstName);
-            updateStatement.setString(5, lastName);
-            updateStatement.setInt(6, accessLevel);
-            updateStatement.setString(7, employedBy);
-            updateStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

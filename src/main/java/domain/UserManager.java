@@ -13,17 +13,14 @@ public class UserManager {
     public UserManager() {
         adminList = new ArrayList<>();
         producerList = new ArrayList<>();
-        App.getFileManager().readUsers(producerList);
-//        App.getFileManager().readUsers(adminList, producerList);
     }
 
     public List<Producer> getProducerList() {
-        return producerList;
+        return App.getDatabaseManager().getProducerList();
     }
 
     public List<Systemadministrator> getAdminList() {
         return App.getDatabaseManager().getAdminList();
-        return adminList;
     }
 
     public void createUser(String username, String password, String email, String firstName,
@@ -35,7 +32,6 @@ public class UserManager {
 
         Systemadministrator admin = null;
         Producer producer = null;
-
         switch (accessLevel) {
             case 1:
                 String producerID = generateProducerId();
@@ -45,71 +41,54 @@ public class UserManager {
                 App.getDatabaseManager().insertProducer(username, password, email, firstName, lastName, accessLevel, producerID, employedBy);
                 break;
             case 2:
-              String adminID = generateAdminId();
+                String adminID = generateAdminId();
                 admin = new Systemadministrator(username, password, email, firstName, lastName,
                         accessLevel, adminID);
-                adminList.add(user);
+                adminList.add(admin);
                 App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel, adminID));
                 break;
         }
-        //App.getFileManager().appendToFile("users.txt", user);
-                adminList.add(admin);
-                App.getDatabaseManager().insertAdmin(username, password, email, firstName, lastName, accessLevel, adminID);
-                break;
-        }
-        //App.getFileManager().appendToFile("users.txt", admin, producer);
     }
 
-    public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+    public void updateAdmin(Systemadministrator systemadministrator, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
 
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAccessLevel(accessLevel);
-        user.setEmployedBy(employedBy);
+        systemadministrator.setUsername(username);
+        systemadministrator.setPassword(password);
+        systemadministrator.setEmail(email);
+        systemadministrator.setFirstName(firstName);
+        systemadministrator.setLastName(lastName);
+        systemadministrator.setAccessLevel(accessLevel);
 
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(adminList);
         tempList.addAll(producerList);
-        App.getFileManager().writeToFile("users.txt", tempList);
-        App.getDatabaseManager().updateAdmin(username, password, email, firstName, lastName, accessLevel, ((Systemadministrator) user).getAdminId());
+        App.getDatabaseManager().updateAdmin(username, password, email, firstName, lastName, accessLevel, systemadministrator.getAdminId());
     }
 
-    public void deleteAdmin(Systemadministrator sysadmin) {
-
-//        App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, employedBy);
-    }
-
-    public void updateProducer(User user, String username, String password, String email,
+    public void updateProducer(Producer producer, String username, String password, String email,
                                String firstName, String lastName, int accessLevel, String employedBy) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAccessLevel(accessLevel);
-        user.setEmployedBy(employedBy);
+        producer.setUsername(username);
+        producer.setPassword(password);
+        producer.setEmail(email);
+        producer.setFirstName(firstName);
+        producer.setLastName(lastName);
+        producer.setAccessLevel(accessLevel);
+        producer.setEmployedBy(employedBy);
 
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(producerList);
-        App.getFileManager().writeToFile("users.txt", tempList);
-
-        App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, ((Producer)user).getProducerId(), employedBy);
-
+        App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, producer.getProducerId(), employedBy);
     }
 
-
-    public void deleteAdmin(User user) {
+    public void deleteAdmin(Systemadministrator sysadmin) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
@@ -119,7 +98,6 @@ public class UserManager {
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(adminList);
         tempList.addAll(producerList);
-        App.getFileManager().writeToFile("users.txt", tempList);
         App.getDatabaseManager().deleteAdmin(sysadmin.getAdminId());
     }
 
@@ -133,8 +111,6 @@ public class UserManager {
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(adminList);
         tempList.addAll(producerList);
-        App.getFileManager().writeToFile("users.txt", tempList);
-
         App.getDatabaseManager().deleteProducer(user);
     }
 
@@ -154,7 +130,6 @@ public class UserManager {
         }
         return "P" + index;
     }
-
 }
 
 

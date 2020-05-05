@@ -7,7 +7,6 @@ public abstract class User {
     private String firstName;
     private String lastName;
     private int accessLevel;
-    private String employedBy;
 
     public User(String username, String password, String email, String firstName, String lastName, int accessLevel) {
         this.username = username;
@@ -64,14 +63,6 @@ public abstract class User {
 
     public void setAccessLevel(int accessLevel) {
         this.accessLevel = accessLevel;
-    }
-
-    public String getEmployedBy()  {
-        return employedBy;
-    }
-
-    public void setEmployedBy(String employedBy)  {
-        this.employedBy = employedBy;
     }
 
     @Override

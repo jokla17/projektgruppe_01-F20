@@ -1,5 +1,2 @@
 P1;test;test;1;1;hjgj;gj
-P2;test;test;1;1;hjgj;gj
 P3;test;test;1;1;hjgj;gj
-P4;test;test;1;1;hjgj;gj
-P5;test;test;1;1;hjgj;gj

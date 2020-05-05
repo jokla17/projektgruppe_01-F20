@@ -2,6 +2,7 @@ package domain;
 
 public class Producer extends User {
     private String producerId;
+
     private String employedBy;
 
     public Producer(String username, String password, String email, String firstName, String lastName,
@@ -16,6 +17,10 @@ public class Producer extends User {
     }
 
     public String getEmployedBy() {return employedBy;}
+
+    public void setEmployedBy(String employedBy) {
+        this.employedBy = employedBy;
+    }
 
     @Override
     public String toString() {
