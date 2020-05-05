@@ -52,21 +52,22 @@
             </VBox>
             <TableView fx:id="tvAdmin" focusTraversable="false" layoutX="234.0" layoutY="14.0" onMouseClicked="#selectAdmin" prefHeight="174.0" prefWidth="518.0">
               <columns>
-                <TableColumn fx:id="tcAdminID" prefWidth="85.0" text="ID" />
-                <TableColumn fx:id="tcAdminUsername" prefWidth="101.0" text="Brugernavn" />
-                  <TableColumn fx:id="tcAdminPassword" prefWidth="117.0" text="Kodeord" />
-                  <TableColumn fx:id="tcAdminFirstName" prefWidth="115.0" text="Navn" />
-                  <TableColumn fx:id="tcAdminLastName" prefWidth="93.5999755859375" text="Efternavn" />
+                <TableColumn fx:id="tcAdminID" prefWidth="59.0" text="ID" />
+                <TableColumn fx:id="tcAdminUsername" prefWidth="109.0" text="Brugernavn" />
+                  <TableColumn fx:id="tcAdminPassword" prefWidth="114.0" text="Kodeord" />
+                  <TableColumn fx:id="tcAdminFirstName" prefWidth="118.0" text="Navn" />
+                  <TableColumn fx:id="tcAdminLastName" prefWidth="117.0" text="Efternavn" />
               </columns>
             </TableView>
             <Button fx:id="btnDelete" focusTraversable="false" layoutX="234.0" layoutY="413.0" mnemonicParsing="false" onAction="#deleteProducer" prefHeight="30.0" prefWidth="111.0" text="Slet producer" />
             <TableView fx:id="tvProducer" focusTraversable="false" layoutX="234.0" layoutY="251.0" onMouseClicked="#selectProducer" prefHeight="152.0" prefWidth="518.0">
               <columns>
-                <TableColumn fx:id="tcProducerID" prefWidth="79.0" text="ID" />
-                <TableColumn fx:id="tcProducerUsername" prefWidth="112.0" text="Brugernavn" />
-                  <TableColumn fx:id="tcProducerPassword" prefWidth="107.0" text="Kodeord" />
-                  <TableColumn fx:id="tcProducerFirstName" prefWidth="111.0" text="Navn" />
-                  <TableColumn fx:id="tcProducerLastName" prefWidth="103.2000732421875" text="Efternavn" />
+                <TableColumn fx:id="tcProducerID" prefWidth="52.0" text="ID" />
+                <TableColumn fx:id="tcProducerUsername" prefWidth="100.0" text="Brugernavn" />
+                  <TableColumn fx:id="tcProducerPassword" prefWidth="93.0" text="Kodeord" />
+                  <TableColumn fx:id="tcProducerFirstName" prefWidth="89.0" text="Navn" />
+                  <TableColumn fx:id="tcProducerLastName" prefWidth="95.0" text="Efternavn" />
+                  <TableColumn fx:id="tcProducerEmployedBy" prefWidth="88.0" text="Arbejdsgiver" />
               </columns>
             </TableView>
             <Button fx:id="btnDelete" focusTraversable="false" layoutX="234.0" layoutY="204.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="30.0" prefWidth="89.0" text="Slet admin" />
