@@ -6,15 +6,15 @@ public class Credit {
     private String firstName;
     private String lastName;
 
-    public Credit(int Id, String Role, String firstName, String lastName) {
+    public Credit(int Id, String role, String firstName, String lastName) {
         this.id = Id;
-        this.role = Role;
+        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Credit(String Role, String firstName, String lastName) {
-        this.role = Role;
+    public Credit(String role, String firstName, String lastName) {
+        this.role = role;
         this.firstName = firstName;
         this.lastName = lastName;
     }

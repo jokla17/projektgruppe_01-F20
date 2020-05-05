@@ -24,7 +24,6 @@ public class ProductionManager {
                 Integer.parseInt(productionArgs[3]),
                 productionArgs[4],
                 productionArgs[5]);
-
         App.getDatabaseManager().insertProduction(production);
         productionList.clear();
         App.getDatabaseManager().productionResultSet(productionList);

@@ -13,9 +13,9 @@ import java.util.List;
 public class DatabaseManager {
     private String url = "localhost";
     private int port = 5432;
-    private String databaseName = "ajate_db";
+    private String databaseName = "Ajate_db";
     private String username = "postgres";
-    private String password = "sosuarem2";
+    private String password = "student123";
     private Connection connection = null;
 
     public DatabaseManager() {
@@ -294,12 +294,11 @@ public class DatabaseManager {
                     "SELECT * FROM productions INNER JOIN production_credits ON production_credits.production_id = productions.id INNER JOIN credits ON production_credits.credit_id = credits.id");
             ResultSet sqlReturnValues = cs.executeQuery();
             while (sqlReturnValues.next()) {
-                int creditId = sqlReturnValues.getInt(1);
-                String firstName = sqlReturnValues.getString(2);
-                String lastName = sqlReturnValues.getString(3);
-                String role = sqlReturnValues.getString(4);
-
-                tempCreditList.add(new Credit(creditId, firstName, lastName, role));
+                int creditId = sqlReturnValues.getInt("credit_id");
+                String firstName = sqlReturnValues.getString("first_name");
+                String lastName = sqlReturnValues.getString("last_name");
+                String role = sqlReturnValues.getString("role");
+                tempCreditList.add(new Credit(creditId, role, firstName, lastName));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -316,12 +315,11 @@ public class DatabaseManager {
             cs.setInt(1, productionId);
             ResultSet sqlReturnValues = cs.executeQuery();
             while (sqlReturnValues.next()) {
-                int creditId = sqlReturnValues.getInt(1);
-                String firstName = sqlReturnValues.getString(2);
-                String lastName = sqlReturnValues.getString(3);
-                String role = sqlReturnValues.getString(4);
-
-                tempCreditList.add(new Credit(creditId, firstName, lastName, role));
+                int creditId = sqlReturnValues.getInt("credit_id");
+                String firstName = sqlReturnValues.getString("first_name");
+                String lastName = sqlReturnValues.getString("last_name");
+                String role = sqlReturnValues.getString("role");
+                tempCreditList.add(new Credit(creditId, role, firstName, lastName));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -329,15 +327,14 @@ public class DatabaseManager {
         creditList.addAll(tempCreditList);
     }
 
-//    public void deleteCredit(Credit credit) {
-//        try {
-//            PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM producers WHERE username = ? ");
-//            deleteStatement.setString(1, user.getUsername());
-//            deleteStatement.execute();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-
-
+    public void deleteCredit(Credit credit, int productionId) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("CALL delete_credit(?,?)");
+            ps.setInt(1, credit.getId());
+            ps.setInt(2, productionId);
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

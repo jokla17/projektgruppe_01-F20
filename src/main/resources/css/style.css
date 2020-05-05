@@ -161,6 +161,25 @@
     -fx-background-color: warning-hover-button-color;
 }
 
+/** NOTIFICATION BOX **/
+#spNotificationBox-created {
+    -fx-background-color: success-button-color;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
+#spNotificationBox-deleted {
+    -fx-background-color: warning-button-color;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
+#spNotificationBox-updated {
+    -fx-background-color: update-button-color;
+    -fx-border-radius: 10px 10px 10px 10px;
+    -fx-background-radius: 10px 10px 10px 10px;
+}
+
 /** START PAGE LAYOUT **/
 #gpStartBackground {
     -fx-background-color: base-color-6;

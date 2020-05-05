@@ -27,17 +27,15 @@ public class CreditManager {
     }
 
     public void setCreditList(int productionId) {
-
+        App.getDatabaseManager().creditResultSet(creditList, productionId);
     }
 
-    public void setAllCreditList() {
-        creditList.clear();
-        App.getFileManager().readCredits(creditList);
+    public void setCreditList() {
+        App.getDatabaseManager().creditResultSet(creditList);
     }
 
-    public void createCredit(String role, String firstName, String lastName, int productionId){
+    public void createCredit(int productionId, String role, String firstName, String lastName){
         Credit credit = new Credit(role, firstName, lastName);
-        creditList.add(credit);
         App.getDatabaseManager().insertCredit(credit, productionId);
         creditList.clear();
         App.getDatabaseManager().creditResultSet(creditList, productionId);
@@ -45,7 +43,6 @@ public class CreditManager {
 
     public List<Credit> readCredit(String searchText) {
         List<Credit> tempCreditList = new ArrayList<>();
-
         for(int i = 0; i < creditList.size(); i++){
             if(creditList.get(i).toString().toLowerCase().contains(
                     searchText.toLowerCase())){
@@ -64,8 +61,10 @@ public class CreditManager {
         App.getDatabaseManager().creditResultSet(creditList);
     }
 
-    public void deleteCredit(Credit credit) {
-        creditList.remove(credit);
+    public void deleteCredit(Credit credit, int productionId) {
+        App.getDatabaseManager().deleteCredit(credit, productionId);
+        creditList.clear();
+        App.getDatabaseManager().creditResultSet(creditList, productionId);
     }
 
     public void saveCredits(String productionId){

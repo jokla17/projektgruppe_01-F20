@@ -46,24 +46,23 @@
                         <Label text="Rolle" />
                         <TextField fx:id="tfCreditRole" focusTraversable="false" promptText="f.eks. Fotograf" />
                         <Label text="Fornavn" />
-                        <TextField fx:id="tfFirstName" focusTraversable="false" promptText="f.eks. Ahmed" />
+                        <TextField fx:id="tfFirstName" focusTraversable="false" promptText="f.eks. John" />
                         <Label text="Efternavn" />
-                        <TextField fx:id="tfLastName" promptText="f.eks. El-atbi" />
+                        <TextField fx:id="tfLastName" focusTraversable="false" promptText="f.eks. Doe" />
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-            <VBox layoutX="325.0" layoutY="24.0" prefHeight="438.0" prefWidth="453.0" spacing="10.0">
+            <VBox layoutX="329.0" layoutY="24.0" prefHeight="334.0" prefWidth="433.0" spacing="10.0">
                <children>
-                  <TableView fx:id="tvCreditTable" focusTraversable="false" onMouseClicked="#selectCredit" prefHeight="396.0" prefWidth="419.0">
+                  <TableView fx:id="tvCreditTable" focusTraversable="false" onMouseClicked="#selectCredit" prefHeight="334.0" prefWidth="435.0">
                     <columns>
                       <TableColumn fx:id="tcId" prefWidth="75.0" text="ID" />
                       <TableColumn fx:id="tcRole" prefWidth="108.80010986328125" text="Rolle" />
-                        <TableColumn fx:id="tcFirstName" prefWidth="90.4000244140625" text="Fornavn" />
-                        <TableColumn fx:id="tcLastName" prefWidth="168.0" text="Efternavn" />
+                        <TableColumn fx:id="tcFirstName" prefWidth="114.4000244140625" text="Fornavn" />
+                        <TableColumn fx:id="tcLastName" prefWidth="130.4000244140625" text="Efternavn" />
                     </columns>
                   </TableView>
-                  <HBox prefHeight="32.0" prefWidth="387.0" spacing="10.0" />
                </children>
             </VBox>
             <Button fx:id="btnDelete" layoutX="242.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCredit" prefHeight="30.0" prefWidth="71.0" text="Slet" />
@@ -71,7 +70,16 @@
             <Button fx:id="btnCreate" focusTraversable="false" layoutX="23.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#createSingleCredit" prefHeight="30.0" prefWidth="69.0" text="Opret " />
             <Label layoutX="24.0" layoutY="292.0" text="Produktions ID" />
             <TextField fx:id="tfProductionID" layoutX="133.0" layoutY="286.0" prefHeight="29.0" prefWidth="179.0" promptText="f.eks. P1" />
-         </children></AnchorPane>
+             <StackPane fx:id="spNotificationBox" layoutX="517.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="216.0">
+                 <children>
+                     <Text fx:id="spNotificationText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Production has been deleted successfully!" textAlignment="CENTER" wrappingWidth="196.25665283203125">
+                         <font>
+                             <Font name="System Bold" size="12.0" />
+                         </font></Text>
+                 </children>
+             </StackPane>
+         </children>
+        </AnchorPane>
         <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
             <children>
                 <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" prefHeight="78.0" prefWidth="390.0">

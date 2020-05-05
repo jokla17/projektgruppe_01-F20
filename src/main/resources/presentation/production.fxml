@@ -60,7 +60,7 @@
                   <Label text="Produktions land" />
                   <TextField fx:id="tfProductionCountry" focusTraversable="false" prefWidth="200.0" promptText="f.eks. Danmark" />
                   <Label text="Produceret af" />
-                  <TextField fx:id="tfProducedBy" focusTraversable="false" prefWidth="200.0" promptText="f.eks. John Doe" />
+                  <TextField fx:id="tfProducedBy" disable="true" focusTraversable="false" prefWidth="200.0" promptText="f.eks. John Doe" />
                </children>
             </VBox>
             <TableView fx:id="tvProductions" focusTraversable="false" layoutX="256.0" layoutY="21.0" onMouseClicked="#selectProduction" prefHeight="298.0" prefWidth="502.0">
@@ -78,6 +78,14 @@
                   <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#updateProduction" prefHeight="30.0" prefWidth="68.0" text="Opdater" />
                </children>
             </HBox>
+            <StackPane fx:id="spNotificationBox" layoutX="517.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="216.0">
+               <children>
+                  <Text fx:id="spNotificationText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Production has been deleted successfully!" textAlignment="CENTER" wrappingWidth="196.25665283203125">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Text>
+               </children>
+            </StackPane>
          </children>
       </AnchorPane>
       <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
