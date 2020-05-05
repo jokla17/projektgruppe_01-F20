@@ -15,6 +15,8 @@ public class Producer extends User {
         return producerId;
     }
 
+    public String getEmployedBy() {return employedBy;}
+
     @Override
     public String toString() {
         return super.toString() + ";" + producerId + ";" + employedBy;

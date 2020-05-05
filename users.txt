@@ -1,2 +1,4 @@
 test;test;test@test.dk;Test;Testensen;2;S1
 producer;producer;producer@producer;jane;doe;1;P1;SDU
+admin;admin;admin@admin;john;doe;2;S1
+producer;password;admin@admin;john;doe;1;P1;TV2

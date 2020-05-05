@@ -7,49 +7,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private List<User> adminList;
-    private List<User> producerList;
+    private List<Systemadministrator> adminList;
+    private List<Producer> producerList;
 
     public UserManager() {
         adminList = new ArrayList<>();
         producerList = new ArrayList<>();
         App.getFileManager().readUsers(producerList);
+//        App.getFileManager().readUsers(adminList, producerList);
     }
 
-    public List<User> getProducerList() {
+    public List<Producer> getProducerList() {
         return producerList;
     }
 
     public List<Systemadministrator> getAdminList() {
         return App.getDatabaseManager().getAdminList();
+        return adminList;
     }
 
     public void createUser(String username, String password, String email, String firstName,
-                           String lastName, int accessLevel, String... other) {
+                           String lastName, int accessLevel, String employedBy) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
 
-        User user = null;
+        Systemadministrator admin = null;
+        Producer producer = null;
+
         switch (accessLevel) {
             case 1:
-                user = new Producer(username, password, email, firstName, lastName,
-                        accessLevel, generateProducerId(), other[0]);
-                producerList.add(user);
+                String producerID = generateProducerId();
+                producer = new Producer(username, password, email, firstName, lastName,
+                        accessLevel, producerID, employedBy);
+                producerList.add(producer);
+                App.getDatabaseManager().insertProducer(username, password, email, firstName, lastName, accessLevel, producerID, employedBy);
                 break;
             case 2:
               String adminID = generateAdminId();
-                user = new Systemadministrator(username, password, email, firstName, lastName,
+                admin = new Systemadministrator(username, password, email, firstName, lastName,
                         accessLevel, adminID);
                 adminList.add(user);
                 App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel, adminID));
                 break;
         }
         //App.getFileManager().appendToFile("users.txt", user);
+                adminList.add(admin);
+                App.getDatabaseManager().insertAdmin(username, password, email, firstName, lastName, accessLevel, adminID);
+                break;
+        }
+        //App.getFileManager().appendToFile("users.txt", admin, producer);
     }
 
-    public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String... other) {
+    public void updateUser(User user, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
@@ -61,6 +72,7 @@ public class UserManager {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setAccessLevel(accessLevel);
+        user.setEmployedBy(employedBy);
 
         List<Object> tempList = new ArrayList<>();
         tempList.addAll(adminList);
@@ -70,6 +82,34 @@ public class UserManager {
     }
 
     public void deleteAdmin(Systemadministrator sysadmin) {
+
+//        App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, employedBy);
+    }
+
+    public void updateProducer(User user, String username, String password, String email,
+                               String firstName, String lastName, int accessLevel, String employedBy) {
+        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+            System.out.println("Functionality not available for this user type.");
+            return;
+        }
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setAccessLevel(accessLevel);
+        user.setEmployedBy(employedBy);
+
+        List<Object> tempList = new ArrayList<>();
+        tempList.addAll(producerList);
+        App.getFileManager().writeToFile("users.txt", tempList);
+
+        App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, ((Producer)user).getProducerId(), employedBy);
+
+    }
+
+
+    public void deleteAdmin(User user) {
         if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
             System.out.println("Functionality not available for this user type.");
             return;
@@ -94,6 +134,8 @@ public class UserManager {
         tempList.addAll(adminList);
         tempList.addAll(producerList);
         App.getFileManager().writeToFile("users.txt", tempList);
+
+        App.getDatabaseManager().deleteProducer(user);
     }
 
     public String generateAdminId() {

@@ -1,9 +1,6 @@
 package presentation;
 
-import domain.Credit;
-import domain.Producer;
-import domain.Systemadministrator;
-import domain.User;
+import domain.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -42,9 +39,12 @@ public class UserController extends MainController implements Initializable {
     public TableColumn<Producer, String> tcProducerPassword;
     public TableColumn<Producer, String> tcProducerFirstName;
     public TableColumn<Producer, String> tcProducerLastName;
+    public TableColumn<Producer, String> tcProducerEmployedBy;
     public TableView<User> tvAdmin;
-    public TableView<User> tvProducer;
+    public TableView<Producer> tvProducer;
     public Label lbCurrentUser;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,6 +61,7 @@ public class UserController extends MainController implements Initializable {
         tcProducerPassword.setCellValueFactory(new PropertyValueFactory<>("Password"));
         tcProducerFirstName.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
         tcProducerLastName.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+        tcProducerEmployedBy.setCellValueFactory(new PropertyValueFactory<>("EmployedBy"));
 
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
         tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
@@ -70,7 +71,7 @@ public class UserController extends MainController implements Initializable {
 
     public void createUser(ActionEvent actionEvent) {
         if(Integer.parseInt(tfAccessLevel.getText()) == 2) {
-            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
+            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
         }
         else {
             App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
@@ -83,20 +84,20 @@ public class UserController extends MainController implements Initializable {
         if (Integer.parseInt(tfAccessLevel.getText()) == 2) {
             App.getUserManager().updateUser(tvAdmin.getSelectionModel().getSelectedItem(),
                     tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
-                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
+                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
             tvAdmin.refresh();
         } else {
-            App.getUserManager().updateUser(tvProducer.getSelectionModel().getSelectedItem(),
+            App.getUserManager().updateProducer(tvProducer.getSelectionModel().getSelectedItem(),
                     tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
-                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
+                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
             tvProducer.refresh();
         }
     }
 
     // Search functionality handler
     public void searchFunctionality(ActionEvent actionEvent) {
-        ArrayList<User> searchResultAdmin = new ArrayList<>();
-        ArrayList<User> searchResultProducer = new ArrayList<>();
+        ArrayList<Systemadministrator> searchResultAdmin = new ArrayList<>();
+        ArrayList<Producer> searchResultProducer = new ArrayList<>();
         String searchText = tfSearch.getText().toLowerCase();
         for (int i = 0; i < App.getUserManager().getAdminList().size(); i++){
             if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)){
@@ -129,6 +130,7 @@ public class UserController extends MainController implements Initializable {
         tfFirstName.setText(tvProducer.getSelectionModel().getSelectedItem().getFirstName());
         tfLastName.setText(tvProducer.getSelectionModel().getSelectedItem().getLastName());
         tfAccessLevel.setText(String.valueOf(tvProducer.getSelectionModel().getSelectedItem().getAccessLevel()));
+//        tfEmployedBy.setText(tvProducer.getSelectionModel().getSelectedItems().getEmployedBy());
     }
 
     public void selectAdmin(MouseEvent mouseEvent) {
