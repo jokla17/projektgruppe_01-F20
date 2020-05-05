@@ -52,6 +52,13 @@ public class ProductionController extends MainController implements Initializabl
     }
 
     public void createProduction(ActionEvent actionEvent) {
+        if (tfTitle.getText().isEmpty() | tfGenre.getText().isEmpty() | tfEpisodeNumber.getText().isEmpty()
+                | tfProductionCountry.getText().isEmpty() | tfProductionYear.getText().isEmpty()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
+                    Production.class.getSimpleName(), 0, btnCreate, btnDelete, btnUpdate);
+            return;
+        }
+
         App.getProductionManager().createProduction(new String[]{tfTitle.getText(), tfGenre.getText(),
                 tfEpisodeNumber.getText(), tfProductionYear.getText(), tfProductionCountry.getText(), tfProducedBy.getText()});
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));

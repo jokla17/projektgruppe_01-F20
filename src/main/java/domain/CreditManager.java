@@ -66,27 +66,6 @@ public class CreditManager {
         creditList.clear();
         App.getDatabaseManager().creditResultSet(creditList, productionId);
     }
-
-    public void saveCredits(String productionId){
-        Scanner reader = null;
-        try{
-            reader = new Scanner(new File("credits.txt"));
-            while (reader.hasNext()) {
-                String[] split = reader.nextLine().split("\\[");
-                String prodId = split[0].replace(";","");
-                String credits = split[1];
-                if (prodId.contains(productionId)) {
-                    App.getFileManager().replaceLineInFile(prodId + ";\\[" + credits, productionId + ";" + creditList);
-                    return;
-                }
-            }
-            App.getFileManager().appendToFile("credits.txt", productionId + ";" + creditList);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } finally {
-            reader.close();
-        }
-    }
 }
 
 

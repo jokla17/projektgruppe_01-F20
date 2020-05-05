@@ -245,7 +245,6 @@ public class DatabaseManager {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     public void deleteProducer(User user) {
@@ -284,7 +283,17 @@ public class DatabaseManager {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
 
+    public void deleteCredit(Credit credit, int productionId) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("CALL delete_credit(?,?)");
+            ps.setInt(1, credit.getId());
+            ps.setInt(2, productionId);
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void creditResultSet(List<Credit> creditList) {
@@ -325,16 +334,5 @@ public class DatabaseManager {
             ex.printStackTrace();
         }
         creditList.addAll(tempCreditList);
-    }
-
-    public void deleteCredit(Credit credit, int productionId) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("CALL delete_credit(?,?)");
-            ps.setInt(1, credit.getId());
-            ps.setInt(2, productionId);
-            ps.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
     }
 }

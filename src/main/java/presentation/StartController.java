@@ -48,6 +48,7 @@ public class StartController implements Initializable {
         } else if (rbCredits.isSelected()) {
             lvProductionsResults.setVisible(false);
             lvCreditResults.setVisible(true);
+            App.getCreditManager().getCreditList().clear();
             App.getCreditManager().setCreditList();
             lvCreditResults.setItems(FXCollections.observableArrayList(
                     App.getCreditManager().readCredit(tfStartSearchfield.getText())));

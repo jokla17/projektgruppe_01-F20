@@ -1,6 +1,7 @@
 package presentation;
 
 import domain.Credit;
+import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -29,6 +30,9 @@ public class CreditController extends MainController implements Initializable {
     public Label lbCurrentUser;
     public StackPane spNotificationBox;
     public Text spNotificationText;
+    public Button btnCreate;
+    public Button btnUpdate;
+    public Button btnDelete;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,22 +52,36 @@ public class CreditController extends MainController implements Initializable {
     }
 
     public void createSingleCredit(ActionEvent actionEvent) {
+        if (tfCreditRole.getText().isEmpty() | tfFirstName.getText().isEmpty() | tfFirstName.getText().isEmpty()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
+                    Credit.class.getSimpleName(), 0, btnCreate, btnDelete, btnUpdate);
+            return;
+        }
+
         App.getCreditManager().createCredit(Integer.parseInt(tfProductionID.getText()), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
         tfCreditRole.clear();
         tfFirstName.clear();
         tfLastName.clear();
-        tfCreditRole.setFocusTraversable(true);
+
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-created",
+                Credit.class.getSimpleName(), 1, btnCreate, btnDelete, btnUpdate);
     }
 
     public void updateCredit(ActionEvent actionEvent) {
         App.getCreditManager().updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
         tvCreditTable.refresh();
+
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-updated",
+                Credit.class.getSimpleName(), 2, btnCreate, btnDelete, btnUpdate);
     }
 
     public void deleteCredit(ActionEvent actionEvent) {
         App.getCreditManager().deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem(), Integer.parseInt(tfProductionID.getText()));
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
+
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
+                Credit.class.getSimpleName(), 3, btnCreate, btnDelete, btnUpdate);
     }
 
     public void searchFunctionality(ActionEvent actionEvent) {
