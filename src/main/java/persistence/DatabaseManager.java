@@ -4,18 +4,19 @@ import domain.Systemadministrator;
 
 import java.sql.*;
 import java.util.ArrayList;
+import domain.Production;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseManager {
-    /**
-     * here should be a Connection-type attribute to connect with the database
-     */
-
     private static DatabaseManager instance;
     private String url = "localhost";
     private int port = 5432;
     private String databaseName = "Ajate_db";
     private String username = "postgres";
-    private String password = "Andreas12";
+    private String password = "student123";
     private Connection connection = null;
 
     public DatabaseManager() {
@@ -126,5 +127,70 @@ public class DatabaseManager {
             return null;
         }
         return admins;
+		
+    public void insertProduction(Production production) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO productions " +
+                    "(id, title, genre, episode_number, production_year, production_country, produced_by) VALUES (?,?,?,?,?,?,?)");
+            ps.setString(1, production.getProductionId());
+            ps.setString(2, production.getTitle());
+            ps.setString(3, production.getGenre());
+            ps.setInt(4, production.getEpisodeNumber());
+            ps.setInt(5, production.getProductionYear());
+            ps.setString(6, production.getProductionCountry());
+            ps.setString(7, production.getProducedBy());
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void deleteProduction(Production production){
+        try {
+            PreparedStatement ps = connection.prepareStatement("DELETE FROM productions WHERE id = ?");
+            ps.setString(1, production.getProductionId());
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void updateProduction(Production production){
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE productions SET title = ?, genre = ?, episode_number = ?, production_year = ?, production_country = ?, produced_by = ? WHERE id = ?");
+            ps.setString(1, production.getTitle());
+            ps.setString(2, production.getGenre());
+            ps.setInt(3, production.getEpisodeNumber());
+            ps.setInt(4, production.getProductionYear());
+            ps.setString(5, production.getProductionCountry());
+            ps.setString(6, production.getProducedBy());
+            ps.setString(7, production.getProductionId());
+            ps.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void productionResultSet(List<Production> productionList){
+        List<Production> tempProductionList = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM productions");
+            ResultSet sqlReturnValues = ps.executeQuery();
+            while (sqlReturnValues.next()) {
+                String productionId = sqlReturnValues.getString(1);
+                String title = sqlReturnValues.getString(2);
+                String genre = sqlReturnValues.getString(3);
+                int episodeNumber = sqlReturnValues.getInt(4);
+                int productionYear = sqlReturnValues.getInt(5);
+                String productionCountry = sqlReturnValues.getString(6);
+                String producedBy = sqlReturnValues.getString(7);
+                tempProductionList.add(new Production(
+                        productionId, title, genre, episodeNumber, productionYear, productionCountry, producedBy));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        productionList.addAll(tempProductionList);
+
     }
 }

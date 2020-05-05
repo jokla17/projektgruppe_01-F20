@@ -12,7 +12,8 @@ public class ProductionManager {
 
     public ProductionManager() {
         productionList = new ArrayList<>();
-        App.getFileManager().readProductions(productionList);
+        //App.getFileManager().readProductions(productionList);
+        App.getDatabaseManager().productionResultSet(productionList);
     }
 
     public List<Production> getProductionList() {
@@ -24,8 +25,9 @@ public class ProductionManager {
      * @param productionArgs - String[] array parameter, with production related arguments from presentation layer.
      */
     public void createProduction(String[] productionArgs){
+        String productionId = generateProductionId();
         Production production = new Production(
-                generateProductionId(),
+                productionId,
                 productionArgs[0],
                 productionArgs[1],
                 Integer.parseInt(productionArgs[2]),
@@ -34,7 +36,7 @@ public class ProductionManager {
                 productionArgs[5]);
         productionList.add(production);
         App.getFileManager().appendToFile("productions.txt", production);
-
+        App.getDatabaseManager().insertProduction(production);
     }
 
     /**
@@ -73,6 +75,7 @@ public class ProductionManager {
         production.setProducedBy(productionArgs[5]);
         List<Object> tempProductionList = new ArrayList<Object>(productionList);
         App.getFileManager().writeToFile("productions.txt", tempProductionList);
+        App.getDatabaseManager().updateProduction(production);
     }
 
     /**
@@ -83,6 +86,7 @@ public class ProductionManager {
         productionList.remove(production);
         List<Object> tempProductionList = new ArrayList<Object>(productionList);
         App.getFileManager().writeToFile("productions.txt", tempProductionList);
+        App.getDatabaseManager().deleteProduction(production);
     }
 
     /**
