@@ -15,40 +15,48 @@ public class UserManager {
     }
 
     public List<Producer> getProducerList() {
-        return App.getDatabaseManager().getProducerList();
+        return App.getDatabaseManager().producerResultSet();
     }
 
     public List<Systemadministrator> getAdminList() {
-        return App.getDatabaseManager().getAdminList();
+        return App.getDatabaseManager().adminResultSet();
     }
 
-    public void createUser(String username, String password, String email, String firstName,
-                           String lastName, int accessLevel, String employedBy) {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+    public void createUser(String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+        if (!App.getAuthentificationManager().checkPermission()) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
 
-        Systemadministrator admin = null;
-        Producer producer = null;
-        switch (accessLevel) {
-            case 1:
-                producer = new Producer(username, password, email, firstName, lastName,
-                        accessLevel, employedBy);
-                producerList.add(producer);
-                App.getDatabaseManager().insertProducer(username, password, email, firstName, lastName, accessLevel, employedBy);
-                break;
-            case 2:
-                admin = new Systemadministrator(username, password, email, firstName, lastName,
-                        accessLevel);
-                adminList.add(admin);
-                App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
-                break;
+        if (employedBy.isEmpty()) {
+            App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
+        } else {
+            App.getDatabaseManager().insertProducer(new Producer(username, password, email, firstName, lastName, accessLevel, employedBy));
         }
     }
 
+    public List<Systemadministrator> readAdmin(String searchText) {
+        List<Systemadministrator> searchResultProducer = new ArrayList<>();
+        for (int i = 0; i < App.getUserManager().getAdminList().size(); i++) {
+            if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)) {
+                searchResultProducer.add(App.getUserManager().getAdminList().get(i));
+            }
+        }
+        return searchResultProducer;
+    }
+
+    public List<Producer> readProducer(String searchText) {
+        List<Producer> searchResultProducer = new ArrayList<>();
+        for (int i = 0; i < App.getUserManager().getProducerList().size(); i++) {
+            if (App.getUserManager().getProducerList().get(i).toString().toLowerCase().contains(searchText)) {
+                searchResultProducer.add(App.getUserManager().getProducerList().get(i));
+            }
+        }
+        return searchResultProducer;
+    }
+
     public void updateAdmin(Systemadministrator systemadministrator, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+        if (!App.getAuthentificationManager().checkPermission()) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
@@ -60,18 +68,15 @@ public class UserManager {
         systemadministrator.setLastName(lastName);
         systemadministrator.setAccessLevel(accessLevel);
 
-        List<Object> tempList = new ArrayList<>();
-        tempList.addAll(adminList);
-        tempList.addAll(producerList);
         App.getDatabaseManager().updateAdmin(username, password, email, firstName, lastName, accessLevel, systemadministrator.getAdminId());
     }
 
-    public void updateProducer(Producer producer, String username, String password, String email,
-                               String firstName, String lastName, int accessLevel, String employedBy) {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+    public void updateProducer(Producer producer, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+        if (!App.getAuthentificationManager().checkPermission()) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
+
         producer.setUsername(username);
         producer.setPassword(password);
         producer.setEmail(email);
@@ -80,34 +85,24 @@ public class UserManager {
         producer.setAccessLevel(accessLevel);
         producer.setEmployedBy(employedBy);
 
-        List<Object> tempList = new ArrayList<>();
-        tempList.addAll(producerList);
         App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, producer.getProducerId(), employedBy);
     }
 
     public void deleteAdmin(Systemadministrator sysadmin) {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+        if (!App.getAuthentificationManager().checkPermission()) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
 
-        adminList.remove(sysadmin);
-        List<Object> tempList = new ArrayList<>();
-        tempList.addAll(adminList);
-        tempList.addAll(producerList);
         App.getDatabaseManager().deleteAdmin(sysadmin.getAdminId());
     }
 
     public void deleteProducer(User user) {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1) {
+        if (!App.getAuthentificationManager().checkPermission()) {
             System.out.println("Functionality not available for this user type.");
             return;
         }
 
-        producerList.remove(user);
-        List<Object> tempList = new ArrayList<>();
-        tempList.addAll(adminList);
-        tempList.addAll(producerList);
         App.getDatabaseManager().deleteProducer(user);
     }
 }

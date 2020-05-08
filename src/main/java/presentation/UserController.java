@@ -10,10 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UserController extends MainController implements Initializable {
@@ -93,27 +91,14 @@ public class UserController extends MainController implements Initializable {
         }
     }
 
-    // Search functionality handler
     public void searchFunctionality(ActionEvent actionEvent) {
-        ArrayList<Systemadministrator> searchResultAdmin = new ArrayList<>();
-        ArrayList<Producer> searchResultProducer = new ArrayList<>();
         String searchText = tfSearch.getText().toLowerCase();
-        for (int i = 0; i < App.getUserManager().getAdminList().size(); i++) {
-            if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)) {
-                searchResultAdmin.add(App.getUserManager().getAdminList().get(i));
-            }
-        }
-        tvAdmin.setItems((FXCollections.observableArrayList(searchResultAdmin)));
-        for (int i = 0; i < App.getUserManager().getProducerList().size(); i++) {
-            if (App.getUserManager().getProducerList().get(i).toString().toLowerCase().contains(searchText)) {
-                searchResultProducer.add(App.getUserManager().getProducerList().get(i));
-            }
-        }
-        tvProducer.setItems((FXCollections.observableArrayList(searchResultProducer)));
+        tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().readAdmin(searchText)));
+        tvProducer.setItems((FXCollections.observableArrayList(App.getUserManager().readProducer(searchText))));
     }
 
     public void deleteAdmin(ActionEvent actionEvent) {
-        App.getUserManager().deleteAdmin((Systemadministrator) tvAdmin.getSelectionModel().getSelectedItem());
+        App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
     }
 
@@ -129,7 +114,7 @@ public class UserController extends MainController implements Initializable {
         tfFirstName.setText(tvProducer.getSelectionModel().getSelectedItem().getFirstName());
         tfLastName.setText(tvProducer.getSelectionModel().getSelectedItem().getLastName());
         tfAccessLevel.setText(String.valueOf(tvProducer.getSelectionModel().getSelectedItem().getAccessLevel()));
-//        tfEmployedBy.setText(tvProducer.getSelectionModel().getSelectedItems().getEmployedBy());
+        tfEmployedBy.setText(tvProducer.getSelectionModel().getSelectedItem().getEmployedBy());
     }
 
     public void selectAdmin(MouseEvent mouseEvent) {

@@ -17,27 +17,26 @@ public class ProductionManager {
         return productionList;
     }
     public void setProductionList() {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1){
+        if (!App.getAuthentificationManager().checkPermission()){
             App.getDatabaseManager().productionResultSet(productionList, ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
             return;
-        } else {
-            App.getDatabaseManager().productionResultSet(productionList);
         }
+        App.getDatabaseManager().productionResultSet(productionList);
     }
 
-
-    public void createProduction(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy, int producerId) {
-        Production production = new Production(
-                title,
-                genre,
-                episodeNumber,
-                productionYear,
-                productionCountry,
-                producedBy,
-                producerId);
+    public void createProduction(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
+        Production production;
+        if (!App.getAuthentificationManager().checkPermission()) {
+            production = new Production(title, genre, episodeNumber, productionYear, productionCountry, producedBy,
+                    ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
+        } else {
+            production = new Production(title, genre,
+                    episodeNumber, productionYear, productionCountry, producedBy);
+        }
         App.getDatabaseManager().insertProduction(production);
         productionList.clear();
-        App.getDatabaseManager().productionResultSet(productionList);
+        App.getDatabaseManager().productionResultSet(productionList,
+                ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
     }
 
     public List<Production> readProduction(String searchText) {
@@ -52,7 +51,7 @@ public class ProductionManager {
         return tempProductionList;
     }
 
-    public void updateProduction(Production production, String[] productionArgs) {
+    public void updateProduction(Production production, String ... productionArgs) {
         production.setTitle(productionArgs[0]);
         production.setGenre(productionArgs[1]);
         production.setEpisodeNumber(Integer.parseInt(productionArgs[2]));

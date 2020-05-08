@@ -13,14 +13,6 @@ public class CreditManager {
         creditList = new ArrayList<>();
     }
 
-    public int getCreditProductionID() {
-        return creditProductionID;
-    }
-
-    public void setCreditProductionID(int creditProductionID) {
-        this.creditProductionID = creditProductionID;
-    }
-
     public List<Credit> getCreditList() {
         return creditList;
     }
@@ -31,6 +23,14 @@ public class CreditManager {
 
     public void setCreditList() {
         App.getDatabaseManager().creditResultSet(creditList);
+    }
+
+    public int getCreditProductionID() {
+        return creditProductionID;
+    }
+
+    public void setCreditProductionID(int creditProductionID) {
+        this.creditProductionID = creditProductionID;
     }
 
     public void createCredit(int productionId, String role, String firstName, String lastName) {

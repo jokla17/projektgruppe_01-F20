@@ -29,8 +29,7 @@ public class MainController {
     public HBox hbTopHeaderBar;
     public ImageView vbSideBarLogo;
 
-    public void searchFunctionality(ActionEvent actionEvent) {
-    }
+    public void searchFunctionality(ActionEvent actionEvent) {}
 
     public void navigateToHome(MouseEvent mouseEvent) throws IOException {
         App.setRoot("home");

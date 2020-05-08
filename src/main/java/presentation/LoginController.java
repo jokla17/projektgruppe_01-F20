@@ -1,6 +1,5 @@
 package presentation;
 
-import domain.Production;
 import domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -12,11 +11,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LoginController extends MainController implements Initializable {
@@ -37,27 +34,19 @@ public class LoginController extends MainController implements Initializable {
     public void Login(ActionEvent actionEvent) throws IOException {
         if (tfUsername.getText().isEmpty() | tfPassword.getText().isEmpty()) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                    Production.class.getSimpleName(), 0, btnLogin);
+                    User.class.getSimpleName(), 0, btnLogin);
             return;
         }
 
-        App.getAuthentificationManager().login(tfUsername.getText(), tfPassword.getText());
-
         if (App.getAuthentificationManager().login(tfUsername.getText(), tfPassword.getText())) {
-            ArrayList<User> userList = new ArrayList<>();
-            userList.addAll(App.getUserManager().getAdminList());
-            userList.addAll(App.getUserManager().getProducerList());
-
-            for (int i = 0; i < userList.size(); i++) {
-                if (userList.get(i).getUsername().equals(tfUsername.getText())) {
-                    App.getAuthentificationManager().setCurrentUser(userList.get(i));
-                }
-            }
-            App.setRoot("production");
+             App.setRoot("production");
+        } else {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
+                    User.class.getSimpleName(), 0, btnLogin);
         }
     }
 
     public void backToFrontPage(ActionEvent actionEvent) throws IOException {
-        App.setRoot("Start");
+        App.setRoot("start");
     }
 }

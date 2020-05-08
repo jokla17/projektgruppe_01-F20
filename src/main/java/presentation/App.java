@@ -15,7 +15,7 @@ public class App extends Application {
     private static Scene scene;
     private static DatabaseManager databaseManager = new DatabaseManager();
     private static UserManager userManager = new UserManager();
-    private static AuthentificationManager authentificationManager = new AuthentificationManager();
+    private static AuthenticationManager authentificationManager = new AuthenticationManager();
     private static ProductionManager productionManager = new ProductionManager();
     private static CreditManager creditManager = new CreditManager();
     private static NotificationManager notificationManager = new NotificationManager();
@@ -42,7 +42,7 @@ public class App extends Application {
         return userManager;
     }
 
-    public static AuthentificationManager getAuthentificationManager() {
+    public static AuthenticationManager getAuthentificationManager() {
         return authentificationManager;
     }
 
