@@ -1,11 +1,9 @@
 package presentation;
 
-import domain.UserManager;
 import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -31,7 +29,8 @@ public class MainController {
     public HBox hbTopHeaderBar;
     public ImageView vbSideBarLogo;
 
-    public void searchFunctionality(ActionEvent actionEvent) {}
+    public void searchFunctionality(ActionEvent actionEvent) {
+    }
 
     public void navigateToHome(MouseEvent mouseEvent) throws IOException {
         App.setRoot("home");
@@ -49,16 +48,16 @@ public class MainController {
         App.setRoot("user");
     }
 
-    public void Logout(ActionEvent actionEvent) throws IOException{
+    public void Logout(ActionEvent actionEvent) throws IOException {
         App.setRoot("Login");
     }
 
-    public void notificationAnimationSetter(StackPane stackPane, Text text, String id, String objectType, int type, Button ... buttons) {
-        text.setText(App.getNotificationManager().notificationSwitch(objectType,type));
+    public void notificationAnimationSetter(StackPane stackPane, Text text, String id, String objectType, int type, Button... buttons) {
+        text.setText(App.getNotificationManager().notificationSwitch(objectType, type));
         stackPane.setId(id);
         stackPane.setVisible(true);
 
-        for (Button b: buttons) {
+        for (Button b : buttons) {
             b.setDisable(true);
         }
 
@@ -81,7 +80,7 @@ public class MainController {
                 translateTransition.setToY(200);
                 translateTransition.play();
 
-                for (Button b: buttons) {
+                for (Button b : buttons) {
                     b.setDisable(false);
                 }
             }

@@ -1,11 +1,9 @@
 package presentation;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import domain.Producer;
 import domain.Production;
+import domain.Systemadministrator;
+import domain.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -15,6 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class ProductionController extends MainController implements Initializable {
     public TextField tfTitle;
@@ -44,37 +48,91 @@ public class ProductionController extends MainController implements Initializabl
         tcTitle.setCellValueFactory(new PropertyValueFactory<>("Title"));
         tcGenre.setCellValueFactory(new PropertyValueFactory<>("Genre"));
         tcEpisodeNumber.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
-        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
         lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
+
+        App.getProductionManager().getProductionList().clear();
+        App.getProductionManager().setProductionList();
+        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
 
         tfProducedBy.setText(App.getAuthentificationManager().getCurrentUser().getFirstName()
                 + " " + App.getAuthentificationManager().getCurrentUser().getLastName());
     }
 
     public void createProduction(ActionEvent actionEvent) {
-        if (tfTitle.getText().isEmpty() | tfGenre.getText().isEmpty() | tfEpisodeNumber.getText().isEmpty()
-                | tfProductionCountry.getText().isEmpty() | tfProductionYear.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                    Production.class.getSimpleName(), 0, btnCreate, btnDelete, btnUpdate);
+        User currentUser = App.getAuthentificationManager().getCurrentUser();
+        int currentUserId;
+
+        // Sets the user id by checking what type of user that's currently logged in via the access level
+        if (currentUser.getAccessLevel() == 2) {
+            currentUserId = ((Systemadministrator) currentUser).getAdminId();
+        } else {
+            currentUserId = ((Producer) currentUser).getProducerId();
+        }
+
+        // If the variables are empty, show error message on screen
+        if (tfTitle.getText().isEmpty()
+                | tfGenre.getText().isEmpty()
+                | tfEpisodeNumber.getText().isEmpty()
+                | tfProductionCountry.getText().isEmpty()
+                | tfProductionYear.getText().isEmpty()) {
+            notificationAnimationSetter(
+                    spNotificationBox,
+                    spNotificationText,
+                    "spNotificationBox-deleted",
+                    Production.class.getSimpleName(),
+                    0,
+                    btnCreate,
+                    btnDelete,
+                    btnUpdate);
             return;
         }
 
-        App.getProductionManager().createProduction(new String[]{tfTitle.getText(), tfGenre.getText(),
-                tfEpisodeNumber.getText(), tfProductionYear.getText(), tfProductionCountry.getText(), tfProducedBy.getText()});
+        // Creates the production as an object
+        App.getProductionManager().createProduction(
+                tfTitle.getText(),
+                tfGenre.getText(),
+                Integer.parseInt(tfEpisodeNumber.getText()),
+                Integer.parseInt(tfProductionYear.getText()),
+                tfProductionCountry.getText(),
+                tfProducedBy.getText(),
+                currentUserId
+        );
+
+        // Updates list in GUI
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-created",
-                Production.class.getSimpleName(), 1, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(
+                spNotificationBox,
+                spNotificationText,
+                "spNotificationBox-created",
+                Production.class.getSimpleName(),
+                1,
+                btnCreate,
+                btnDelete,
+                btnUpdate);
     }
 
     public void updateProduction(ActionEvent actionEvent) {
-        App.getProductionManager().updateProduction(tvProductions.getSelectionModel().getSelectedItem(),
-                new String[]{tfTitle.getText(), tfGenre.getText(),
-                        tfEpisodeNumber.getText(), tfProductionYear.getText(), tfProductionCountry.getText(), tfProducedBy.getText()});
+        App.getProductionManager().updateProduction(tvProductions.getSelectionModel().getSelectedItem(), new String[]{
+                tfTitle.getText(),
+                tfGenre.getText(),
+                tfEpisodeNumber.getText(),
+                tfProductionYear.getText(),
+                tfProductionCountry.getText(),
+                tfProducedBy.getText()});
         tvProductions.refresh();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-updated",
-                Production.class.getSimpleName(), 2, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(
+                spNotificationBox,
+                spNotificationText,
+                "spNotificationBox-updated",
+                Production.class.getSimpleName(),
+                2,
+                btnCreate,
+                btnDelete,
+                btnUpdate);
+
+
     }
 
     public void deleteProduction(ActionEvent actionEvent) {
@@ -88,8 +146,8 @@ public class ProductionController extends MainController implements Initializabl
     public void searchFunctionality(ActionEvent actionEvent) {
         ArrayList<Production> searchResult = new ArrayList<>();
         String searchText = tfSearch.getText().toLowerCase();
-        for (int i = 0; i < App.getProductionManager().getProductionList().size(); i++){
-            if (App.getProductionManager().getProductionList().get(i).toString().toLowerCase().contains(searchText)){
+        for (int i = 0; i < App.getProductionManager().getProductionList().size(); i++) {
+            if (App.getProductionManager().getProductionList().get(i).toString().toLowerCase().contains(searchText)) {
                 searchResult.add(App.getProductionManager().getProductionList().get(i));
             }
         }
@@ -97,12 +155,30 @@ public class ProductionController extends MainController implements Initializabl
     }
 
     public void selectProduction(MouseEvent mouseEvent) throws IOException {
-        tfTitle.setText(tvProductions.getSelectionModel().getSelectedItem().getTitle());
-        tfGenre.setText(tvProductions.getSelectionModel().getSelectedItem().getGenre());
-        tfEpisodeNumber.setText(String.valueOf(tvProductions.getSelectionModel().getSelectedItem().getEpisodeNumber()));
-        tfProductionYear.setText(String.valueOf(tvProductions.getSelectionModel().getSelectedItem().getProductionYear()));
-        tfProductionCountry.setText(tvProductions.getSelectionModel().getSelectedItem().getProductionCountry());
-        tfProducedBy.setText(tvProductions.getSelectionModel().getSelectedItem().getProducedBy());
+        tfTitle.setText(tvProductions
+                .getSelectionModel()
+                .getSelectedItem()
+                .getTitle());
+        tfGenre.setText(tvProductions
+                .getSelectionModel()
+                .getSelectedItem()
+                .getGenre());
+        tfEpisodeNumber.setText(String.valueOf(tvProductions
+                .getSelectionModel()
+                .getSelectedItem()
+                .getEpisodeNumber()));
+        tfProductionYear.setText(String.valueOf(tvProductions
+                .getSelectionModel()
+                .getSelectedItem()
+                .getProductionYear()));
+        tfProductionCountry.setText(tvProductions
+                .getSelectionModel()
+                .getSelectedItem()
+                .getProductionCountry());
+        tfProducedBy.setText(tvProductions
+                .getSelectionModel()
+                .getSelectedItem()
+                .getProducedBy());
 
         if (mouseEvent.getClickCount() == 2) {
             App.getCreditManager().getCreditList().clear();

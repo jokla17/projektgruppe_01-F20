@@ -1,6 +1,5 @@
 package domain;
 
-import persistence.DatabaseManager;
 import presentation.App;
 
 import java.util.ArrayList;
@@ -34,11 +33,10 @@ public class UserManager {
         Producer producer = null;
         switch (accessLevel) {
             case 1:
-                String producerID = generateProducerId();
                 producer = new Producer(username, password, email, firstName, lastName,
-                        accessLevel, producerID, employedBy);
+                        accessLevel, employedBy);
                 producerList.add(producer);
-                App.getDatabaseManager().insertProducer(username, password, email, firstName, lastName, accessLevel, producerID, employedBy);
+                App.getDatabaseManager().insertProducer(username, password, email, firstName, lastName, accessLevel, employedBy);
                 break;
             case 2:
                 admin = new Systemadministrator(username, password, email, firstName, lastName,
@@ -111,15 +109,6 @@ public class UserManager {
         tempList.addAll(adminList);
         tempList.addAll(producerList);
         App.getDatabaseManager().deleteProducer(user);
-    }
-
-    public String generateProducerId() {
-
-        int index = 1;
-        for (int i = 0; i < producerList.size(); i++) {
-            index++;
-        }
-        return "P" + index;
     }
 }
 
