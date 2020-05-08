@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import persistence.DatabaseManager;
-import persistence.FileManager;
 
 import java.io.IOException;
 
@@ -15,7 +14,6 @@ public class App extends Application {
 
     private static Scene scene;
     private static DatabaseManager databaseManager = new DatabaseManager();
-    private static FileManager fileManager = new FileManager();
     private static UserManager userManager = new UserManager();
     private static AuthentificationManager authentificationManager = new AuthentificationManager();
     private static ProductionManager productionManager = new ProductionManager();
@@ -40,10 +38,6 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static FileManager getFileManager() {
-        return fileManager;
-    }
-
     public static UserManager getUserManager() {
         return userManager;
     }
@@ -64,7 +58,9 @@ public class App extends Application {
         return databaseManager;
     }
 
-    public static NotificationManager getNotificationManager() { return notificationManager; }
+    public static NotificationManager getNotificationManager() {
+        return notificationManager;
+    }
 
     public static void main(String[] args) {
         launch();

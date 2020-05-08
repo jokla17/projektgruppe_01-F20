@@ -1,7 +1,8 @@
 package domain;
 
 public class NotificationManager {
-    public NotificationManager() {}
+    public NotificationManager() {
+    }
 
     public String notificationSwitch(String objectName, int type) {
         String notificationMessage = "has been ";

@@ -2,10 +2,6 @@ package domain;
 
 import presentation.App;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 public class AuthentificationManager {
     private User currentUser;
 

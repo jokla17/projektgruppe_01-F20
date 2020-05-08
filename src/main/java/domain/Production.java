@@ -8,6 +8,7 @@ public class Production {
     private int productionYear;
     private String productionCountry;
     private String producedBy;
+    private int producerId;
 
     public Production(int productionId, String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
         this.productionId = productionId;
@@ -26,6 +27,16 @@ public class Production {
         this.productionYear = productionYear;
         this.productionCountry = productionCountry;
         this.producedBy = producedBy;
+    }
+
+    public Production(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy, int producerId) {
+        this.title = title;
+        this.genre = genre;
+        this.episodeNumber = episodeNumber;
+        this.productionYear = productionYear;
+        this.productionCountry = productionCountry;
+        this.producedBy = producedBy;
+        this.producerId = producerId;
     }
 
     public int getProductionId() {
@@ -78,6 +89,14 @@ public class Production {
 
     public void setProducedBy(String producedBy) {
         this.producedBy = producedBy;
+    }
+
+    public int getProducerId() {
+        return producerId;
+    }
+
+    public void setProducerId(int producerId) {
+        this.producerId = producerId;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package presentation;
 
-import domain.*;
+import domain.Producer;
+import domain.Systemadministrator;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -9,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,12 +33,12 @@ public class UserController extends MainController implements Initializable {
     public AnchorPane apMainScreen;
     public TableColumn<Systemadministrator, String> tcAdminID;
     public TableColumn<Systemadministrator, String> tcAdminUsername;
-    public TableColumn<Systemadministrator, String> tcAdminPassword;
+    public TableColumn<Systemadministrator, String> tcAdminEmail;
     public TableColumn<Systemadministrator, String> tcAdminFirstName;
     public TableColumn<Systemadministrator, String> tcAdminLastName;
     public TableColumn<Producer, String> tcProducerID;
     public TableColumn<Producer, String> tcProducerUsername;
-    public TableColumn<Producer, String> tcProducerPassword;
+    public TableColumn<Producer, String> tcProducerEmail;
     public TableColumn<Producer, String> tcProducerFirstName;
     public TableColumn<Producer, String> tcProducerLastName;
     public TableColumn<Producer, String> tcProducerEmployedBy;
@@ -50,13 +52,13 @@ public class UserController extends MainController implements Initializable {
 
         tcAdminID.setCellValueFactory(new PropertyValueFactory<>("AdminId"));
         tcAdminUsername.setCellValueFactory(new PropertyValueFactory<>("Username"));
-        tcAdminPassword.setCellValueFactory(new PropertyValueFactory<>("Password"));
+        tcAdminEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
         tcAdminFirstName.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
         tcAdminLastName.setCellValueFactory(new PropertyValueFactory<>("LastName"));
 
         tcProducerID.setCellValueFactory(new PropertyValueFactory<>("ProducerId"));
         tcProducerUsername.setCellValueFactory(new PropertyValueFactory<>("Username"));
-        tcProducerPassword.setCellValueFactory(new PropertyValueFactory<>("Password"));
+        tcProducerEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
         tcProducerFirstName.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
         tcProducerLastName.setCellValueFactory(new PropertyValueFactory<>("LastName"));
         tcProducerEmployedBy.setCellValueFactory(new PropertyValueFactory<>("EmployedBy"));
@@ -68,10 +70,9 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void createUser(ActionEvent actionEvent) {
-        if(Integer.parseInt(tfAccessLevel.getText()) == 2) {
+        if (Integer.parseInt(tfAccessLevel.getText()) == 2) {
             App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
-        }
-        else {
+        } else {
             App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
         }
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
@@ -97,14 +98,14 @@ public class UserController extends MainController implements Initializable {
         ArrayList<Systemadministrator> searchResultAdmin = new ArrayList<>();
         ArrayList<Producer> searchResultProducer = new ArrayList<>();
         String searchText = tfSearch.getText().toLowerCase();
-        for (int i = 0; i < App.getUserManager().getAdminList().size(); i++){
-            if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)){
+        for (int i = 0; i < App.getUserManager().getAdminList().size(); i++) {
+            if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)) {
                 searchResultAdmin.add(App.getUserManager().getAdminList().get(i));
             }
         }
         tvAdmin.setItems((FXCollections.observableArrayList(searchResultAdmin)));
-        for (int i = 0; i < App.getUserManager().getProducerList().size(); i++){
-            if (App.getUserManager().getProducerList().get(i).toString().toLowerCase().contains(searchText)){
+        for (int i = 0; i < App.getUserManager().getProducerList().size(); i++) {
+            if (App.getUserManager().getProducerList().get(i).toString().toLowerCase().contains(searchText)) {
                 searchResultProducer.add(App.getUserManager().getProducerList().get(i));
             }
         }
@@ -112,7 +113,7 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void deleteAdmin(ActionEvent actionEvent) {
-        App.getUserManager().deleteAdmin((Systemadministrator)tvAdmin.getSelectionModel().getSelectedItem());
+        App.getUserManager().deleteAdmin((Systemadministrator) tvAdmin.getSelectionModel().getSelectedItem());
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
     }
 

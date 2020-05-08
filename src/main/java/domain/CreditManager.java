@@ -1,10 +1,9 @@
 package domain;
 
 import presentation.App;
-import java.io.*;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CreditManager {
     private List<Credit> creditList;
@@ -34,7 +33,7 @@ public class CreditManager {
         App.getDatabaseManager().creditResultSet(creditList);
     }
 
-    public void createCredit(int productionId, String role, String firstName, String lastName){
+    public void createCredit(int productionId, String role, String firstName, String lastName) {
         Credit credit = new Credit(role, firstName, lastName);
         App.getDatabaseManager().insertCredit(credit, productionId);
         creditList.clear();
@@ -43,9 +42,9 @@ public class CreditManager {
 
     public List<Credit> readCredit(String searchText) {
         List<Credit> tempCreditList = new ArrayList<>();
-        for(int i = 0; i < creditList.size(); i++){
-            if(creditList.get(i).toString().toLowerCase().contains(
-                    searchText.toLowerCase())){
+        for (int i = 0; i < creditList.size(); i++) {
+            if (creditList.get(i).toString().toLowerCase().contains(
+                    searchText.toLowerCase())) {
                 tempCreditList.add(creditList.get(i));
             }
         }

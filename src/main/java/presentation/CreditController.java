@@ -1,7 +1,6 @@
 package presentation;
 
 import domain.Credit;
-import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -87,8 +86,8 @@ public class CreditController extends MainController implements Initializable {
     public void searchFunctionality(ActionEvent actionEvent) {
         ArrayList<Credit> searchResult = new ArrayList<>();
         String searchText = tfSearch.getText().toLowerCase();
-        for (int i = 0; i < App.getCreditManager().getCreditList().size(); i++){
-            if (App.getCreditManager().getCreditList().get(i).toString().toLowerCase().contains(searchText)){
+        for (int i = 0; i < App.getCreditManager().getCreditList().size(); i++) {
+            if (App.getCreditManager().getCreditList().get(i).toString().toLowerCase().contains(searchText)) {
                 searchResult.add(App.getCreditManager().getCreditList().get(i));
             }
         }

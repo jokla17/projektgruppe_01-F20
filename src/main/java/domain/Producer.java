@@ -1,22 +1,28 @@
 package domain;
 
 public class Producer extends User {
-    private String producerId;
-
+    private int producerId;
     private String employedBy;
 
     public Producer(String username, String password, String email, String firstName, String lastName,
-                    int accessLevel, String producerId, String employedBy) {
+                    int accessLevel, String employedBy) {
+        super(username, password, email, firstName, lastName, accessLevel);
+        this.employedBy = employedBy;
+    }
+
+    public Producer(String username, String password, String email, String firstName, String lastName, int accessLevel, int producerId, String employedBy) {
         super(username, password, email, firstName, lastName, accessLevel);
         this.producerId = producerId;
         this.employedBy = employedBy;
     }
 
-    public String getProducerId() {
+    public int getProducerId() {
         return producerId;
     }
 
-    public String getEmployedBy() {return employedBy;}
+    public String getEmployedBy() {
+        return employedBy;
+    }
 
     public void setEmployedBy(String employedBy) {
         this.employedBy = employedBy;
