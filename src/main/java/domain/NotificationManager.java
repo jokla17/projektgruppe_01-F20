@@ -8,13 +8,16 @@ public class NotificationManager {
         String notificationMessage;
         switch (type) {
             case 1:
-                notificationMessage = "has been " + objectName + " created successfully!";
+                notificationMessage = objectName + " has been created successfully!";
                 break;
             case 2:
-                notificationMessage = "has been " + objectName + " updated successfully!";
+                notificationMessage = objectName + " has been updated successfully!";
                 break;
             case 3:
-                notificationMessage = "has been" + objectName + " deleted successfully!";
+                notificationMessage = objectName + " has been deleted successfully!";
+                break;
+            case 4:
+                notificationMessage = "Functionality not available for this user type.";
                 break;
             default:
                 return "One or more fields are empty or incorrect, please try again.";

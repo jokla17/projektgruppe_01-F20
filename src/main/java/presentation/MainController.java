@@ -51,9 +51,14 @@ public class MainController {
         App.setRoot("Login");
     }
 
-    public void notificationAnimationSetter(StackPane stackPane, Text text, String id, String objectType, int type, Button... buttons) {
+    public void notificationAnimationSetter(StackPane stackPane, Text text, String objectType, int type, Button... buttons) {
+        switch (type) {
+            case 1: stackPane.setId("spNotificationBox-created"); break;
+            case 2: stackPane.setId("spNotificationBox-updated"); break;
+            case 3: case 4: case 0: stackPane.setId("spNotificationBox-deleted"); break;
+        }
+
         text.setText(App.getNotificationManager().notificationSwitch(objectType, type));
-        stackPane.setId(id);
         stackPane.setVisible(true);
 
         for (Button b : buttons) {
@@ -82,6 +87,13 @@ public class MainController {
                 for (Button b : buttons) {
                     b.setDisable(false);
                 }
+
+                translateTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        stackPane.setVisible(false);
+                    }
+                });
             }
         });
     }

@@ -2,6 +2,7 @@ package presentation;
 
 import domain.Producer;
 import domain.Systemadministrator;
+import domain.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -10,6 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,6 +47,8 @@ public class UserController extends MainController implements Initializable {
     public TableView<Systemadministrator> tvAdmin;
     public TableView<Producer> tvProducer;
     public Label lbCurrentUser;
+    public StackPane spNotificationBox;
+    public Text spNotificationText;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -68,17 +74,23 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void createUser(ActionEvent actionEvent) {
-        if (Integer.parseInt(tfAccessLevel.getText()) == 2) {
-            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
-        } else {
-            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+        if (!App.getAuthentificationManager().checkPermission()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
+            return;
         }
+
+        App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
         tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
     }
 
     public void updateUser(ActionEvent actionEvent) {
-        if (Integer.parseInt(tfAccessLevel.getText()) == 2) {
+        if (!App.getAuthentificationManager().checkPermission()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
+            return;
+        }
+
+        if (Integer.parseInt(tfAccessLevel.getText()) == 1) {
             App.getUserManager().updateAdmin(tvAdmin.getSelectionModel().getSelectedItem(),
                     tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
                     tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
@@ -98,16 +110,28 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void deleteAdmin(ActionEvent actionEvent) {
+        if (!App.getAuthentificationManager().checkPermission()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
+            return;
+        }
+
         App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
         tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
     }
 
     public void deleteProducer(ActionEvent actionEvent) {
+        if (!App.getAuthentificationManager().checkPermission()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
+            return;
+        }
+
         App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
         tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
     }
 
     public void selectProducer(MouseEvent mouseEvent) {
+        tfEmployedBy.clear();
+
         tfUsername.setText(tvProducer.getSelectionModel().getSelectedItem().getUsername());
         tfPassword.setText(tvProducer.getSelectionModel().getSelectedItem().getPassword());
         tfEmail.setText(tvProducer.getSelectionModel().getSelectedItem().getEmail());
@@ -118,6 +142,8 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void selectAdmin(MouseEvent mouseEvent) {
+        tfEmployedBy.clear();
+
         tfUsername.setText(tvAdmin.getSelectionModel().getSelectedItem().getUsername());
         tfPassword.setText(tvAdmin.getSelectionModel().getSelectedItem().getPassword());
         tfEmail.setText(tvAdmin.getSelectionModel().getSelectedItem().getEmail());

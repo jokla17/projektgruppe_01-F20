@@ -33,16 +33,14 @@ public class LoginController extends MainController implements Initializable {
 
     public void Login(ActionEvent actionEvent) throws IOException {
         if (tfUsername.getText().isEmpty() | tfPassword.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                    User.class.getSimpleName(), 0, btnLogin);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 0, btnLogin);
             return;
         }
 
         if (App.getAuthentificationManager().login(tfUsername.getText(), tfPassword.getText())) {
              App.setRoot("production");
         } else {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                    User.class.getSimpleName(), 0, btnLogin);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 0, btnLogin);
         }
     }
 

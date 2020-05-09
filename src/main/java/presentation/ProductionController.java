@@ -13,7 +13,6 @@ import javafx.scene.text.Text;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,7 +56,7 @@ public class ProductionController extends MainController implements Initializabl
 
     public void createProduction(ActionEvent actionEvent) {
         if (tfTitle.getText().isEmpty() | tfGenre.getText().isEmpty() | tfEpisodeNumber.getText().isEmpty() | tfProductionCountry.getText().isEmpty() | tfProductionYear.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted", Production.class.getSimpleName(), 0, btnCreate, btnDelete, btnUpdate);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 0);
             return;
         }
 
@@ -70,8 +69,7 @@ public class ProductionController extends MainController implements Initializabl
 
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-created",
-                Production.class.getSimpleName(), 1, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 1);
     }
 
     public void updateProduction(ActionEvent actionEvent) {
@@ -80,16 +78,14 @@ public class ProductionController extends MainController implements Initializabl
                 tfProductionCountry.getText(), tfProducedBy.getText());
         tvProductions.refresh();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-updated",
-                Production.class.getSimpleName(), 2, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 2);
     }
 
     public void deleteProduction(ActionEvent actionEvent) {
         App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem());
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                Production.class.getSimpleName(), 3, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 3);
     }
 
     public void searchFunctionality(ActionEvent actionEvent) {

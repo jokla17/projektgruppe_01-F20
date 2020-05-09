@@ -1,7 +1,6 @@
 package domain;
 
 import presentation.App;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +22,6 @@ public class UserManager {
     }
 
     public void createUser(String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
-        if (!App.getAuthentificationManager().checkPermission()) {
-            System.out.println("Functionality not available for this user type.");
-            return;
-        }
-
         if (employedBy.isEmpty()) {
             App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
         } else {
@@ -37,9 +31,9 @@ public class UserManager {
 
     public List<Systemadministrator> readAdmin(String searchText) {
         List<Systemadministrator> searchResultProducer = new ArrayList<>();
-        for (int i = 0; i < App.getUserManager().getAdminList().size(); i++) {
-            if (App.getUserManager().getAdminList().get(i).toString().toLowerCase().contains(searchText)) {
-                searchResultProducer.add(App.getUserManager().getAdminList().get(i));
+        for (int i = 0; i < adminList.size(); i++) {
+            if (adminList.get(i).toString().toLowerCase().contains(searchText)) {
+                searchResultProducer.add(adminList.get(i));
             }
         }
         return searchResultProducer;
@@ -47,20 +41,15 @@ public class UserManager {
 
     public List<Producer> readProducer(String searchText) {
         List<Producer> searchResultProducer = new ArrayList<>();
-        for (int i = 0; i < App.getUserManager().getProducerList().size(); i++) {
-            if (App.getUserManager().getProducerList().get(i).toString().toLowerCase().contains(searchText)) {
-                searchResultProducer.add(App.getUserManager().getProducerList().get(i));
+        for (int i = 0; i < producerList.size(); i++) {
+            if (producerList.get(i).toString().toLowerCase().contains(searchText)) {
+                searchResultProducer.add(producerList.get(i));
             }
         }
         return searchResultProducer;
     }
 
     public void updateAdmin(Systemadministrator systemadministrator, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
-        if (!App.getAuthentificationManager().checkPermission()) {
-            System.out.println("Functionality not available for this user type.");
-            return;
-        }
-
         systemadministrator.setUsername(username);
         systemadministrator.setPassword(password);
         systemadministrator.setEmail(email);
@@ -72,11 +61,6 @@ public class UserManager {
     }
 
     public void updateProducer(Producer producer, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
-        if (!App.getAuthentificationManager().checkPermission()) {
-            System.out.println("Functionality not available for this user type.");
-            return;
-        }
-
         producer.setUsername(username);
         producer.setPassword(password);
         producer.setEmail(email);
@@ -88,22 +72,12 @@ public class UserManager {
         App.getDatabaseManager().updateProducer(username, password, email, firstName, lastName, accessLevel, producer.getProducerId(), employedBy);
     }
 
-    public void deleteAdmin(Systemadministrator sysadmin) {
-        if (!App.getAuthentificationManager().checkPermission()) {
-            System.out.println("Functionality not available for this user type.");
-            return;
-        }
-
-        App.getDatabaseManager().deleteAdmin(sysadmin.getAdminId());
+    public void deleteAdmin(Systemadministrator systemadministrator) {
+        App.getDatabaseManager().deleteAdmin(systemadministrator.getAdminId());
     }
 
-    public void deleteProducer(User user) {
-        if (!App.getAuthentificationManager().checkPermission()) {
-            System.out.println("Functionality not available for this user type.");
-            return;
-        }
-
-        App.getDatabaseManager().deleteProducer(user);
+    public void deleteProducer(Producer producer) {
+        App.getDatabaseManager().deleteProducer(producer.getProducerId());
     }
 }
 

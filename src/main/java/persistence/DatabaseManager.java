@@ -162,10 +162,10 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteProducer(User user) {
+    public void deleteProducer(int producerId) {
         try {
             PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM producers WHERE id = ? ");
-            deleteStatement.setString(1, user.getUsername());
+            deleteStatement.setInt(1, producerId);
             deleteStatement.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

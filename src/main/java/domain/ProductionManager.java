@@ -16,9 +16,11 @@ public class ProductionManager {
     public List<Production> getProductionList() {
         return productionList;
     }
+
     public void setProductionList() {
         if (!App.getAuthentificationManager().checkPermission()){
-            App.getDatabaseManager().productionResultSet(productionList, ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
+            App.getDatabaseManager().productionResultSet(productionList,
+                    ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
             return;
         }
         App.getDatabaseManager().productionResultSet(productionList);
@@ -35,17 +37,14 @@ public class ProductionManager {
         }
         App.getDatabaseManager().insertProduction(production);
         productionList.clear();
-        App.getDatabaseManager().productionResultSet(productionList,
-                ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
+        setProductionList();
     }
 
     public List<Production> readProduction(String searchText) {
         List<Production> tempProductionList = new ArrayList<>();
-
-        for (int i = 0; i < App.getProductionManager().getProductionList().size(); i++) {
-            if (App.getProductionManager().getProductionList().get(i).toString().toLowerCase().contains(
-                    searchText.toLowerCase())) {
-                tempProductionList.add(App.getProductionManager().getProductionList().get(i));
+        for (int i = 0; i < productionList.size(); i++) {
+            if (productionList.get(i).toString().toLowerCase().contains(searchText.toLowerCase())) {
+                tempProductionList.add(productionList.get(i));
             }
         }
         return tempProductionList;
@@ -62,9 +61,8 @@ public class ProductionManager {
     }
 
     public void deleteProduction(Production production) {
-        productionList.remove(production);
         App.getDatabaseManager().deleteProduction(production);
         productionList.clear();
-        App.getDatabaseManager().productionResultSet(productionList);
+        setProductionList();
     }
 }

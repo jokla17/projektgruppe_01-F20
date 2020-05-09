@@ -12,7 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -46,10 +45,9 @@ public class CreditController extends MainController implements Initializable {
         lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 
-    public void createSingleCredit(ActionEvent actionEvent) {
+    public void createCredit(ActionEvent actionEvent) {
         if (tfCreditRole.getText().isEmpty() | tfFirstName.getText().isEmpty() | tfFirstName.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                    Credit.class.getSimpleName(), 0, btnCreate, btnDelete, btnUpdate);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 0);
             return;
         }
 
@@ -59,24 +57,21 @@ public class CreditController extends MainController implements Initializable {
         tfFirstName.clear();
         tfLastName.clear();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-created",
-                Credit.class.getSimpleName(), 1, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 1);
     }
 
     public void updateCredit(ActionEvent actionEvent) {
         App.getCreditManager().updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
         tvCreditTable.refresh();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-updated",
-                Credit.class.getSimpleName(), 2, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 2);
     }
 
     public void deleteCredit(ActionEvent actionEvent) {
         App.getCreditManager().deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem(), Integer.parseInt(tfProductionID.getText()));
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                Credit.class.getSimpleName(), 3, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 3);
     }
 
     @Override

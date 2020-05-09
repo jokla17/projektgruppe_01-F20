@@ -78,7 +78,16 @@
                   <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#updateUser" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
                </children>
             </HBox>
-         </children></AnchorPane>
+             <StackPane fx:id="spNotificationBox" layoutX="517.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="216.0" visible="false">
+                 <children>
+                     <Text fx:id="spNotificationText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Production has been deleted successfully!" textAlignment="CENTER" wrappingWidth="196.25665283203125">
+                         <font>
+                             <Font name="System Bold" size="12.0" />
+                         </font></Text>
+                 </children>
+             </StackPane>
+         </children>
+        </AnchorPane>
         <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
             <children>
                 <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" prefHeight="78.0" prefWidth="390.0">
