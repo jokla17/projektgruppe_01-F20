@@ -9,8 +9,8 @@ public class UserManager {
     private List<Producer> producerList;
 
     public UserManager() {
-        adminList = new ArrayList<>();
-        producerList = new ArrayList<>();
+        adminList = App.getDatabaseManager().adminResultSet();
+        producerList = App.getDatabaseManager().producerResultSet();
     }
 
     public List<Producer> getProducerList() {
