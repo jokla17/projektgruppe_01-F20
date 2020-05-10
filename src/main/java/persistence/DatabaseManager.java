@@ -8,9 +8,9 @@ import java.util.List;
 public class DatabaseManager {
     private String url = "localhost";
     private int port = 5432;
-    private String databaseName = "Ajate_db";
+    private String databaseName = "ajate_db";
     private String username = "postgres";
-    private String password = "student123";
+    private String password = "sosuarem2";
     private Connection connection = null;
 
     public DatabaseManager() {
@@ -264,14 +264,17 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteProduction(Production production) {
+    public boolean deleteProduction(Production production) {
+        boolean canDelete = false;
         try {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM productions WHERE id = ?");
             ps.setInt(1, production.getProductionId());
             ps.execute();
+            canDelete = true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            canDelete = false;
         }
+        return canDelete;
     }
 
     /**

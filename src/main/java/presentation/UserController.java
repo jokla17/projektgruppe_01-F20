@@ -78,10 +78,15 @@ public class UserController extends MainController implements Initializable {
             notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
             return;
         }
-
-        App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
-        tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
-        tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+        try {
+            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+            tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+            tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+        }catch (NumberFormatException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 0);
+            return;
+        }
+        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 1);
     }
 
     public void updateUser(ActionEvent actionEvent) {
@@ -89,18 +94,25 @@ public class UserController extends MainController implements Initializable {
             notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
             return;
         }
+        try {
+            if (Integer.parseInt(tfAccessLevel.getText()) == 1) {
+                App.getUserManager().updateAdmin(tvAdmin.getSelectionModel().getSelectedItem(),
+                        tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
+                        tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+                tvAdmin.refresh();
+            } else {
+                App.getUserManager().updateProducer(tvProducer.getSelectionModel().getSelectedItem(),
+                        tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
+                        tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+                tvProducer.refresh();
+            }
 
-        if (Integer.parseInt(tfAccessLevel.getText()) == 1) {
-            App.getUserManager().updateAdmin(tvAdmin.getSelectionModel().getSelectedItem(),
-                    tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
-                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
-            tvAdmin.refresh();
-        } else {
-            App.getUserManager().updateProducer(tvProducer.getSelectionModel().getSelectedItem(),
-                    tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
-                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
-            tvProducer.refresh();
+
+        }catch (NumberFormatException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 6);
+            return;
         }
+        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 2);
     }
 
     public void searchFunctionality(ActionEvent actionEvent) {
@@ -114,9 +126,15 @@ public class UserController extends MainController implements Initializable {
             notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
             return;
         }
+        try {
+            App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
+            tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+        }catch (NullPointerException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 5);
+            return;
+        }
 
-        App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
-        tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 3);
     }
 
     public void deleteProducer(ActionEvent actionEvent) {
@@ -124,31 +142,38 @@ public class UserController extends MainController implements Initializable {
             notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
             return;
         }
-
-        App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
-        tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+        try {
+            App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
+            tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+        }catch (NullPointerException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 5);
+            return;
+        }
+        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 3);
     }
 
     public void selectProducer(MouseEvent mouseEvent) {
         tfEmployedBy.clear();
-
-        tfUsername.setText(tvProducer.getSelectionModel().getSelectedItem().getUsername());
-        tfPassword.setText(tvProducer.getSelectionModel().getSelectedItem().getPassword());
-        tfEmail.setText(tvProducer.getSelectionModel().getSelectedItem().getEmail());
-        tfFirstName.setText(tvProducer.getSelectionModel().getSelectedItem().getFirstName());
-        tfLastName.setText(tvProducer.getSelectionModel().getSelectedItem().getLastName());
-        tfAccessLevel.setText(String.valueOf(tvProducer.getSelectionModel().getSelectedItem().getAccessLevel()));
-        tfEmployedBy.setText(tvProducer.getSelectionModel().getSelectedItem().getEmployedBy());
+        try {
+            tfUsername.setText(tvProducer.getSelectionModel().getSelectedItem().getUsername());
+            tfPassword.setText(tvProducer.getSelectionModel().getSelectedItem().getPassword());
+            tfEmail.setText(tvProducer.getSelectionModel().getSelectedItem().getEmail());
+            tfFirstName.setText(tvProducer.getSelectionModel().getSelectedItem().getFirstName());
+            tfLastName.setText(tvProducer.getSelectionModel().getSelectedItem().getLastName());
+            tfAccessLevel.setText(String.valueOf(tvProducer.getSelectionModel().getSelectedItem().getAccessLevel()));
+            tfEmployedBy.setText(tvProducer.getSelectionModel().getSelectedItem().getEmployedBy());
+        }catch (NullPointerException e){ }
     }
 
     public void selectAdmin(MouseEvent mouseEvent) {
         tfEmployedBy.clear();
-
-        tfUsername.setText(tvAdmin.getSelectionModel().getSelectedItem().getUsername());
-        tfPassword.setText(tvAdmin.getSelectionModel().getSelectedItem().getPassword());
-        tfEmail.setText(tvAdmin.getSelectionModel().getSelectedItem().getEmail());
-        tfFirstName.setText(tvAdmin.getSelectionModel().getSelectedItem().getFirstName());
-        tfLastName.setText(tvAdmin.getSelectionModel().getSelectedItem().getLastName());
-        tfAccessLevel.setText(String.valueOf(tvAdmin.getSelectionModel().getSelectedItem().getAccessLevel()));
+        try {
+            tfUsername.setText(tvAdmin.getSelectionModel().getSelectedItem().getUsername());
+            tfPassword.setText(tvAdmin.getSelectionModel().getSelectedItem().getPassword());
+            tfEmail.setText(tvAdmin.getSelectionModel().getSelectedItem().getEmail());
+            tfFirstName.setText(tvAdmin.getSelectionModel().getSelectedItem().getFirstName());
+            tfLastName.setText(tvAdmin.getSelectionModel().getSelectedItem().getLastName());
+            tfAccessLevel.setText(String.valueOf(tvAdmin.getSelectionModel().getSelectedItem().getAccessLevel()));
+        }catch (NullPointerException e){ }
     }
 }

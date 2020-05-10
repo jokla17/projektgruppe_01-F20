@@ -81,8 +81,10 @@ public class CreditController extends MainController implements Initializable {
     }
 
     public void selectCredit(MouseEvent mouseEvent) {
-        tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getRole());
-        tfFirstName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getFirstName());
-        tfLastName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getLastName());
+        try {
+            tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getRole());
+            tfFirstName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getFirstName());
+            tfLastName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getLastName());
+        }catch (NullPointerException e){ }
     }
 }

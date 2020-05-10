@@ -8,19 +8,31 @@ public class NotificationManager {
         String notificationMessage;
         switch (type) {
             case 1:
-                notificationMessage = objectName + " has been created successfully!";
+                notificationMessage = objectName + " er blevet oprettet uden fejl!";
                 break;
             case 2:
-                notificationMessage = objectName + " has been updated successfully!";
+                notificationMessage = objectName + " er blevet opdateret uden fejl!";
                 break;
             case 3:
-                notificationMessage = objectName + " has been deleted successfully!";
+                notificationMessage = objectName + " er blevet slettet uden fejl!";
                 break;
             case 4:
-                notificationMessage = "Functionality not available for this user type.";
+                notificationMessage = "Funktionalitet er ikke tilgængeligt til denne brugertype.";
+                break;
+            case 5:
+                notificationMessage = "Der skal være valgt et element i tabellen før der kan fjernes!";
+                break;
+            case 6:
+                notificationMessage = "Der skal være valgt et element i tabellen før der kan opdateres!";
+                break;
+            case 7:
+                notificationMessage = "Produktion kunne ikke fjernes, grundet den har tilknyttet krediteringer.";
+                break;
+            case 8:
+                notificationMessage = "En fil er blevet oprettet!";
                 break;
             default:
-                return "One or more fields are empty or incorrect, please try again.";
+                return "En eller flere felter er tomme eller har fejl, prøv venligst igen.";
         }
         return notificationMessage;
     }

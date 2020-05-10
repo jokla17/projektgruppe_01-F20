@@ -2,6 +2,10 @@ package domain;
 
 import presentation.App;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +64,44 @@ public class ProductionManager {
         App.getDatabaseManager().updateProduction(production);
     }
 
-    public void deleteProduction(Production production) {
-        App.getDatabaseManager().deleteProduction(production);
+    public boolean deleteProduction(Production production) {
+        boolean canDelete = App.getDatabaseManager().deleteProduction(production);
         productionList.clear();
         setProductionList();
+        return canDelete;
+    }
+
+    public void saveProduction(File file, Production production){
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(new FileWriter(file, true));
+            printWriter.append("Produktion \n");
+            printWriter.append(production.getTitle());
+            printWriter.append(";");
+            printWriter.append(production.getGenre());
+            printWriter.append(";");
+            printWriter.append(String.valueOf(production.getEpisodeNumber()));
+            printWriter.append(";");
+            printWriter.append(String.valueOf(production.getProductionYear()));
+            printWriter.append(";");
+            printWriter.append(production.getProductionCountry());
+            printWriter.append(";");
+            printWriter.append(production.getProducedBy() + "\n");
+
+            App.getCreditManager().getCreditList().clear();
+            App.getCreditManager().setCreditList(production.getProductionId());
+            printWriter.append("Krediteringer \n");
+            for (Credit c : App.getCreditManager().getCreditList()) {
+                printWriter.append(c.getRole());
+                printWriter.append(";");
+                printWriter.append(c.getFirstName());
+                printWriter.append(";");
+                printWriter.append(c.getLastName() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            printWriter.close();
+        }
     }
 }

@@ -1,5 +1,6 @@
 package presentation;
 
+import domain.Credit;
 import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -8,10 +9,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,6 +42,7 @@ public class ProductionController extends MainController implements Initializabl
     public Button btnDelete;
     public Button btnSearch;
     public StackPane spNotificationBox;
+    public GridPane gpBackground;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -68,24 +75,33 @@ public class ProductionController extends MainController implements Initializabl
         );
 
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
-
         notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 1);
     }
 
     public void updateProduction(ActionEvent actionEvent) {
-        App.getProductionManager().updateProduction(tvProductions.getSelectionModel().getSelectedItem(),
-                tfTitle.getText(), tfGenre.getText(), tfEpisodeNumber.getText(), tfProductionYear.getText(),
-                tfProductionCountry.getText(), tfProducedBy.getText());
-        tvProductions.refresh();
-
+        try {
+            App.getProductionManager().updateProduction(tvProductions.getSelectionModel().getSelectedItem(),
+                    tfTitle.getText(), tfGenre.getText(), tfEpisodeNumber.getText(), tfProductionYear.getText(),
+                    tfProductionCountry.getText(), tfProducedBy.getText());
+            tvProductions.refresh();
+        }catch (NullPointerException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 6);
+            return;
+        }
         notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 2);
     }
 
     public void deleteProduction(ActionEvent actionEvent) {
-        App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem());
-        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
-
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 3);
+        try {
+            if (!App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem())){
+                notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 7);
+            }else {
+                tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
+                notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 3);
+            }
+        }catch (NullPointerException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 5);
+        }
     }
 
     public void searchFunctionality(ActionEvent actionEvent) {
@@ -94,36 +110,53 @@ public class ProductionController extends MainController implements Initializabl
     }
 
     public void selectProduction(MouseEvent mouseEvent) throws IOException {
-        tfTitle.setText(tvProductions
-                .getSelectionModel()
-                .getSelectedItem()
-                .getTitle());
-        tfGenre.setText(tvProductions
-                .getSelectionModel()
-                .getSelectedItem()
-                .getGenre());
-        tfEpisodeNumber.setText(String.valueOf(tvProductions
-                .getSelectionModel()
-                .getSelectedItem()
-                .getEpisodeNumber()));
-        tfProductionYear.setText(String.valueOf(tvProductions
-                .getSelectionModel()
-                .getSelectedItem()
-                .getProductionYear()));
-        tfProductionCountry.setText(tvProductions
-                .getSelectionModel()
-                .getSelectedItem()
-                .getProductionCountry());
-        tfProducedBy.setText(tvProductions
-                .getSelectionModel()
-                .getSelectedItem()
-                .getProducedBy());
+        btnCreate.setDisable(false);
+        try {
+            tfTitle.setText(tvProductions
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .getTitle());
+            tfGenre.setText(tvProductions
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .getGenre());
+            tfEpisodeNumber.setText(String.valueOf(tvProductions
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .getEpisodeNumber()));
+            tfProductionYear.setText(String.valueOf(tvProductions
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .getProductionYear()));
+            tfProductionCountry.setText(tvProductions
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .getProductionCountry());
+            tfProducedBy.setText(tvProductions
+                    .getSelectionModel()
+                    .getSelectedItem()
+                    .getProducedBy());
+        }catch (NullPointerException e){ }
 
         if (mouseEvent.getClickCount() == 2) {
-            App.getCreditManager().getCreditList().clear();
-            App.getCreditManager().setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
-            App.getCreditManager().setCreditProductionID(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
-            App.setRoot("credit");
+            try {
+                App.getCreditManager().getCreditList().clear();
+                App.getCreditManager().setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
+                App.getCreditManager().setCreditProductionID(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
+                App.setRoot("credit");
+            }catch (NullPointerException e){ }
         }
+    }
+
+    public void saveFile(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter firstExtensionFilter = new FileChooser.ExtensionFilter("CSV files (.csv)", ".csv");
+        FileChooser.ExtensionFilter secondExtensionFilter = new FileChooser.ExtensionFilter("XML files (.xml)", ".xml");
+        fileChooser.getExtensionFilters().add(firstExtensionFilter);
+        fileChooser.getExtensionFilters().add(secondExtensionFilter);
+        fileChooser.setInitialDirectory(new File("."));
+        App.getProductionManager().saveProduction(fileChooser.showSaveDialog(gpBackground.getScene().getWindow()),
+                tvProductions.getSelectionModel().getSelectedItem());
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 8);
     }
 }
