@@ -29,8 +29,7 @@ public class MainController {
     public HBox hbTopHeaderBar;
     public ImageView vbSideBarLogo;
 
-    public void searchFunctionality(ActionEvent actionEvent) {
-    }
+    public void searchFunctionality(ActionEvent actionEvent) {}
 
     public void navigateToHome(MouseEvent mouseEvent) throws IOException {
         App.setRoot("home");
@@ -52,9 +51,13 @@ public class MainController {
         App.setRoot("Login");
     }
 
-    public void notificationAnimationSetter(StackPane stackPane, Text text, String id, String objectType, int type, Button... buttons) {
+    public void notificationAnimationSetter(StackPane stackPane, Text text, String objectType, int type, Button... buttons) {
+        switch (type) {
+            case 1: case 2: case 3: case 8: stackPane.setId("spNotificationBox-success"); break;
+            case 4: case 5: case 6: case 7: case 0: stackPane.setId("spNotificationBox-warning"); break;
+        }
+
         text.setText(App.getNotificationManager().notificationSwitch(objectType, type));
-        stackPane.setId(id);
         stackPane.setVisible(true);
 
         for (Button b : buttons) {
@@ -83,6 +86,13 @@ public class MainController {
                 for (Button b : buttons) {
                     b.setDisable(false);
                 }
+
+                translateTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        stackPane.setVisible(false);
+                    }
+                });
             }
         });
     }

@@ -2,6 +2,10 @@ package domain;
 
 import presentation.App;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,43 +20,41 @@ public class ProductionManager {
     public List<Production> getProductionList() {
         return productionList;
     }
+
     public void setProductionList() {
-        if (App.getAuthentificationManager().getCurrentUser().getAccessLevel() == 1){
-            App.getDatabaseManager().productionResultSet(productionList, ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
+        if (!App.getAuthentificationManager().checkPermission()){
+            App.getDatabaseManager().productionResultSet(productionList,
+                    ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
             return;
-        } else {
-            App.getDatabaseManager().productionResultSet(productionList);
         }
+        App.getDatabaseManager().productionResultSet(productionList);
     }
 
-
-    public void createProduction(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy, int producerId) {
-        Production production = new Production(
-                title,
-                genre,
-                episodeNumber,
-                productionYear,
-                productionCountry,
-                producedBy,
-                producerId);
+    public void createProduction(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
+        Production production;
+        if (!App.getAuthentificationManager().checkPermission()) {
+            production = new Production(title, genre, episodeNumber, productionYear, productionCountry, producedBy,
+                    ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
+        } else {
+            production = new Production(title, genre,
+                    episodeNumber, productionYear, productionCountry, producedBy);
+        }
         App.getDatabaseManager().insertProduction(production);
         productionList.clear();
-        App.getDatabaseManager().productionResultSet(productionList);
+        setProductionList();
     }
 
     public List<Production> readProduction(String searchText) {
         List<Production> tempProductionList = new ArrayList<>();
-
-        for (int i = 0; i < App.getProductionManager().getProductionList().size(); i++) {
-            if (App.getProductionManager().getProductionList().get(i).toString().toLowerCase().contains(
-                    searchText.toLowerCase())) {
-                tempProductionList.add(App.getProductionManager().getProductionList().get(i));
+        for (int i = 0; i < productionList.size(); i++) {
+            if (productionList.get(i).toString().toLowerCase().contains(searchText.toLowerCase())) {
+                tempProductionList.add(productionList.get(i));
             }
         }
         return tempProductionList;
     }
 
-    public void updateProduction(Production production, String[] productionArgs) {
+    public void updateProduction(Production production, String ... productionArgs) {
         production.setTitle(productionArgs[0]);
         production.setGenre(productionArgs[1]);
         production.setEpisodeNumber(Integer.parseInt(productionArgs[2]));
@@ -62,10 +64,44 @@ public class ProductionManager {
         App.getDatabaseManager().updateProduction(production);
     }
 
-    public void deleteProduction(Production production) {
-        productionList.remove(production);
-        App.getDatabaseManager().deleteProduction(production);
+    public boolean deleteProduction(Production production) {
+        boolean canDelete = App.getDatabaseManager().deleteProduction(production);
         productionList.clear();
-        App.getDatabaseManager().productionResultSet(productionList);
+        setProductionList();
+        return canDelete;
+    }
+
+    public void saveProduction(File file, Production production){
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(new FileWriter(file, true));
+            printWriter.append("Produktion \n");
+            printWriter.append(production.getTitle());
+            printWriter.append(";");
+            printWriter.append(production.getGenre());
+            printWriter.append(";");
+            printWriter.append(String.valueOf(production.getEpisodeNumber()));
+            printWriter.append(";");
+            printWriter.append(String.valueOf(production.getProductionYear()));
+            printWriter.append(";");
+            printWriter.append(production.getProductionCountry());
+            printWriter.append(";");
+            printWriter.append(production.getProducedBy() + "\n");
+
+            App.getCreditManager().getCreditList().clear();
+            App.getCreditManager().setCreditList(production.getProductionId());
+            printWriter.append("Krediteringer \n");
+            for (Credit c : App.getCreditManager().getCreditList()) {
+                printWriter.append(c.getRole());
+                printWriter.append(";");
+                printWriter.append(c.getFirstName());
+                printWriter.append(";");
+                printWriter.append(c.getLastName() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            printWriter.close();
+        }
     }
 }

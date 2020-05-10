@@ -55,7 +55,7 @@
             </VBox>
             <Button fx:id="btnDelete" layoutX="242.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCredit" prefHeight="30.0" prefWidth="71.0" text="Slet" />
             <Button fx:id="btnUpdate" layoutX="98.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#updateCredit" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
-            <Button fx:id="btnCreate" focusTraversable="false" layoutX="23.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#createSingleCredit" prefHeight="30.0" prefWidth="69.0" text="Opret " />
+            <Button fx:id="btnCreate" focusTraversable="false" layoutX="23.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#createCredit" prefHeight="30.0" prefWidth="69.0" text="Opret " />
             <Label layoutX="24.0" layoutY="292.0" text="Produktions ID" />
             <TextField fx:id="tfProductionID" layoutX="133.0" layoutY="286.0" prefHeight="29.0" prefWidth="179.0" promptText="f.eks. P1" />
              <StackPane fx:id="spNotificationBox" layoutX="517.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="216.0">

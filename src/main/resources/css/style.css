@@ -162,20 +162,14 @@
 }
 
 /** NOTIFICATION BOX **/
-#spNotificationBox-created {
+#spNotificationBox-success {
     -fx-background-color: success-button-color;
     -fx-border-radius: 10px 10px 10px 10px;
     -fx-background-radius: 10px 10px 10px 10px;
 }
 
-#spNotificationBox-deleted {
+#spNotificationBox-warning {
     -fx-background-color: warning-button-color;
-    -fx-border-radius: 10px 10px 10px 10px;
-    -fx-background-radius: 10px 10px 10px 10px;
-}
-
-#spNotificationBox-updated {
-    -fx-background-color: update-button-color;
     -fx-border-radius: 10px 10px 10px 10px;
     -fx-background-radius: 10px 10px 10px 10px;
 }

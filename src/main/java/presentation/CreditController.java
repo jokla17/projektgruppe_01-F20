@@ -10,10 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreditController extends MainController implements Initializable {
@@ -42,18 +41,13 @@ public class CreditController extends MainController implements Initializable {
         tcLastName.setCellValueFactory(new PropertyValueFactory<>("LastName"));
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
         tfProductionID.setDisable(true);
-        if (App.getCreditManager().getCreditProductionID() != 0) {
-            tfProductionID.setText(String.valueOf(App.getCreditManager().getCreditProductionID()));
-        } else {
-            tfProductionID.setText("No production selected");
-        }
+        tfProductionID.setText(String.valueOf(App.getCreditManager().getCreditProductionID()));
         lbCurrentUser.setText("Logget på som: " + App.getAuthentificationManager().getCurrentUser().getUsername());
     }
 
-    public void createSingleCredit(ActionEvent actionEvent) {
+    public void createCredit(ActionEvent actionEvent) {
         if (tfCreditRole.getText().isEmpty() | tfFirstName.getText().isEmpty() | tfFirstName.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                    Credit.class.getSimpleName(), 0, btnCreate, btnDelete, btnUpdate);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 0);
             return;
         }
 
@@ -63,40 +57,34 @@ public class CreditController extends MainController implements Initializable {
         tfFirstName.clear();
         tfLastName.clear();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-created",
-                Credit.class.getSimpleName(), 1, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 1);
     }
 
     public void updateCredit(ActionEvent actionEvent) {
         App.getCreditManager().updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
         tvCreditTable.refresh();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-updated",
-                Credit.class.getSimpleName(), 2, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 2);
     }
 
     public void deleteCredit(ActionEvent actionEvent) {
         App.getCreditManager().deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem(), Integer.parseInt(tfProductionID.getText()));
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "spNotificationBox-deleted",
-                Credit.class.getSimpleName(), 3, btnCreate, btnDelete, btnUpdate);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 3);
     }
 
+    @Override
     public void searchFunctionality(ActionEvent actionEvent) {
-        ArrayList<Credit> searchResult = new ArrayList<>();
-        String searchText = tfSearch.getText().toLowerCase();
-        for (int i = 0; i < App.getCreditManager().getCreditList().size(); i++) {
-            if (App.getCreditManager().getCreditList().get(i).toString().toLowerCase().contains(searchText)) {
-                searchResult.add(App.getCreditManager().getCreditList().get(i));
-            }
-        }
+        List<Credit> searchResult = App.getCreditManager().readCredit(tfSearch.getText());
         tvCreditTable.setItems((FXCollections.observableArrayList(searchResult)));
     }
 
     public void selectCredit(MouseEvent mouseEvent) {
-        tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getRole());
-        tfFirstName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getFirstName());
-        tfLastName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getLastName());
+        try {
+            tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getRole());
+            tfFirstName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getFirstName());
+            tfLastName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getLastName());
+        }catch (NullPointerException e){ }
     }
 }
