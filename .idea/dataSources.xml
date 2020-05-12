@@ -7,11 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/dbtest</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="ajate_db@localhost" uuid="190b1f5e-3bb5-48c8-9871-785cc7aad2a5">
+    <data-source source="LOCAL" name="Ajate_db@localhost" uuid="190b1f5e-3bb5-48c8-9871-785cc7aad2a5">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/ajate_db</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/Ajate_db</jdbc-url>
     </data-source>
   </component>
 </project>

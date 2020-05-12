@@ -8,13 +8,13 @@ public class NotificationManager {
         String notificationMessage;
         switch (type) {
             case 1:
-                notificationMessage = objectName + " er blevet oprettet uden fejl!";
+                notificationMessage = objectName + " er blevet oprettet!";
                 break;
             case 2:
-                notificationMessage = objectName + " er blevet opdateret uden fejl!";
+                notificationMessage = objectName + " er blevet opdateret";
                 break;
             case 3:
-                notificationMessage = objectName + " er blevet slettet uden fejl!";
+                notificationMessage = objectName + " er blevet slettet!";
                 break;
             case 4:
                 notificationMessage = "Funktionalitet er ikke tilgængeligt til denne brugertype.";
@@ -30,6 +30,9 @@ public class NotificationManager {
                 break;
             case 8:
                 notificationMessage = "En fil er blevet oprettet!";
+                break;
+            case 9:
+                notificationMessage = "To krediteringer kan ikke oprettes med samme navn.";
                 break;
             default:
                 return "En eller flere felter er tomme eller har fejl, prøv venligst igen.";

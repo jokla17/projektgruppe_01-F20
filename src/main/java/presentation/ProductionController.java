@@ -63,7 +63,7 @@ public class ProductionController extends MainController implements Initializabl
 
     public void createProduction(ActionEvent actionEvent) {
         if (tfTitle.getText().isEmpty() | tfGenre.getText().isEmpty() | tfEpisodeNumber.getText().isEmpty() | tfProductionCountry.getText().isEmpty() | tfProductionYear.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 0);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 0);
             return;
         }
 
@@ -75,7 +75,7 @@ public class ProductionController extends MainController implements Initializabl
         );
 
         tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 1);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 1);
     }
 
     public void updateProduction(ActionEvent actionEvent) {
@@ -85,22 +85,22 @@ public class ProductionController extends MainController implements Initializabl
                     tfProductionCountry.getText(), tfProducedBy.getText());
             tvProductions.refresh();
         }catch (NullPointerException e){
-            notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 6);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 6);
             return;
         }
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 2);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 2);
     }
 
     public void deleteProduction(ActionEvent actionEvent) {
         try {
             if (!App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem())){
-                notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 7);
+                notificationAnimationSetter(spNotificationBox, spNotificationText,"Produktion", 7);
             }else {
                 tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
-                notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 3);
+                notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 3);
             }
         }catch (NullPointerException e){
-            notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 5);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 5);
         }
     }
 
@@ -157,6 +157,6 @@ public class ProductionController extends MainController implements Initializabl
         fileChooser.setInitialDirectory(new File("."));
         App.getProductionManager().saveProduction(fileChooser.showSaveDialog(gpBackground.getScene().getWindow()),
                 tvProductions.getSelectionModel().getSelectedItem());
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Production.class.getSimpleName(), 8);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 8);
     }
 }

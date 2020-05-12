@@ -8,9 +8,9 @@ import java.util.List;
 public class DatabaseManager {
     private String url = "localhost";
     private int port = 5432;
-    private String databaseName = "ajate_db";
+    private String databaseName = "Ajate_db";
     private String username = "postgres";
-    private String password = "sosuarem2";
+    private String password = "Hadersarah01";
     private Connection connection = null;
 
     public DatabaseManager() {
@@ -284,10 +284,10 @@ public class DatabaseManager {
         List<Credit> tempCreditList = new ArrayList<>();
         try {
             PreparedStatement cs = connection.prepareStatement("" +
-                    "SELECT * FROM productions INNER JOIN production_credits ON production_credits.production_id = productions.id INNER JOIN credits ON production_credits.credit_id = credits.id");
+                    "SELECT * FROM credits");
             ResultSet sqlReturnValues = cs.executeQuery();
             while (sqlReturnValues.next()) {
-                int creditId = sqlReturnValues.getInt("credit_id");
+                int creditId = sqlReturnValues.getInt("id");
                 String firstName = sqlReturnValues.getString("first_name");
                 String lastName = sqlReturnValues.getString("last_name");
                 String role = sqlReturnValues.getString("role");
@@ -320,7 +320,8 @@ public class DatabaseManager {
         creditList.addAll(tempCreditList);
     }
 
-    public void insertCredit(Credit credit, int productionId) {
+    public boolean insertCredit(Credit credit, int productionId) {
+        boolean canInsert = false;
         try {
             PreparedStatement insertStatement = connection.prepareStatement("CALL insert_credit(?, ?, ?, ?)");
             insertStatement.setString(1, credit.getFirstName());
@@ -328,9 +329,11 @@ public class DatabaseManager {
             insertStatement.setString(3, credit.getRole());
             insertStatement.setInt(4, productionId);
             insertStatement.execute();
+            canInsert = true;
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            canInsert = false;
         }
+        return canInsert;
     }
 
     public void updateCredit(Credit credit) {

@@ -83,15 +83,15 @@ public class UserController extends MainController implements Initializable {
             tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
             tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
         }catch (NumberFormatException e){
-            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 0);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 0);
             return;
         }
-        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 1);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 1);
     }
 
     public void updateUser(ActionEvent actionEvent) {
         if (!App.getAuthentificationManager().checkPermission()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 4);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 4);
             return;
         }
         try {
@@ -109,10 +109,10 @@ public class UserController extends MainController implements Initializable {
 
 
         }catch (NumberFormatException e){
-            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 6);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 6);
             return;
         }
-        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 2);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 2);
     }
 
     public void searchFunctionality(ActionEvent actionEvent) {
@@ -130,11 +130,11 @@ public class UserController extends MainController implements Initializable {
             App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
             tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
         }catch (NullPointerException e){
-            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 5);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Systemadministratoren", 5);
             return;
         }
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 3);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Systemadministratoren", 3);
     }
 
     public void deleteProducer(ActionEvent actionEvent) {
@@ -146,10 +146,10 @@ public class UserController extends MainController implements Initializable {
             App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
             tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
         }catch (NullPointerException e){
-            notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 5);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 5);
             return;
         }
-        notificationAnimationSetter(spNotificationBox, spNotificationText, User.class.getSimpleName(), 3);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 3);
     }
 
     public void selectProducer(MouseEvent mouseEvent) {

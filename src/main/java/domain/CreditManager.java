@@ -33,11 +33,12 @@ public class CreditManager {
         this.creditProductionID = creditProductionID;
     }
 
-    public void createCredit(int productionId, String role, String firstName, String lastName) {
+    public boolean createCredit(int productionId, String role, String firstName, String lastName) {
         Credit credit = new Credit(role, firstName, lastName);
-        App.getDatabaseManager().insertCredit(credit, productionId);
+        boolean canCreate = App.getDatabaseManager().insertCredit(credit, productionId);
         creditList.clear();
-        App.getDatabaseManager().creditResultSet(creditList, productionId);
+        setCreditList(productionId);
+        return canCreate;
     }
 
     public List<Credit> readCredit(String searchText) {

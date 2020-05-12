@@ -47,31 +47,45 @@ public class CreditController extends MainController implements Initializable {
 
     public void createCredit(ActionEvent actionEvent) {
         if (tfCreditRole.getText().isEmpty() | tfFirstName.getText().isEmpty() | tfFirstName.getText().isEmpty()) {
-            notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 0);
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 0);
             return;
         }
+        try {
+            if (App.getCreditManager().createCredit(Integer.parseInt(tfProductionID.getText()), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText())){
+                notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 1);
+                tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
+                tfCreditRole.clear();
+                tfFirstName.clear();
+                tfLastName.clear();
 
-        App.getCreditManager().createCredit(Integer.parseInt(tfProductionID.getText()), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
-        tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
-        tfCreditRole.clear();
-        tfFirstName.clear();
-        tfLastName.clear();
-
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 1);
+            }else {
+                notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 9);
+            }
+        }catch (NullPointerException e){
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 5);
+        }
     }
 
     public void updateCredit(ActionEvent actionEvent) {
+        if (tfCreditRole.getText().isEmpty() | tfFirstName.getText().isEmpty() | tfFirstName.getText().isEmpty()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 0);
+            return;
+        }
         App.getCreditManager().updateCredit(tvCreditTable.getSelectionModel().getSelectedItem(), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
         tvCreditTable.refresh();
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 2);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 2);
     }
 
     public void deleteCredit(ActionEvent actionEvent) {
+        if (tfCreditRole.getText().isEmpty() | tfFirstName.getText().isEmpty() | tfFirstName.getText().isEmpty()) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 0);
+            return;
+        }
         App.getCreditManager().deleteCredit(tvCreditTable.getSelectionModel().getSelectedItem(), Integer.parseInt(tfProductionID.getText()));
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
 
-        notificationAnimationSetter(spNotificationBox, spNotificationText, Credit.class.getSimpleName(), 3);
+        notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 3);
     }
 
     @Override
