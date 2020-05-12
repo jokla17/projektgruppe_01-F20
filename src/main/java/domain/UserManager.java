@@ -21,12 +21,14 @@ public class UserManager {
         return App.getDatabaseManager().adminResultSet();
     }
 
-    public void createUser(String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+    public boolean createUser(String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+        boolean canInsert;
         if (employedBy.isEmpty()) {
-            App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
+            canInsert = App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
         } else {
-            App.getDatabaseManager().insertProducer(new Producer(username, password, email, firstName, lastName, accessLevel, employedBy));
+            canInsert = App.getDatabaseManager().insertProducer(new Producer(username, password, email, firstName, lastName, accessLevel, employedBy));
         }
+        return canInsert;
     }
 
     public List<Systemadministrator> readAdmin(String searchText) {
@@ -76,8 +78,9 @@ public class UserManager {
         App.getDatabaseManager().deleteAdmin(systemadministrator.getAdminId());
     }
 
-    public void deleteProducer(Producer producer) {
-        App.getDatabaseManager().deleteProducer(producer.getProducerId());
+    public boolean deleteProducer(Producer producer) {
+        boolean canDelete = App.getDatabaseManager().deleteProducer(producer.getProducerId());
+        return canDelete;
     }
 }
 

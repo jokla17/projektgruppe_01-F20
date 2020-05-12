@@ -53,7 +53,7 @@ public class MainController {
     public void notificationAnimationSetter(StackPane stackPane, Text text, String objectType, int type, Button... buttons) {
         switch (type) {
             case 1: case 2: case 3: case 8: stackPane.setId("spNotificationBox-success"); break;
-            case 4: case 5: case 6: case 7: case 9: case 0: stackPane.setId("spNotificationBox-warning"); break;
+            case 4: case 5: case 6: case 7: case 9: case 10: case 11: case 0: stackPane.setId("spNotificationBox-warning"); break;
         }
 
         text.setText(App.getNotificationManager().notificationSwitch(objectType, type));

@@ -9,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

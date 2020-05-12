@@ -8,9 +8,9 @@ import java.util.List;
 public class DatabaseManager {
     private String url = "localhost";
     private int port = 5432;
-    private String databaseName = "Ajate_db";
+    private String databaseName = "ajate_db";
     private String username = "postgres";
-    private String password = "";
+    private String password = "student123";
     private Connection connection = null;
 
     public DatabaseManager() {
@@ -53,7 +53,8 @@ public class DatabaseManager {
         return admins;
     }
 
-    public void insertAdmin(Systemadministrator systemadministrator) {
+    public boolean insertAdmin(Systemadministrator systemadministrator) {
+        boolean canInsert;
         try {
             PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO systemadministrators "
                     + "(username, password, email, first_name, last_name, access_level)"
@@ -65,9 +66,11 @@ public class DatabaseManager {
             insertStatement.setString(5, systemadministrator.getLastName());
             insertStatement.setInt(6, systemadministrator.getAccessLevel());
             insertStatement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            canInsert = true;
+        } catch (SQLException ex) {
+            canInsert = false;
         }
+        return canInsert;
     }
 
     public void updateAdmin(String username, String password, String email, String firstName, String lastName, int accessLevel, int adminId) {
@@ -83,8 +86,8 @@ public class DatabaseManager {
             updateStatement.setInt(6, accessLevel);
             updateStatement.setInt(7, adminId);
             updateStatement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -124,7 +127,8 @@ public class DatabaseManager {
         return producers;
     }
 
-    public void insertProducer(Producer producer) {
+    public boolean insertProducer(Producer producer) {
+        boolean canInsert;
         try {
             PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO producers "
                     + "(username, password, email, first_name, last_name, access_level, employed_by)"
@@ -137,9 +141,11 @@ public class DatabaseManager {
             insertStatement.setInt(6, producer.getAccessLevel());
             insertStatement.setString(7, producer.getEmployedBy());
             insertStatement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            canInsert = true;
+        } catch (SQLException ex) {
+            canInsert = false;
         }
+        return canInsert;
     }
 
     public void updateProducer(String username, String password, String email, String firstName, String lastName,
@@ -162,14 +168,17 @@ public class DatabaseManager {
         }
     }
 
-    public void deleteProducer(int producerId) {
+    public boolean deleteProducer(int producerId) {
+        boolean canDelete;
         try {
             PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM producers WHERE id = ? ");
             deleteStatement.setInt(1, producerId);
             deleteStatement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            canDelete = true;
+        } catch (SQLException ex) {
+            canDelete = false;
         }
+        return canDelete;
     }
 
     public void productionResultSet(List<Production> productionList) {
@@ -265,7 +274,7 @@ public class DatabaseManager {
     }
 
     public boolean deleteProduction(Production production) {
-        boolean canDelete = false;
+        boolean canDelete;
         try {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM productions WHERE id = ?");
             ps.setInt(1, production.getProductionId());
@@ -321,7 +330,7 @@ public class DatabaseManager {
     }
 
     public boolean insertCredit(Credit credit, int productionId) {
-        boolean canInsert = false;
+        boolean canInsert;
         try {
             PreparedStatement insertStatement = connection.prepareStatement("CALL insert_credit(?, ?, ?, ?)");
             insertStatement.setString(1, credit.getFirstName());

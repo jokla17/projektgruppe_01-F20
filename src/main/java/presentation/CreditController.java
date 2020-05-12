@@ -57,7 +57,6 @@ public class CreditController extends MainController implements Initializable {
                 tfCreditRole.clear();
                 tfFirstName.clear();
                 tfLastName.clear();
-
             }else {
                 notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 9);
             }
@@ -86,6 +85,12 @@ public class CreditController extends MainController implements Initializable {
         tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
 
         notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 3);
+
+        tfCreditRole.clear();
+        tfFirstName.clear();
+        tfLastName.clear();
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
     @Override
@@ -99,6 +104,8 @@ public class CreditController extends MainController implements Initializable {
             tfCreditRole.setText(tvCreditTable.getSelectionModel().getSelectedItem().getRole());
             tfFirstName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getFirstName());
             tfLastName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getLastName());
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
         }catch (NullPointerException e){ }
     }
 }

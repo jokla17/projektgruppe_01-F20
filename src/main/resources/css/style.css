@@ -31,12 +31,12 @@
     -fx-background-color: update-hover-button-color;
 }
 
-#btnDelete {
+#btnDelete, #btnDeleteAdmin, #btnDeleteProducer {
     -fx-background-color: warning-button-color;
     -fx-border-color: warning-hover-button-color;
 }
 
-#btnDelete:hover {
+#btnDelete:hover, #btnDeleteAdmin:hover, #btnDeleteProducer:hover {
     -fx-background-color: warning-hover-button-color;
 }
 

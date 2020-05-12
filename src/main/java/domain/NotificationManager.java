@@ -17,7 +17,7 @@ public class NotificationManager {
                 notificationMessage = objectName + " er blevet slettet!";
                 break;
             case 4:
-                notificationMessage = "Funktionalitet er ikke tilgængeligt til denne brugertype.";
+                notificationMessage = "Funktionalitet er ikke tilgængeligt for denne brugertype.";
                 break;
             case 5:
                 notificationMessage = "Der skal være valgt et element i tabellen før der kan fjernes!";
@@ -33,6 +33,12 @@ public class NotificationManager {
                 break;
             case 9:
                 notificationMessage = "To krediteringer kan ikke oprettes med samme navn.";
+                break;
+            case 10:
+                notificationMessage = "To bruger med samme brugernavn eller email kan ikke oprettes.";
+                break;
+            case 11:
+                notificationMessage = "Brugeren kunne ikke slettes, grundet den har tilknyttede produktioner.";
                 break;
             default:
                 return "En eller flere felter er tomme eller har fejl, prøv venligst igen.";

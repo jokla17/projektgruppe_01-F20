@@ -1,7 +1,6 @@
 package domain;
 
 import presentation.App;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,6 @@ public class AuthenticationManager {
 
     public AuthenticationManager() {
         users = new ArrayList<>();
-        users.addAll(App.getUserManager().getAdminList());
-        users.addAll(App.getUserManager().getProducerList());
     }
 
     public User getCurrentUser() {
@@ -20,6 +17,9 @@ public class AuthenticationManager {
     }
 
     public boolean login(String username, String password) {
+        users.addAll(App.getUserManager().getAdminList());
+        users.addAll(App.getUserManager().getProducerList());
+
         boolean loggedIn = false;
         for (User u: users) {
             if (username.equals(u.getUsername()) & password.equals(u.getPassword())) {

@@ -20,7 +20,8 @@ import java.util.ResourceBundle;
 public class UserController extends MainController implements Initializable {
     public Button btnCreate;
     public Button btnUpdate;
-    public Button btnDelete;
+    public Button btnDeleteAdmin;
+    public Button btnDeleteProducer;
     public Button btnLogout;
     public Button btnSearch;
     public TextField tfUsername;
@@ -78,9 +79,22 @@ public class UserController extends MainController implements Initializable {
             return;
         }
         try {
-            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(), tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
-            tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
-            tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+            if (App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
+                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText())) {
+                tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+                tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+
+                tfUsername.clear();
+                tfPassword.clear();
+                tfFirstName.clear();
+                tfLastName.clear();
+                tfEmail.clear();
+                tfAccessLevel.clear();
+                tfEmployedBy.clear();
+            } else {
+                notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 10);
+                return;
+            }
         }catch (NumberFormatException e){
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 0);
             return;
@@ -105,8 +119,6 @@ public class UserController extends MainController implements Initializable {
                         tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
                 tvProducer.refresh();
             }
-
-
         }catch (NumberFormatException e){
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 6);
             return;
@@ -128,6 +140,15 @@ public class UserController extends MainController implements Initializable {
         try {
             App.getUserManager().deleteAdmin(tvAdmin.getSelectionModel().getSelectedItem());
             tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+
+            tfUsername.clear();
+            tfPassword.clear();
+            tfFirstName.clear();
+            tfLastName.clear();
+            tfEmail.clear();
+            tfAccessLevel.clear();
+            btnDeleteAdmin.setDisable(true);
+            btnUpdate.setDisable(true);
         }catch (NullPointerException e){
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Systemadministratoren", 5);
             return;
@@ -142,17 +163,31 @@ public class UserController extends MainController implements Initializable {
             return;
         }
         try {
-            App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
-            tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+            if (App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem())) {
+                tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+                notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 3);
+
+                tfUsername.clear();
+                tfPassword.clear();
+                tfFirstName.clear();
+                tfLastName.clear();
+                tfEmail.clear();
+                tfAccessLevel.clear();
+                tfEmployedBy.clear();
+                btnDeleteProducer.setDisable(true);
+                btnUpdate.setDisable(true);
+            } else {
+                notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 11);
+            }
         }catch (NullPointerException e){
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 5);
-            return;
         }
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 3);
     }
 
     public void selectProducer(MouseEvent mouseEvent) {
-        tfEmployedBy.clear();
+        btnUpdate.setDisable(false);
+        btnDeleteProducer.setDisable(false);
+        btnDeleteAdmin.setDisable(true);
         try {
             tfUsername.setText(tvProducer.getSelectionModel().getSelectedItem().getUsername());
             tfPassword.setText(tvProducer.getSelectionModel().getSelectedItem().getPassword());
@@ -165,6 +200,9 @@ public class UserController extends MainController implements Initializable {
     }
 
     public void selectAdmin(MouseEvent mouseEvent) {
+        btnUpdate.setDisable(false);
+        btnDeleteProducer.setDisable(true);
+        btnDeleteAdmin.setDisable(false);
         tfEmployedBy.clear();
         try {
             tfUsername.setText(tvAdmin.getSelectionModel().getSelectedItem().getUsername());

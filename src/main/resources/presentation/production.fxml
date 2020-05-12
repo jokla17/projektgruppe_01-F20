@@ -63,21 +63,31 @@
                   <TextField fx:id="tfProducedBy" disable="true" focusTraversable="false" prefWidth="200.0" promptText="f.eks. John Doe" />
                </children>
             </VBox>
-            <TableView fx:id="tvProductions" focusTraversable="false" layoutX="256.0" layoutY="21.0" onMouseClicked="#selectProduction" prefHeight="298.0" prefWidth="502.0">
+            <TableView fx:id="tvProductions" focusTraversable="false" layoutX="256.0" layoutY="21.0" onMouseClicked="#selectProduction" prefHeight="297.0" prefWidth="502.0">
               <columns>
                 <TableColumn fx:id="tcID" prefWidth="49.60005187988281" text="ID" />
                 <TableColumn fx:id="tcTitle" prefWidth="123.20001220703125" text="Titel" />
                   <TableColumn fx:id="tcGenre" prefWidth="180.00006103515625" text="Genre" />
-                  <TableColumn fx:id="tcEpisodeNumber" prefWidth="143.199951171875" text="Episode nummer" />
+                  <TableColumn fx:id="tcEpisodeNumber" prefWidth="143.9998779296875" text="Episode nummer" />
               </columns>
             </TableView>
-            <Button fx:id="btnDelete" focusTraversable="false" layoutX="256.0" layoutY="343.0" mnemonicParsing="false" onAction="#deleteProduction" prefHeight="30.0" prefWidth="60.0" text="Slet" />
+            <Button fx:id="btnDelete" disable="true" focusTraversable="false" layoutX="256.0" layoutY="343.0" mnemonicParsing="false" onAction="#deleteProduction" prefHeight="30.0" prefWidth="60.0" text="Slet" />
             <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="333.0" prefHeight="50.0" prefWidth="199.0" spacing="10.0">
                <children>
                   <Button fx:id="btnCreate" focusTraversable="false" mnemonicParsing="false" onAction="#createProduction" prefHeight="30.0" prefWidth="60.0" text="Opret" />
-                  <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#updateProduction" prefHeight="30.0" prefWidth="68.0" text="Opdater" />
+                  <Button fx:id="btnUpdate" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#updateProduction" prefHeight="30.0" prefWidth="68.0" text="Opdater" />
                </children>
             </HBox>
+            <Text layoutX="432.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tryk på en produktion for at gemme som en fil.">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Text>
+            <Text layoutX="432.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dobbeltklik på en produktion for at se/redigere krediteringer. ">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Text>
             <StackPane fx:id="spNotificationBox" layoutX="517.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="216.0">
                <children>
                   <Text fx:id="spNotificationText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Production has been deleted successfully!" textAlignment="CENTER" wrappingWidth="196.25665283203125">
@@ -87,16 +97,6 @@
                </children>
             </StackPane>
             <Button fx:id="btnCreate" disable="true" focusTraversable="false" layoutX="327.0" layoutY="343.0" mnemonicParsing="false" onAction="#saveFile" prefHeight="30.0" prefWidth="78.0" text="Gem som" />
-            <Text layoutX="442.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tryk på en produktion for at gemme som en fil">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Text>
-            <Text layoutX="442.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dobbeltklik på en produktion for at se/redigere krediteringer ">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
       <HBox fx:id="hbTopHeaderBar" alignment="CENTER_RIGHT" prefHeight="75.0" prefWidth="759.0" GridPane.columnIndex="1">
@@ -109,7 +109,10 @@
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="78.0" prefWidth="466.0">
                <children>
-                  <Label fx:id="lbCurrentUser" prefHeight="27.0" prefWidth="158.0" text="Nuværende bruger: user" />
+                  <Label fx:id="lbCurrentUser" prefHeight="27.0" prefWidth="158.0" text="Nuværende bruger: user">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" text="Log ud">
                      <HBox.margin>
                         <Insets right="40.0" />

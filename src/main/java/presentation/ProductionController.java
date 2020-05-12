@@ -63,15 +63,25 @@ public class ProductionController extends MainController implements Initializabl
             return;
         }
 
-        App.getProductionManager().createProduction(tfTitle.getText(), tfGenre.getText(),
-                Integer.parseInt(tfEpisodeNumber.getText()),
-                Integer.parseInt(tfProductionYear.getText()),
-                tfProductionCountry.getText(),
-                tfProducedBy.getText()
-        );
+        try {
+            App.getProductionManager().createProduction(tfTitle.getText(), tfGenre.getText(),
+                    Integer.parseInt(tfEpisodeNumber.getText()),
+                    Integer.parseInt(tfProductionYear.getText()),
+                    tfProductionCountry.getText(),
+                    tfProducedBy.getText()
+            );
 
-        tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 1);
+            tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 1);
+
+            tfTitle.clear();
+            tfGenre.clear();
+            tfEpisodeNumber.clear();
+            tfProductionCountry.clear();
+            tfProductionYear.clear();
+        } catch (NumberFormatException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 0);
+        }
     }
 
     public void updateProduction(ActionEvent actionEvent) {
@@ -94,6 +104,15 @@ public class ProductionController extends MainController implements Initializabl
             }else {
                 tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
                 notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 3);
+
+                tfTitle.clear();
+                tfGenre.clear();
+                tfEpisodeNumber.clear();
+                tfProductionCountry.clear();
+                tfProductionYear.clear();
+                btnCreate.setDisable(true);
+                btnUpdate.setDisable(true);
+                btnDelete.setDisable(true);
             }
         }catch (NullPointerException e){
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 5);
@@ -106,7 +125,6 @@ public class ProductionController extends MainController implements Initializabl
     }
 
     public void selectProduction(MouseEvent mouseEvent) throws IOException {
-        btnCreate.setDisable(false);
         try {
             tfTitle.setText(tvProductions
                     .getSelectionModel()
@@ -132,6 +150,10 @@ public class ProductionController extends MainController implements Initializabl
                     .getSelectionModel()
                     .getSelectedItem()
                     .getProducedBy());
+
+            btnCreate.setDisable(false);
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
         }catch (NullPointerException e){ }
 
         if (mouseEvent.getClickCount() == 2) {

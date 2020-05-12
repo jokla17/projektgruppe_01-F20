@@ -51,31 +51,31 @@
                   <TextField fx:id="tfEmployedBy" focusTraversable="false" promptText="f.eks. John Doe" />
                </children>
             </VBox>
-            <TableView fx:id="tvAdmin" focusTraversable="false" layoutX="234.0" layoutY="14.0" onMouseClicked="#selectAdmin" prefHeight="174.0" prefWidth="518.0">
+            <TableView fx:id="tvAdmin" focusTraversable="false" layoutX="234.0" layoutY="29.0" onMouseClicked="#selectAdmin" prefHeight="160.0" prefWidth="518.0">
               <columns>
                 <TableColumn fx:id="tcAdminID" prefWidth="59.0" text="ID" />
                 <TableColumn fx:id="tcAdminUsername" prefWidth="109.0" text="Brugernavn" />
                   <TableColumn fx:id="tcAdminEmail" prefWidth="114.0" text="E-mail" />
                   <TableColumn fx:id="tcAdminFirstName" prefWidth="118.0" text="Navn" />
-                  <TableColumn fx:id="tcAdminLastName" prefWidth="117.0" text="Efternavn" />
+                  <TableColumn fx:id="tcAdminLastName" prefWidth="113.5999755859375" text="Efternavn" />
               </columns>
             </TableView>
-            <Button fx:id="btnDelete" focusTraversable="false" layoutX="234.0" layoutY="413.0" mnemonicParsing="false" onAction="#deleteProducer" prefHeight="30.0" prefWidth="111.0" text="Slet producer" />
-            <TableView fx:id="tvProducer" focusTraversable="false" layoutX="234.0" layoutY="251.0" onMouseClicked="#selectProducer" prefHeight="152.0" prefWidth="518.0">
+            <Button fx:id="btnDeleteProducer" disable="true" focusTraversable="false" layoutX="234.0" layoutY="412.0" mnemonicParsing="false" onAction="#deleteProducer" prefHeight="30.0" prefWidth="111.0" text="Slet producer" />
+            <TableView fx:id="tvProducer" focusTraversable="false" layoutX="234.0" layoutY="241.0" onMouseClicked="#selectProducer" prefHeight="160.0" prefWidth="518.0">
               <columns>
                 <TableColumn fx:id="tcProducerID" prefWidth="52.0" text="ID" />
                 <TableColumn fx:id="tcProducerUsername" prefWidth="100.0" text="Brugernavn" />
                   <TableColumn fx:id="tcProducerEmail" prefWidth="93.0" text="Email" />
                   <TableColumn fx:id="tcProducerFirstName" prefWidth="89.0" text="Navn" />
                   <TableColumn fx:id="tcProducerLastName" prefWidth="95.0" text="Efternavn" />
-                  <TableColumn fx:id="tcProducerEmployedBy" prefWidth="88.0" text="Arbejdsgiver" />
+                  <TableColumn fx:id="tcProducerEmployedBy" prefWidth="84.800048828125" text="Arbejdsgiver" />
               </columns>
             </TableView>
-            <Button fx:id="btnDelete" focusTraversable="false" layoutX="234.0" layoutY="204.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="30.0" prefWidth="89.0" text="Slet admin" />
+            <Button fx:id="btnDeleteAdmin" disable="true" focusTraversable="false" layoutX="234.0" layoutY="196.0" mnemonicParsing="false" onAction="#deleteAdmin" prefHeight="30.0" prefWidth="89.0" text="Slet admin" />
             <HBox layoutX="14.0" layoutY="412.0" prefHeight="30.0" prefWidth="152.0" spacing="10.0">
                <children>
                   <Button fx:id="btnCreate" focusTraversable="false" mnemonicParsing="false" onAction="#createUser" prefHeight="30.0" prefWidth="70.0" text="Opret" />
-                  <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#updateUser" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
+                  <Button fx:id="btnUpdate" disable="true" focusTraversable="false" mnemonicParsing="false" onAction="#updateUser" prefHeight="30.0" prefWidth="70.0" text="Opdater" />
                </children>
             </HBox>
              <StackPane fx:id="spNotificationBox" layoutX="517.0" layoutY="365.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="64.0" prefWidth="216.0" visible="false">
@@ -98,7 +98,10 @@
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" prefHeight="78.0" prefWidth="466.0">
                     <children>
-                  <Label fx:id="lbCurrentUser" prefHeight="27.0" prefWidth="158.0" text="Nuværende bruger: user" />
+                  <Label fx:id="lbCurrentUser" prefHeight="27.0" prefWidth="158.0" text="Nuværende bruger: user">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                         <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#Logout" prefHeight="30.0" prefWidth="70.0" text="Log ud">
                             <HBox.margin>
                                 <Insets right="40.0" />
