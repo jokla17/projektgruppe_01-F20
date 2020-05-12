@@ -1,6 +1,5 @@
 package presentation;
 
-import domain.Credit;
 import domain.Production;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -13,11 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

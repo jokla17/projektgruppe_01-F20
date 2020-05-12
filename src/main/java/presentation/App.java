@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import persistence.DatabaseManager;
-
 import java.io.IOException;
 
 public class App extends Application {

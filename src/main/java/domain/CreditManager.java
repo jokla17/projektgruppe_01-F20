@@ -1,7 +1,6 @@
 package domain;
 
 import presentation.App;
-
 import java.util.ArrayList;
 import java.util.List;
 
