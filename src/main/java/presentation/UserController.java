@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class UserController extends MainController implements Initializable {
@@ -79,24 +80,22 @@ public class UserController extends MainController implements Initializable {
             return;
         }
         try {
-            if (App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
-                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText())) {
-                tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
-                tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
-
-                tfUsername.clear();
-                tfPassword.clear();
-                tfFirstName.clear();
-                tfLastName.clear();
-                tfEmail.clear();
-                tfAccessLevel.clear();
-                tfEmployedBy.clear();
-            } else {
-                notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 10);
-                return;
-            }
-        }catch (NumberFormatException e){
+            App.getUserManager().createUser(tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
+                    tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+            tvAdmin.setItems(FXCollections.observableArrayList(App.getUserManager().getAdminList()));
+            tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+            tfUsername.clear();
+            tfPassword.clear();
+            tfFirstName.clear();
+            tfLastName.clear();
+            tfEmail.clear();
+            tfAccessLevel.clear();
+            tfEmployedBy.clear();
+        } catch (NumberFormatException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 0);
+            return;
+        } catch (SQLException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 10);
             return;
         }
         notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 1);
@@ -111,7 +110,7 @@ public class UserController extends MainController implements Initializable {
             if (Integer.parseInt(tfAccessLevel.getText()) == 1) {
                 App.getUserManager().updateAdmin(tvAdmin.getSelectionModel().getSelectedItem(),
                         tfUsername.getText(), tfPassword.getText(), tfEmail.getText(),
-                        tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
+                        tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()));
                 tvAdmin.refresh();
             } else {
                 App.getUserManager().updateProducer(tvProducer.getSelectionModel().getSelectedItem(),
@@ -119,8 +118,11 @@ public class UserController extends MainController implements Initializable {
                         tfFirstName.getText(), tfLastName.getText(), Integer.parseInt(tfAccessLevel.getText()), tfEmployedBy.getText());
                 tvProducer.refresh();
             }
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 6);
+            return;
+        } catch (SQLException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 12);
             return;
         }
         notificationAnimationSetter(spNotificationBox, spNotificationText, "Brugeren", 2);
@@ -149,7 +151,7 @@ public class UserController extends MainController implements Initializable {
             tfAccessLevel.clear();
             btnDeleteAdmin.setDisable(true);
             btnUpdate.setDisable(true);
-        }catch (NullPointerException e){
+        } catch (NullPointerException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Systemadministratoren", 5);
             return;
         }
@@ -163,24 +165,23 @@ public class UserController extends MainController implements Initializable {
             return;
         }
         try {
-            if (App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem())) {
-                tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
-                notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 3);
+            App.getUserManager().deleteProducer(tvProducer.getSelectionModel().getSelectedItem());
+            tvProducer.setItems(FXCollections.observableArrayList(App.getUserManager().getProducerList()));
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 3);
 
-                tfUsername.clear();
-                tfPassword.clear();
-                tfFirstName.clear();
-                tfLastName.clear();
-                tfEmail.clear();
-                tfAccessLevel.clear();
-                tfEmployedBy.clear();
-                btnDeleteProducer.setDisable(true);
-                btnUpdate.setDisable(true);
-            } else {
-                notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 11);
-            }
-        }catch (NullPointerException e){
+            tfUsername.clear();
+            tfPassword.clear();
+            tfFirstName.clear();
+            tfLastName.clear();
+            tfEmail.clear();
+            tfAccessLevel.clear();
+            tfEmployedBy.clear();
+            btnDeleteProducer.setDisable(true);
+            btnUpdate.setDisable(true);
+        } catch (NullPointerException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 5);
+        } catch (SQLException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produceren", 11);
         }
     }
 
@@ -196,7 +197,7 @@ public class UserController extends MainController implements Initializable {
             tfLastName.setText(tvProducer.getSelectionModel().getSelectedItem().getLastName());
             tfAccessLevel.setText(String.valueOf(tvProducer.getSelectionModel().getSelectedItem().getAccessLevel()));
             tfEmployedBy.setText(tvProducer.getSelectionModel().getSelectedItem().getEmployedBy());
-        }catch (NullPointerException e){ }
+        } catch (NullPointerException e) {}
     }
 
     public void selectAdmin(MouseEvent mouseEvent) {
@@ -211,6 +212,6 @@ public class UserController extends MainController implements Initializable {
             tfFirstName.setText(tvAdmin.getSelectionModel().getSelectedItem().getFirstName());
             tfLastName.setText(tvAdmin.getSelectionModel().getSelectedItem().getLastName());
             tfAccessLevel.setText(String.valueOf(tvAdmin.getSelectionModel().getSelectedItem().getAccessLevel()));
-        }catch (NullPointerException e){ }
+        } catch (NullPointerException ex) {}
     }
 }

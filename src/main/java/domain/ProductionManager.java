@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,16 @@ public class ProductionManager {
     }
 
     public void setProductionList() {
-        if (!App.getAuthentificationManager().checkPermission()){
-            App.getDatabaseManager().productionResultSet(productionList,
-                    ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
-            return;
+        try {
+            if (!App.getAuthentificationManager().checkPermission()){
+                App.getDatabaseManager().productionResultSet(productionList,
+                        ((Producer)App.getAuthentificationManager().getCurrentUser()).getProducerId());
+                return;
+            }
+            App.getDatabaseManager().productionResultSet(productionList);
+        } catch (NullPointerException ex) {
+            App.getDatabaseManager().productionResultSet(productionList);
         }
-        App.getDatabaseManager().productionResultSet(productionList);
     }
 
     public void createProduction(String title, String genre, int episodeNumber, int productionYear, String productionCountry, String producedBy) {
@@ -63,11 +68,10 @@ public class ProductionManager {
         App.getDatabaseManager().updateProduction(production);
     }
 
-    public boolean deleteProduction(Production production) {
-        boolean canDelete = App.getDatabaseManager().deleteProduction(production);
+    public void deleteProduction(Production production) throws SQLException {
+        App.getDatabaseManager().deleteProduction(production);
         productionList.clear();
         setProductionList();
-        return canDelete;
     }
 
     public void saveProduction(File file, Production production){
