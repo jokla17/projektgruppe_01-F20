@@ -10,7 +10,7 @@ public class DatabaseManager {
     private int port = 5432;
     private String databaseName = "ajate_db";
     private String username = "postgres";
-    private String password = "";
+    private String password = " ";
     private Connection connection = null;
 
     public DatabaseManager() {
