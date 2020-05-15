@@ -11,7 +11,7 @@ public class NotificationManager {
                 notificationMessage = objectName + " er blevet oprettet!";
                 break;
             case 2:
-                notificationMessage = objectName + " er blevet opdateret";
+                notificationMessage = objectName + " er blevet opdateret!";
                 break;
             case 3:
                 notificationMessage = objectName + " er blevet slettet!";
@@ -20,10 +20,10 @@ public class NotificationManager {
                 notificationMessage = "Funktionalitet er ikke tilgængeligt for denne brugertype.";
                 break;
             case 5:
-                notificationMessage = "Der skal være valgt et element i tabellen før der kan fjernes!";
+                notificationMessage = "Der skal være valgt et element i tabellen før der kan fjernes.";
                 break;
             case 6:
-                notificationMessage = "Der skal være valgt et element i tabellen før der kan opdateres!";
+                notificationMessage = "Der skal være valgt et element i tabellen før der kan opdateres.";
                 break;
             case 7:
                 notificationMessage = "Produktion kunne ikke fjernes, grundet den har tilknyttet krediteringer.";
