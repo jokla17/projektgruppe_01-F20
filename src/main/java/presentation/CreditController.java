@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -51,17 +52,16 @@ public class CreditController extends MainController implements Initializable {
             return;
         }
         try {
-            if (App.getCreditManager().createCredit(Integer.parseInt(tfProductionID.getText()), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText())){
-                notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 1);
-                tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
-                tfCreditRole.clear();
-                tfFirstName.clear();
-                tfLastName.clear();
-            }else {
-                notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 9);
-            }
-        }catch (NullPointerException e){
+            App.getCreditManager().createCredit(Integer.parseInt(tfProductionID.getText()), tfCreditRole.getText(), tfFirstName.getText(), tfLastName.getText());
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 1);
+            tvCreditTable.setItems(FXCollections.observableArrayList(App.getCreditManager().getCreditList()));
+            tfCreditRole.clear();
+            tfFirstName.clear();
+            tfLastName.clear();
+        } catch (NullPointerException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 5);
+        } catch (SQLException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Krediteringen", 9);
         }
     }
 
@@ -106,6 +106,6 @@ public class CreditController extends MainController implements Initializable {
             tfLastName.setText(tvCreditTable.getSelectionModel().getSelectedItem().getLastName());
             btnUpdate.setDisable(false);
             btnDelete.setDisable(false);
-        }catch (NullPointerException e){ }
+        }catch (NullPointerException ex){}
     }
 }

@@ -1,6 +1,7 @@
 package domain;
 
 import presentation.App;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,7 @@ public class UserManager {
     private List<Producer> producerList;
 
     public UserManager() {
-        adminList = App.getDatabaseManager().adminResultSet();
-        producerList = App.getDatabaseManager().producerResultSet();
+        setUsersList();
     }
 
     public List<Producer> getProducerList() {
@@ -21,14 +21,18 @@ public class UserManager {
         return App.getDatabaseManager().adminResultSet();
     }
 
-    public boolean createUser(String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
-        boolean canInsert;
+    public void setUsersList() {
+        adminList = App.getDatabaseManager().adminResultSet();
+        producerList = App.getDatabaseManager().producerResultSet();
+    }
+
+    public void createUser(String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) throws SQLException {
         if (employedBy.isEmpty()) {
-            canInsert = App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
+            App.getDatabaseManager().insertAdmin(new Systemadministrator(username, password, email, firstName, lastName, accessLevel));
         } else {
-            canInsert = App.getDatabaseManager().insertProducer(new Producer(username, password, email, firstName, lastName, accessLevel, employedBy));
+            App.getDatabaseManager().insertProducer(new Producer(username, password, email, firstName, lastName, accessLevel, employedBy));
         }
-        return canInsert;
+        setUsersList();
     }
 
     public List<Systemadministrator> readAdmin(String searchText) {
@@ -51,7 +55,7 @@ public class UserManager {
         return searchResultProducer;
     }
 
-    public void updateAdmin(Systemadministrator systemadministrator, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+    public void updateAdmin(Systemadministrator systemadministrator, String username, String password, String email, String firstName, String lastName, int accessLevel) throws SQLException {
         systemadministrator.setUsername(username);
         systemadministrator.setPassword(password);
         systemadministrator.setEmail(email);
@@ -62,7 +66,7 @@ public class UserManager {
         App.getDatabaseManager().updateAdmin(username, password, email, firstName, lastName, accessLevel, systemadministrator.getAdminId());
     }
 
-    public void updateProducer(Producer producer, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) {
+    public void updateProducer(Producer producer, String username, String password, String email, String firstName, String lastName, int accessLevel, String employedBy) throws SQLException {
         producer.setUsername(username);
         producer.setPassword(password);
         producer.setEmail(email);
@@ -76,11 +80,14 @@ public class UserManager {
 
     public void deleteAdmin(Systemadministrator systemadministrator) {
         App.getDatabaseManager().deleteAdmin(systemadministrator.getAdminId());
+        adminList.clear();
+        setUsersList();
     }
 
-    public boolean deleteProducer(Producer producer) {
-        boolean canDelete = App.getDatabaseManager().deleteProducer(producer.getProducerId());
-        return canDelete;
+    public void deleteProducer(Producer producer) throws SQLException{
+        App.getDatabaseManager().deleteProducer(producer.getProducerId());
+        producerList.clear();
+        setUsersList();
     }
 }
 

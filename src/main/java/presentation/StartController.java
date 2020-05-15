@@ -32,7 +32,7 @@ public class StartController implements Initializable {
     }
 
     public void forwardToLogin(ActionEvent actionEvent) throws IOException {
-        App.setRoot("Login");
+        App.setRoot("login");
         App.getCreditManager().getCreditList().clear();
     }
 
@@ -42,6 +42,8 @@ public class StartController implements Initializable {
         if (rbProductions.isSelected()) {
             lvCreditResults.setVisible(false);
             lvProductionsResults.setVisible(true);
+            App.getProductionManager().getProductionList().clear();
+            App.getProductionManager().setProductionList();
             lvProductionsResults.setItems(FXCollections.observableArrayList(
                     App.getProductionManager().readProduction(tfStartSearchfield.getText())));
         } else if (rbCredits.isSelected()) {
@@ -92,8 +94,7 @@ public class StartController implements Initializable {
                             setText(null);
                             return;
                         }
-                        setText("Produktions id: " + item.getProductionId()
-                                + "\nTitel: " + item.getTitle()
+                        setText("Titel: " + item.getTitle()
                                 + "\nGenre: " + item.getGenre()
                                 + "\nEpisode nummer: " + item.getEpisodeNumber()
                                 + "\nProduktions år: " + item.getProductionYear()

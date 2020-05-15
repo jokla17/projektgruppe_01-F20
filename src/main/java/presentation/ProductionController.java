@@ -15,6 +15,7 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -90,32 +91,31 @@ public class ProductionController extends MainController implements Initializabl
                     tfTitle.getText(), tfGenre.getText(), tfEpisodeNumber.getText(), tfProductionYear.getText(),
                     tfProductionCountry.getText(), tfProducedBy.getText());
             tvProductions.refresh();
-        }catch (NullPointerException e){
+        } catch (NullPointerException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 6);
             return;
         }
         notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 2);
     }
 
-    public void deleteProduction(ActionEvent actionEvent) {
+    public void deleteProduction(ActionEvent actionEvent) throws SQLException {
         try {
-            if (!App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem())){
-                notificationAnimationSetter(spNotificationBox, spNotificationText,"Produktion", 7);
-            }else {
-                tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
-                notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 3);
+            App.getProductionManager().deleteProduction(tvProductions.getSelectionModel().getSelectedItem());
+            tvProductions.setItems(FXCollections.observableArrayList(App.getProductionManager().getProductionList()));
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 3);
 
-                tfTitle.clear();
-                tfGenre.clear();
-                tfEpisodeNumber.clear();
-                tfProductionCountry.clear();
-                tfProductionYear.clear();
-                btnCreate.setDisable(true);
-                btnUpdate.setDisable(true);
-                btnDelete.setDisable(true);
-            }
-        }catch (NullPointerException e){
+            tfTitle.clear();
+            tfGenre.clear();
+            tfEpisodeNumber.clear();
+            tfProductionCountry.clear();
+            tfProductionYear.clear();
+            btnCreate.setDisable(true);
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+        } catch (NullPointerException ex) {
             notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 5);
+        } catch (SQLException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText,"Produktion", 7);
         }
     }
 
@@ -154,7 +154,7 @@ public class ProductionController extends MainController implements Initializabl
             btnCreate.setDisable(false);
             btnUpdate.setDisable(false);
             btnDelete.setDisable(false);
-        }catch (NullPointerException e){ }
+        } catch (NullPointerException ex) {}
 
         if (mouseEvent.getClickCount() == 2) {
             try {
@@ -162,19 +162,23 @@ public class ProductionController extends MainController implements Initializabl
                 App.getCreditManager().setCreditList(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
                 App.getCreditManager().setCreditProductionID(tvProductions.getSelectionModel().getSelectedItem().getProductionId());
                 App.setRoot("credit");
-            }catch (NullPointerException e){ }
+            } catch (NullPointerException ex) {}
         }
     }
 
     public void saveFile(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter firstExtensionFilter = new FileChooser.ExtensionFilter("CSV files (.csv)", ".csv");
-        FileChooser.ExtensionFilter secondExtensionFilter = new FileChooser.ExtensionFilter("XML files (.xml)", ".xml");
-        fileChooser.getExtensionFilters().add(firstExtensionFilter);
-        fileChooser.getExtensionFilters().add(secondExtensionFilter);
-        fileChooser.setInitialDirectory(new File("."));
-        App.getProductionManager().saveProduction(fileChooser.showSaveDialog(gpBackground.getScene().getWindow()),
-                tvProductions.getSelectionModel().getSelectedItem());
-        notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 8);
+        try {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter firstExtensionFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+            FileChooser.ExtensionFilter secondExtensionFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+            fileChooser.getExtensionFilters().add(firstExtensionFilter);
+            fileChooser.getExtensionFilters().add(secondExtensionFilter);
+            fileChooser.setInitialDirectory(new File("."));
+            App.getProductionManager().saveProduction(fileChooser.showSaveDialog(gpBackground.getScene().getWindow()),
+                    tvProductions.getSelectionModel().getSelectedItem());
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 8);
+        } catch (NullPointerException ex) {
+            notificationAnimationSetter(spNotificationBox, spNotificationText, "Produktion", 13);
+        }
     }
 }

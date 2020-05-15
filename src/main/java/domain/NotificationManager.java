@@ -35,10 +35,16 @@ public class NotificationManager {
                 notificationMessage = "To krediteringer kan ikke oprettes med samme navn.";
                 break;
             case 10:
-                notificationMessage = "To bruger med samme brugernavn eller email kan ikke oprettes.";
+                notificationMessage = "To brugere med samme brugernavn eller email kan ikke oprettes.";
                 break;
             case 11:
                 notificationMessage = "Brugeren kunne ikke slettes, grundet den har tilknyttede produktioner.";
+                break;
+            case 12:
+                notificationMessage = "Opdatering mislykkedes, grundet en anden bruger har samme brugernavn eller email.";
+                break;
+            case 13:
+                notificationMessage = "Oprettelse af fil mislykkedes.";
                 break;
             default:
                 return "En eller flere felter er tomme eller har fejl, prøv venligst igen.";

@@ -1,6 +1,8 @@
 package domain;
 
 import presentation.App;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +34,11 @@ public class CreditManager {
         this.creditProductionID = creditProductionID;
     }
 
-    public boolean createCredit(int productionId, String role, String firstName, String lastName) {
+    public void createCredit(int productionId, String role, String firstName, String lastName) throws SQLException {
         Credit credit = new Credit(role, firstName, lastName);
-        boolean canCreate = App.getDatabaseManager().insertCredit(credit, productionId);
+        App.getDatabaseManager().insertCredit(credit, productionId);
         creditList.clear();
         setCreditList(productionId);
-        return canCreate;
     }
 
     public List<Credit> readCredit(String searchText) {
