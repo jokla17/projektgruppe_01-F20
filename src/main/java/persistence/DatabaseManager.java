@@ -8,9 +8,9 @@ import java.util.List;
 public class DatabaseManager {
     private String url = "localhost";
     private int port = 5432;
-    private String databaseName = "Ajate_db";
+    private String databaseName = "ajate_db";
     private String username = "postgres";
-    private String password = "Andreas12";
+    private String password = "";
     private Connection connection = null;
 
     public DatabaseManager() {
