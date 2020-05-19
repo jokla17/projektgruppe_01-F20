@@ -1,4 +1,4 @@
-package test;
+package domain;
 
 import domain.AuthenticationManager;
 import org.junit.After;

@@ -104,7 +104,7 @@
       <recent name="C:\Users\Jonas\OneDrive - Syddansk Universitet\IntelliJ Projects\projektgruppe_01-F20" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AuthenticationManagerTest">
+  <component name="RunManager" selected="JUnit.AuthenticationManagerTest (1)">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="presentation.App" />
       <module name="projektgruppe_01-F20" />
@@ -131,8 +131,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductionManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="domain.ProductionManager" />
+    <configuration name="UserManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="domain.UserManager" />
       <module name="projektgruppe_01-F20" />
       <extension name="coverage">
         <pattern>
@@ -144,8 +144,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="domain.UserManager" />
+    <configuration name="AuthenticationManagerTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="projektgruppe_01-F20" />
       <extension name="coverage">
         <pattern>
@@ -153,6 +152,9 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="domain" />
+      <option name="MAIN_CLASS_NAME" value="domain.AuthenticationManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -174,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AuthenticationManagerTest (1)" />
         <item itemvalue="JUnit.AuthenticationManagerTest" />
         <item itemvalue="Application.App" />
         <item itemvalue="Application.FileManager" />
         <item itemvalue="Application.UserManager" />
-        <item itemvalue="Application.ProductionManager" />
       </list>
     </recent_temporary>
   </component>
